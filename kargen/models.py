@@ -1,0 +1,330 @@
+import json
+
+import numpy as np
+from keras import Input, Model
+from keras.models import load_model
+from keras.optimizers import Adam
+from keras.layers import Embedding, TimeDistributed, Bidirectional, LSTM, Concatenate, Dropout, Dense, Conv1D, \
+    GlobalMaxPooling1D
+from seqeval.metrics import sequence_labeling, f1_score
+
+from kargen.crf import CRF, crf_loss
+from kargen.preprocessing import ELMoTransformer
+from kargen.trainer import Trainer
+from kargen.utils import load_glove, filter_embeddings
+
+
+class SequenceModel(object):
+
+    def __init__(self,
+                 word_embedding_dim=100,
+                 char_embedding_dim=16,
+                 word_lstm_size=64,
+                 char_lstm_size=None,
+                 char_cnn_num_filters=64,
+                 char_cnn_filters_size=3,
+                 fc_dim=100,
+                 dropout=0.5,
+                 initial_vocab=None,
+                 optimizer="adam"):
+        self.model = None
+        self.p = None
+        self.tagger = None
+        self.embeddings = None
+        self.word_embedding_dim = word_embedding_dim
+        self.char_embedding_dim = char_embedding_dim
+        self.word_lstm_size = word_lstm_size
+        self.char_lstm_size = char_lstm_size
+        self.char_cnn_num_filters = char_cnn_num_filters
+        self.char_cnn_filters_size = char_cnn_filters_size
+        self.fc_dim = fc_dim
+        self.dropout = dropout
+        self.initial_vocab = initial_vocab
+        self.optimizer = optimizer
+
+    def fit(self, x_train, y_train, x_valid, y_valid,
+            embeddings_file, elmo_options_file, elmo_weights_file,
+            epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
+        print("elmo")
+        p = ELMoTransformer(elmo_options_file, elmo_weights_file)
+        p.fit(x_train, y_train)
+        print("glove")
+        embeddings = load_glove(embeddings_file)
+        embeddings = filter_embeddings(embeddings, p.get_vocab(), self.word_embedding_dim)
+        print("building model")
+        model = MultiLayerLSTM(
+             num_labels=p.label_size,
+             word_vocab_size=p.word_vocab_size,
+             char_vocab_size=p.char_vocab_size,
+             word_embedding_dim=self.word_embedding_dim,
+             char_embedding_dim=self.char_embedding_dim,
+             word_lstm_size=self.word_lstm_size,
+             char_lstm_size=self.char_lstm_size,
+             char_cnn_num_filters=self.char_cnn_num_filters,
+             char_cnn_filters_size=self.char_cnn_filters_size,
+             fc_dim=self.fc_dim,
+             dropout=self.dropout,
+             embeddings=embeddings
+        )
+        model, loss = model.build()
+        model.compile(loss=loss, optimizer=self.optimizer)
+        print("training")
+        trainer = Trainer(model, preprocessor=p)
+        trainer.train(
+            x_train, y_train, x_valid, y_valid,
+            epochs=epochs, batch_size=batch_size,
+            verbose=verbose, callbacks=callbacks,
+            shuffle=shuffle
+        )
+        self.p = p
+        self.model = model
+
+    def predict(self, x_test):
+        """Returns the prediction of the model on the given test data.
+
+        Args:
+            x_test : array-like, shape = (n_samples, sent_length)
+            Test samples.
+
+        Returns:
+            y_pred : array-like, shape = (n_smaples, sent_length)
+            Prediction labels for x.
+        """
+        if self.model:
+            lengths = map(len, x_test)
+            x_test = self.p.transform(x_test)
+            y_pred = self.model.predict(x_test)
+            y_pred = self.p.inverse_transform(y_pred, lengths)
+            return y_pred
+        else:
+            raise OSError('Could not find a model. Call load(dir_path).')
+
+    def score(self, x_test, y_test):
+        """Returns the f1-micro score on the given test data and labels.
+
+        Args:
+            x_test : array-like, shape = (n_samples, sent_length)
+            Test samples.
+
+            y_test : array-like, shape = (n_samples, sent_length)
+            True labels for x.
+
+        Returns:
+            score : float, f1-micro score.
+        """
+        if self.model:
+            x_test = self.p.transform(x_test)
+            lengths = map(len, y_test)
+            y_pred = self.model.predict(x_test)
+            y_pred = self.p.inverse_transform(y_pred, lengths)
+            score = f1_score(y_test, y_pred)
+            return score
+        else:
+            raise OSError('Could not find a model. Call load(dir_path).')
+
+    def analyze(self, text, tokenizer=str.split):
+        """Analyze text and return pretty format.
+
+        Args:
+            text: string, the input text.
+            tokenizer: Tokenize input sentence. Default tokenizer is `str.split`.
+
+        Returns:
+            res: dict.
+        """
+        if not self.tagger:
+            self.tagger = Tagger(self.model,
+                                 preprocessor=self.p,
+                                 tokenizer=tokenizer)
+        return self.tagger.analyze(text)
+
+    def save(self, weights_file, preprocessor_file, params_file=None):
+        self.model.save(weights_file)
+        self.p.save(preprocessor_file)
+        if params_file:
+            with open(params_file, 'w') as f:
+                params = self.model.to_json()
+                json.dump(json.loads(params), f, sort_keys=True, indent=4)
+
+    @classmethod
+    def load(cls, weights_file, preprocessor_file):
+        self = cls()
+        self.p = ELMoTransformer.load(preprocessor_file)
+        self.model = load_model(weights_file, custom_objects={'CRF': CRF}, compile=False)
+        self.model.compile(loss=crf_loss, optimizer="adam")
+        return self
+
+
+class MultiLayerLSTM(object):
+    """
+    A Keras implementation of ELMo BiLSTM-CRF for sequence labeling.
+    """
+
+    def __init__(self,
+                 num_labels,
+                 word_vocab_size,
+                 char_vocab_size,
+                 word_embedding_dim,
+                 char_embedding_dim,
+                 word_lstm_size,
+                 char_lstm_size,
+                 char_cnn_num_filters,
+                 char_cnn_filters_size,
+                 fc_dim,
+                 dropout,
+                 embeddings):
+        """Build a Bi-LSTM CRF model.
+
+        Args:
+            word_vocab_size (int): word vocabulary size.
+            char_vocab_size (int): character vocabulary size.
+            num_labels (int): number of entity labels.
+            word_embedding_dim (int): word embedding dimensions.
+            char_embedding_dim (int): character embedding dimensions.
+            word_lstm_size (int): character LSTM feature extractor output dimensions.
+            char_lstm_size (int): word tagger LSTM output dimensions.
+            fc_dim (int): output fully-connected layer size.
+            dropout (float): dropout rate.
+            embeddings (numpy array): word embedding matrix.
+        """
+        self._char_embedding_dim = char_embedding_dim
+        self._word_embedding_dim = word_embedding_dim
+        self._char_lstm_size = char_lstm_size
+        self._char_cnn_num_filters = char_cnn_num_filters
+        self._char_cnn_filters_size = char_cnn_filters_size
+        self._word_lstm_size = word_lstm_size
+        self._char_vocab_size = char_vocab_size
+        self._word_vocab_size = word_vocab_size
+        self._fc_dim = fc_dim
+        self._dropout = dropout
+        self._embeddings = embeddings
+        self._num_labels = num_labels
+
+    def build(self):
+        # build word embedding
+        word_ids = Input(batch_shape=(None, None), dtype='int32', name='word_input')
+        if self._embeddings is None:
+            word_embeddings = Embedding(input_dim=self._word_vocab_size,
+                                        output_dim=self._word_embedding_dim,
+                                        mask_zero=True,
+                                        name='word_embedding')(word_ids)
+        else:
+            word_embeddings = Embedding(input_dim=self._embeddings.shape[0],
+                                        output_dim=self._embeddings.shape[1],
+                                        mask_zero=True,
+                                        weights=[self._embeddings],
+                                        name='word_embedding')(word_ids)
+
+        # build character based word embedding
+        char_ids = Input(batch_shape=(None, None, None), dtype='int32', name='char_input')
+        char_embeddings = Embedding(input_dim=self._char_vocab_size,
+                                    output_dim=self._char_embedding_dim,
+                                    mask_zero=self._char_lstm_size is not None,
+                                    name='char_embedding')(char_ids)
+        if self._char_lstm_size:
+            char_embeddings = TimeDistributed(Bidirectional(LSTM(self._char_lstm_size)))(char_embeddings)
+        else:
+            char_embeddings = TimeDistributed(
+                Conv1D(64, 3, padding="same", activation="relu"),
+                name="char_cnn"
+            )(char_embeddings)
+            char_embeddings = TimeDistributed(GlobalMaxPooling1D(), name="char_pooling")(char_embeddings)
+
+        elmo_embeddings = Input(shape=(None, 1024), dtype='float32')
+
+        word_embeddings = Concatenate()([word_embeddings, char_embeddings, elmo_embeddings])
+
+        word_embeddings = Dropout(self._dropout)(word_embeddings)
+        z = Bidirectional(LSTM(units=self._word_lstm_size, return_sequences=True))(word_embeddings)
+        z = Dense(self._fc_dim, activation='relu')(z)
+
+        crf_ner = CRF(self._num_labels, sparse_target=False, name="crf_ner")
+        loss = crf_ner.loss_function
+        pred = crf_ner(z)
+
+        model = Model(inputs=[word_ids, char_ids, elmo_embeddings], outputs=pred)
+        print(model.summary())
+
+        return model, loss
+
+
+class Tagger(object):
+    """A model API that tags input sentence.
+
+    Attributes:
+        model: Model.
+        preprocessor: Transformer. Preprocessing data for feature extraction.
+        tokenizer: Tokenize input sentence. Default tokenizer is `str.split`.
+    """
+
+    def __init__(self, model, preprocessor, tokenizer=str.split):
+        self.model = model
+        self.preprocessor = preprocessor
+        self.tokenizer = tokenizer
+
+    def predict_proba(self, text):
+        """Probability estimates.
+
+        The returned estimates for all classes are ordered by the
+        label of classes.
+
+        Args:
+            text : string, the input text.
+
+        Returns:
+            y : array-like, shape = [num_words, num_classes]
+            Returns the probability of the word for each class in the model,
+        """
+        assert isinstance(text, str)
+
+        words = self.tokenizer(text)
+        X = self.preprocessor.transform([words])
+        y = self.model.predict(X)
+        y = y[0]  # reduce batch dimension.
+
+        return y
+
+    def _get_prob(self, pred):
+        prob = np.max(pred, -1)
+
+        return prob
+
+    def _get_tags(self, pred):
+        tags = self.preprocessor.inverse_transform([pred])
+        tags = tags[0]  # reduce batch dimension
+
+        return tags
+
+    def _build_response(self, sent, tags, prob):
+        words = self.tokenizer(sent)
+        res = {
+            'words': words,
+            'entities': [
+
+            ]
+        }
+        chunks = sequence_labeling.get_entities(tags)
+
+        for chunk_type, chunk_start, chunk_end in chunks:
+            chunk_end += 1
+            entity = {
+                'text': ' '.join(words[chunk_start: chunk_end]),
+                'type': chunk_type,
+                'score': float(np.average(prob[chunk_start: chunk_end])),
+                'beginOffset': chunk_start,
+                'endOffset': chunk_end
+            }
+            res['entities'].append(entity)
+        return res
+
+    def analyze(self, text):
+        pred = self.predict_proba(text)
+        tags = self._get_tags(pred)
+        prob = self._get_prob(pred)
+        res = self._build_response(text, tags, prob)
+        return res
+
+    def predict(self, text):
+        pred = self.predict_proba(text)
+        tags = self._get_tags(pred)
+        return tags
