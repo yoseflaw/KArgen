@@ -42,36 +42,39 @@ class SequenceModel(object):
         self.initial_vocab = initial_vocab
         self.optimizer = optimizer
 
-    def fit(self, x_train, y_train, x_valid, y_valid,
+    def fit(self, x_train, y_ner_train, y_term_train,
+            x_valid, y_ner_valid, y_term_valid,
             embeddings_file, elmo_options_file, elmo_weights_file,
             epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
         print("elmo")
         p = ELMoTransformer(elmo_options_file, elmo_weights_file)
-        p.fit(x_train, y_train)
+        p.fit(x_train, y_ner_train, y_term_train)
         print("glove")
         embeddings = load_glove(embeddings_file)
         embeddings = filter_embeddings(embeddings, p.get_vocab(), self.word_embedding_dim)
         print("building model")
         model = MultiLayerLSTM(
-             num_labels=p.label_size,
-             word_vocab_size=p.word_vocab_size,
-             char_vocab_size=p.char_vocab_size,
-             word_embedding_dim=self.word_embedding_dim,
-             char_embedding_dim=self.char_embedding_dim,
-             word_lstm_size=self.word_lstm_size,
-             char_lstm_size=self.char_lstm_size,
-             char_cnn_num_filters=self.char_cnn_num_filters,
-             char_cnn_filters_size=self.char_cnn_filters_size,
-             fc_dim=self.fc_dim,
-             dropout=self.dropout,
-             embeddings=embeddings
+            num_labels_ner=p.label_size_ner,
+            num_labels_term=p.label_size_term,
+            word_vocab_size=p.word_vocab_size,
+            char_vocab_size=p.char_vocab_size,
+            word_embedding_dim=self.word_embedding_dim,
+            char_embedding_dim=self.char_embedding_dim,
+            word_lstm_size=self.word_lstm_size,
+            char_lstm_size=self.char_lstm_size,
+            char_cnn_num_filters=self.char_cnn_num_filters,
+            char_cnn_filters_size=self.char_cnn_filters_size,
+            fc_dim=self.fc_dim,
+            dropout=self.dropout,
+            embeddings=embeddings
         )
         model, loss = model.build()
         model.compile(loss=loss, optimizer=self.optimizer)
         print("training")
         trainer = Trainer(model, preprocessor=p)
         trainer.train(
-            x_train, y_train, x_valid, y_valid,
+            x_train, y_ner_train, y_term_train,
+            x_valid, y_ner_valid, y_term_valid,
             epochs=epochs, batch_size=batch_size,
             verbose=verbose, callbacks=callbacks,
             shuffle=shuffle
@@ -87,7 +90,7 @@ class SequenceModel(object):
             Test samples.
 
         Returns:
-            y_pred : array-like, shape = (n_smaples, sent_length)
+            y_pred : array-like, shape = (n_samples, sent_length)
             Prediction labels for x.
         """
         if self.model:
@@ -161,7 +164,8 @@ class MultiLayerLSTM(object):
     """
 
     def __init__(self,
-                 num_labels,
+                 num_labels_ner,
+                 num_labels_term,
                  word_vocab_size,
                  char_vocab_size,
                  word_embedding_dim,
@@ -173,20 +177,6 @@ class MultiLayerLSTM(object):
                  fc_dim,
                  dropout,
                  embeddings):
-        """Build a Bi-LSTM CRF model.
-
-        Args:
-            word_vocab_size (int): word vocabulary size.
-            char_vocab_size (int): character vocabulary size.
-            num_labels (int): number of entity labels.
-            word_embedding_dim (int): word embedding dimensions.
-            char_embedding_dim (int): character embedding dimensions.
-            word_lstm_size (int): character LSTM feature extractor output dimensions.
-            char_lstm_size (int): word tagger LSTM output dimensions.
-            fc_dim (int): output fully-connected layer size.
-            dropout (float): dropout rate.
-            embeddings (numpy array): word embedding matrix.
-        """
         self._char_embedding_dim = char_embedding_dim
         self._word_embedding_dim = word_embedding_dim
         self._char_lstm_size = char_lstm_size
@@ -198,7 +188,8 @@ class MultiLayerLSTM(object):
         self._fc_dim = fc_dim
         self._dropout = dropout
         self._embeddings = embeddings
-        self._num_labels = num_labels
+        self._num_labels_ner = num_labels_ner
+        self._num_labels_term = num_labels_term
 
     def build(self):
         # build word embedding
@@ -237,12 +228,12 @@ class MultiLayerLSTM(object):
         word_embeddings = Dropout(self._dropout)(word_embeddings)
         z = Bidirectional(LSTM(units=self._word_lstm_size, return_sequences=True))(word_embeddings)
         z = Dense(self._fc_dim, activation='relu')(z)
+        crf_ner = CRF(self._num_labels_ner, sparse_target=False, name="crf_ner")
+        crf_term = CRF(self._num_labels_term, sparse_target=False, name="crf_term")
+        loss = [crf_ner.loss_function, crf_term.loss_function]
+        preds = [crf_ner(z), crf_term(z)]
 
-        crf_ner = CRF(self._num_labels, sparse_target=False, name="crf_ner")
-        loss = crf_ner.loss_function
-        pred = crf_ner(z)
-
-        model = Model(inputs=[word_ids, char_ids, elmo_embeddings], outputs=pred)
+        model = Model(inputs=[word_ids, char_ids, elmo_embeddings], outputs=preds)
         print(model.summary())
 
         return model, loss

@@ -7,17 +7,19 @@ from keras.callbacks import Callback
 
 class NERSequence(Sequence):
 
-    def __init__(self, x, y, batch_size=1, preprocess=None):
+    def __init__(self, x, y_ner, y_term, batch_size=1, preprocess=None):
         self.x = x
-        self.y = y
+        self.y_ner = y_ner
+        self.y_term = y_term
         self.batch_size = batch_size
         self.preprocess = preprocess
 
     def __getitem__(self, idx):
         batch_x = self.x[idx * self.batch_size: (idx + 1) * self.batch_size]
-        batch_y = self.y[idx * self.batch_size: (idx + 1) * self.batch_size]
+        batch_y_ner = self.y_ner[idx * self.batch_size: (idx + 1) * self.batch_size]
+        batch_y_term = self.y_term[idx * self.batch_size: (idx + 1) * self.batch_size]
 
-        return self.preprocess(batch_x, batch_y)
+        return self.preprocess(batch_x, batch_y_ner, batch_y_term)
 
     def __len__(self):
         return math.ceil(len(self.x) / self.batch_size)
@@ -41,24 +43,29 @@ class F1score(Callback):
 
         return lengths
 
-    def on_epoch_end(self, epoch, logs={}):
-        label_true = []
-        label_pred = []
+    def on_epoch_end(self, epoch, logs=None):
+        if logs is None: logs = {}
+        label_true_ner, label_true_term = [], []
+        label_pred_ner, label_pred_term = [], []
         for i in range(len(self.seq)):
-            x_true, y_true = self.seq[i]
-            lengths = self.get_lengths(y_true)
-            y_pred = self.model.predict_on_batch(x_true)
+            x_true, (y_true_ner, y_true_term) = self.seq[i]
+            lengths = self.get_lengths(y_true_ner)
+            y_true_ner, y_true_term = self.p.inverse_transform(y_true_ner, y_true_term, lengths)
+            label_true_ner.extend(y_true_ner)
+            label_true_term.extend(y_true_term)
+            y_pred_ner, y_pred_term = self.model.predict_on_batch(x_true)
+            y_pred_ner, y_pred_term = self.p.inverse_transform(y_pred_ner, y_pred_term, lengths)
+            label_pred_ner.extend(y_pred_ner)
+            label_pred_term.extend(y_pred_term)
 
-            y_true = self.p.inverse_transform(y_true, lengths)
-            y_pred = self.p.inverse_transform(y_pred, lengths)
-
-            label_true.extend(y_true)
-            label_pred.extend(y_pred)
-
-        score = f1_score(label_true, label_pred)
-        print(' - f1: {:04.2f}'.format(score * 100))
-        print(classification_report(label_true, label_pred))
-        logs['f1'] = score
+        ner_score = f1_score(label_true_ner, label_pred_ner)
+        print(' - NER f1: {:04.2f}'.format(ner_score * 100))
+        print(classification_report(label_true_ner, label_pred_ner))
+        logs['f1_ner'] = ner_score
+        term_score = f1_score(label_true_term, label_pred_term)
+        print(' - TERM f1: {:04.2f}'.format(term_score * 100))
+        print(classification_report(label_true_term, label_pred_term))
+        logs['f1_term'] = term_score
 
 
 class Trainer(object):
@@ -73,31 +80,13 @@ class Trainer(object):
         self._model = model
         self._preprocessor = preprocessor
 
-    def train(self, x_train, y_train, x_valid=None, y_valid=None,
+    def train(self, x_train, y_ner_train, y_term_train,
+              x_valid=None, y_ner_valid=None, y_term_valid=None,
               epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
-        """Trains the model for a fixed number of epochs (iterations on a dataset).
+        train_seq = NERSequence(x_train, y_ner_train, y_term_train, batch_size, self._preprocessor.transform)
 
-        Args:
-            x_train: list of training data.
-            y_train: list of training target (label) data.
-            x_valid: list of validation data.
-            y_valid: list of validation target (label) data.
-            batch_size: Integer.
-                Number of samples per gradient update.
-                If unspecified, `batch_size` will default to 32.
-            epochs: Integer. Number of epochs to train the model.
-            verbose: Integer. 0, 1, or 2. Verbosity mode.
-                0 = silent, 1 = progress bar, 2 = one line per epoch.
-            callbacks: List of `keras.callbacks.Callback` instances.
-                List of callbacks to apply during training.
-            shuffle: Boolean (whether to shuffle the training data
-                before each epoch). `shuffle` will default to True.
-        """
-
-        train_seq = NERSequence(x_train, y_train, batch_size, self._preprocessor.transform)
-
-        if x_valid and y_valid:
-            valid_seq = NERSequence(x_valid, y_valid, batch_size, self._preprocessor.transform)
+        if x_valid and y_term_valid:
+            valid_seq = NERSequence(x_valid, y_ner_valid, y_term_valid, batch_size, self._preprocessor.transform)
             f1 = F1score(valid_seq, preprocessor=self._preprocessor)
             callbacks = [f1] + callbacks if callbacks else [f1]
 

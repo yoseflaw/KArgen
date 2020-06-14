@@ -11,22 +11,23 @@ from kargen.utils import pad_nested_sequences
 
 
 def load_data_and_labels(filename, encoding='utf-8'):
-    sents, labels = [], []
-    words, tags = [], []
+    sents, ner_labels, term_labels = [], [], []
+    words, ners, terms = [], [], []
     with open(filename, encoding=encoding) as f:
         for line in f:
             line = line.rstrip()
             if line:
-                word, tag, term = line.split('\t')
+                _, word, ner, term, rel, tail = line.split('\t')
                 words.append(word)
-                # tags.append(tag)
-                tags.append(term)
+                ners.append(ner)
+                terms.append(term)
             else:
                 sents.append(words)
-                labels.append(tags)
-                words, tags = [], []
+                ner_labels.append(ners)
+                term_labels.append(terms)
+                words, ners, terms = [], [], []
 
-    return sents, labels
+    return sents, ner_labels, term_labels
 
 
 class Vocabulary(object):
@@ -179,7 +180,7 @@ class Vocabulary(object):
         return self._id2token
 
 
-class IndexTransformer(BaseEstimator, TransformerMixin):
+class ELMoTransformer(BaseEstimator, TransformerMixin):
     """Convert a collection of raw documents to a document id matrix.
 
     Attributes:
@@ -189,73 +190,94 @@ class IndexTransformer(BaseEstimator, TransformerMixin):
         _char_vocab: dict. A mapping of chars to feature indices.
         _label_vocab: dict. A mapping of labels to feature indices.
     """
-
-    def __init__(self, lower=True, num_norm=True,
+    def __init__(self, options_file, weight_file,
+                 lower=True, num_norm=True,
                  use_char=True, initial_vocab=None):
-        """Create a preprocessor object.
-
-        Args:
-            lower: boolean. Whether to convert the texts to lowercase.
-            use_char: boolean. Whether to use char feature.
-            num_norm: boolean. Whether to normalize text.
-            initial_vocab: Iterable. Initial vocabulary for expanding word_vocab.
-        """
         self._num_norm = num_norm
         self._use_char = use_char
         self._word_vocab = Vocabulary(lower=lower)
         self._char_vocab = Vocabulary(lower=False)
-        self._label_vocab = Vocabulary(lower=False, unk_token=False)
+        self._label_vocab_ner = Vocabulary(lower=False, unk_token=False)
+        self._label_vocab_term = Vocabulary(lower=False, unk_token=False)
 
         if initial_vocab:
             self._word_vocab.add_documents([initial_vocab])
             self._char_vocab.add_documents(initial_vocab)
+        self._elmo = Elmo(options_file, weight_file, 2, dropout=0)
 
     def get_vocab(self):
         return self._word_vocab.vocab
 
-    def fit(self, x, y):
+    def fit(self, x, y_ner, y_term):
         self._word_vocab.add_documents(x)
-        self._label_vocab.add_documents(y)
+        self._label_vocab_ner.add_documents(y_ner)
+        self._label_vocab_term.add_documents(y_term)
         if self._use_char:
             for doc in x:
                 self._char_vocab.add_documents(doc)
 
         self._word_vocab.build()
         self._char_vocab.build()
-        self._label_vocab.build()
+        self._label_vocab_ner.build()
+        self._label_vocab_term.build()
 
         return self
 
-    def transform(self, x, y=None):
-        word_ids = [self._word_vocab.doc2id(doc) for doc in x]
+    def transform(self, X, y_ner=None, y_term=None):
+        word_ids = [self._word_vocab.doc2id(doc) for doc in X]
         word_ids = pad_sequences(word_ids, padding='post')
+        char_ids = [[self._char_vocab.doc2id(w) for w in doc] for doc in X]
+        char_ids = pad_nested_sequences(char_ids)
+        character_ids = batch_to_ids(X)
+        elmo_embeddings = self._elmo(character_ids)['elmo_representations'][1]
+        elmo_embeddings = elmo_embeddings.detach().numpy()
+        features = [word_ids, char_ids, elmo_embeddings]
+        if y_ner is None or y_term is None: return features
+        # NER
+        y_ner = [self._label_vocab_ner.doc2id(doc) for doc in y_ner]
+        y_ner = pad_sequences(y_ner, padding='post')
+        y_ner = to_categorical(y_ner, self.label_size_ner).astype(int)
+        y_ner = y_ner if len(y_ner.shape) == 3 else np.expand_dims(y_ner, axis=0)
+        # TERM
+        y_term = [self._label_vocab_term.doc2id(doc) for doc in y_term]
+        y_term = pad_sequences(y_term, padding='post')
+        y_term = to_categorical(y_term, self.label_size_term).astype(int)
+        y_term = y_term if len(y_term.shape) == 3 else np.expand_dims(y_term, axis=0)
+        return features, [y_ner, y_term]
 
-        if self._use_char:
-            char_ids = [[self._char_vocab.doc2id(w) for w in doc] for doc in x]
-            char_ids = pad_nested_sequences(char_ids)
-            features = [word_ids, char_ids]
-        else:
-            features = word_ids
+    # def transform(self, x, y=None):
+    #     word_ids = [self._word_vocab.doc2id(doc) for doc in x]
+    #     word_ids = pad_sequences(word_ids, padding='post')
+    #
+    #     if self._use_char:
+    #         char_ids = [[self._char_vocab.doc2id(w) for w in doc] for doc in x]
+    #         char_ids = pad_nested_sequences(char_ids)
+    #         features = [word_ids, char_ids]
+    #     else:
+    #         features = word_ids
+    #
+    #     if y is not None:
+    #         y = [self._label_vocab.doc2id(doc) for doc in y]
+    #         y = pad_sequences(y, padding='post')
+    #         y = to_categorical(y, self.label_size).astype(int)
+    #         y = y if len(y.shape) == 3 else np.expand_dims(y, axis=0)
+    #         return features, y
+    #     else:
+    #         return features
 
-        if y is not None:
-            y = [self._label_vocab.doc2id(doc) for doc in y]
-            y = pad_sequences(y, padding='post')
-            y = to_categorical(y, self.label_size).astype(int)
-            y = y if len(y.shape) == 3 else np.expand_dims(y, axis=0)
-            return features, y
-        else:
-            return features
+    def fit_transform(self, x, y_ner=None, y_term=None, **params):
+        return self.fit(x, y_ner, y_term).transform(x, y_ner, y_term)
 
-    def fit_transform(self, x, y=None, **params):
-        return self.fit(x, y).transform(x, y)
-
-    def inverse_transform(self, y, lengths=None):
-        y = np.argmax(y, -1)
-        inverse_y = [self._label_vocab.id2doc(ids) for ids in y]
+    def inverse_transform(self, y_ner, y_term, lengths=None):
+        y_ner = np.argmax(y_ner, -1)
+        y_term = np.argmax(y_term, -1)
+        inverse_y_ner = [self._label_vocab_ner.id2doc(ids) for ids in y_ner]
+        inverse_y_term = [self._label_vocab_term.id2doc(ids) for ids in y_term]
         if lengths is not None:
-            inverse_y = [iy[:l] for iy, l in zip(inverse_y, lengths)]
+            inverse_y_ner = [iy[:l] for iy, l in zip(inverse_y_ner, lengths)]
+            inverse_y_term = [iy[:l] for iy, l in zip(inverse_y_term, lengths)]
 
-        return inverse_y
+        return inverse_y_ner, inverse_y_term
 
     @property
     def word_vocab_size(self):
@@ -266,8 +288,12 @@ class IndexTransformer(BaseEstimator, TransformerMixin):
         return len(self._char_vocab)
 
     @property
-    def label_size(self):
-        return len(self._label_vocab)
+    def label_size_ner(self):
+        return len(self._label_vocab_ner)
+
+    @property
+    def label_size_term(self):
+        return len(self._label_vocab_term)
 
     def save(self, file_path):
         joblib.dump(self, file_path)
@@ -279,50 +305,44 @@ class IndexTransformer(BaseEstimator, TransformerMixin):
         return p
 
 
-class ELMoTransformer(IndexTransformer):
-
-    def __init__(self, options_file, weight_file, lower=True, num_norm=True,
-                 use_char=True, initial_vocab=None):
-        super(ELMoTransformer, self).__init__(lower, num_norm, use_char, initial_vocab)
-        self._elmo = Elmo(options_file, weight_file, 2, dropout=0)
-
-    def transform(self, X, y=None):
-        """Transform documents to document ids.
-
-        Uses the vocabulary learned by fit.
-
-        Args:
-            X : iterable
-            an iterable which yields either str, unicode or file objects.
-            y : iterabl, label strings.
-
-        Returns:
-            features: document id matrix.
-            y: label id matrix.
-        """
-        word_ids = [self._word_vocab.doc2id(doc) for doc in X]
-        word_ids = pad_sequences(word_ids, padding='post')
-
-        char_ids = [[self._char_vocab.doc2id(w) for w in doc] for doc in X]
-        char_ids = pad_nested_sequences(char_ids)
-
-        character_ids = batch_to_ids(X)
-        elmo_embeddings = self._elmo(character_ids)['elmo_representations'][1]
-        elmo_embeddings = elmo_embeddings.detach().numpy()
-
-        features = [word_ids, char_ids, elmo_embeddings]
-
-        if y is not None:
-            y = [self._label_vocab.doc2id(doc) for doc in y]
-            y = pad_sequences(y, padding='post')
-            y = to_categorical(y, self.label_size).astype(int)
-            # In 2018/06/01, to_categorical is a bit strange.
-            # >>> to_categorical([[1,3]], num_classes=4).shape
-            # (1, 2, 4)
-            # >>> to_categorical([[1]], num_classes=4).shape
-            # (1, 4)
-            # So, I expand dimensions when len(y.shape) == 2.
-            y = y if len(y.shape) == 3 else np.expand_dims(y, axis=0)
-            return features, y
-        else:
-            return features
+# class ELMoTransformer(IndexTransformer):
+#
+#     def __init__(self, options_file, weight_file, lower=True, num_norm=True,
+#                  use_char=True, initial_vocab=None):
+#         super(ELMoTransformer, self).__init__(lower, num_norm, use_char, initial_vocab)
+#         self._elmo = Elmo(options_file, weight_file, 2, dropout=0)
+#
+#     def transform(self, X, y=None):
+#         """Transform documents to document ids.
+#
+#         Uses the vocabulary learned by fit.
+#
+#         Args:
+#             X : iterable
+#             an iterable which yields either str, unicode or file objects.
+#             y : iterable, label strings.
+#
+#         Returns:
+#             features: document id matrix.
+#             y: label id matrix.
+#         """
+#         word_ids = [self._word_vocab.doc2id(doc) for doc in X]
+#         word_ids = pad_sequences(word_ids, padding='post')
+#
+#         char_ids = [[self._char_vocab.doc2id(w) for w in doc] for doc in X]
+#         char_ids = pad_nested_sequences(char_ids)
+#
+#         character_ids = batch_to_ids(X)
+#         elmo_embeddings = self._elmo(character_ids)['elmo_representations'][1]
+#         elmo_embeddings = elmo_embeddings.detach().numpy()
+#
+#         features = [word_ids, char_ids, elmo_embeddings]
+#
+#         if y is not None:
+#             y = [self._label_vocab.doc2id(doc) for doc in y]
+#             y = pad_sequences(y, padding='post')
+#             y = to_categorical(y, self.label_size).astype(int)
+#             y = y if len(y.shape) == 3 else np.expand_dims(y, axis=0)
+#             return features, y
+#         else:
+#             return features

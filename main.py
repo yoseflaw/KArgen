@@ -62,33 +62,36 @@ if __name__ == "__main__":
     # x_train, y_train = load_data_and_labels("data/conll2003/ner/train.txt")
     # x_valid, y_valid = load_data_and_labels("data/conll2003/ner/valid.txt")
     # x_test, y_test = load_data_and_labels("data/conll2003/ner/test.txt")
-    x_dev, y_dev = load_data_and_labels("data/kargo/dev.txt")
-    x_test, y_test = load_data_and_labels("data/kargo/test.txt")
+    x_dev, y_ner_dev, y_term_dev = load_data_and_labels("data/kargo/dev.txt")
+    x_test, y_ner_test, y_term_test = load_data_and_labels("data/kargo/test.txt")
     print(x_dev[0])
-    print(y_dev[0])
+    print(y_ner_dev[0])
+    print(y_term_dev[0])
     model = SequenceModel()
-    model.fit(x_dev, y_dev, x_test, y_test,
+    model.fit(x_dev, y_ner_dev, y_term_dev,
+              x_test, y_ner_test, y_term_test,
               embeddings_file="pretrain_models/glove/glove.6B.100d.txt.gz",
               elmo_options_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_options.json",
               elmo_weights_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_weights.hdf5",
-              epochs=20,
+              epochs=1,
               batch_size=32)
     # test_score = model.score(x_test, y_test)
     # print(test_score)
     print("try saving model")
     model.save(
-        weights_file="pretrain_models/lstm/test_terms/weights.h5",
-        preprocessor_file="pretrain_models/lstm/test_terms/preprocessors.json",
-        params_file="pretrain_models/lstm/test_terms/params.json",
+        weights_file="pretrain_models/lstm/test_terms2/weights.h5",
+        preprocessor_file="pretrain_models/lstm/test_terms2/preprocessors.json",
+        params_file="pretrain_models/lstm/test_terms2/params.json",
     )
-    print("try loading model")
-    model = SequenceModel.load(
-        weights_file="pretrain_models/lstm/test_terms/weights.h5",
-        preprocessor_file="pretrain_models/lstm/test_terms/preprocessors.json"
-    )
-    print("try analyzing a sample sentence")
+    # print("try loading model")
+    # model = SequenceModel.load(
+    #     weights_file="pretrain_models/lstm/test_terms/weights.h5",
+    #     preprocessor_file="pretrain_models/lstm/test_terms/preprocessors.json"
+    # )
+    # print("try analyzing a sample sentence")
     # test_score = model.score(x_test, y_test)
-    text = "Emirates approved CSafe RAP active temperature-controlled packaging for pharmaceuticals and life-science cargo."
-    analysis = model.analyze(text)
-    from pprint import pprint
-    pprint(analysis)
+    # text = "Emirates approved CSafe RAP active temperature-controlled packaging for pharmaceuticals and life-science cargo."
+    # text2 = "The new facility, opened today (October 23), has 3,620 sq m of temperature-controlled warehouse space."
+    # analysis = model.analyze(text2)
+    # from pprint import pprint
+    # pprint(analysis)
