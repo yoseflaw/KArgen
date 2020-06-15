@@ -11,8 +11,8 @@ from kargen.utils import pad_nested_sequences
 
 
 def load_data_and_labels(filename, encoding='utf-8'):
-    sents, ner_labels, term_labels = [], [], []
-    words, ners, terms = [], [], []
+    sents, ner_labels, term_labels, rel_labels = [], [], [], []
+    words, ners, terms, rels = [], [], [], []
     with open(filename, encoding=encoding) as f:
         for line in f:
             line = line.rstrip()
@@ -21,13 +21,15 @@ def load_data_and_labels(filename, encoding='utf-8'):
                 words.append(word)
                 ners.append(ner)
                 terms.append(term)
+                rels.append(int(rel))
             else:
                 sents.append(words)
                 ner_labels.append(ners)
                 term_labels.append(terms)
-                words, ners, terms = [], [], []
+                rel_labels.append(rels)
+                words, ners, terms, rels = [], [], [], []
 
-    return sents, ner_labels, term_labels
+    return sents, ner_labels, term_labels, rel_labels
 
 
 class Vocabulary(object):
@@ -223,7 +225,7 @@ class ELMoTransformer(BaseEstimator, TransformerMixin):
 
         return self
 
-    def transform(self, X, y_ner=None, y_term=None):
+    def transform(self, X, y_ner=None, y_term=None, y_rel=None):
         word_ids = [self._word_vocab.doc2id(doc) for doc in X]
         word_ids = pad_sequences(word_ids, padding='post')
         char_ids = [[self._char_vocab.doc2id(w) for w in doc] for doc in X]
@@ -232,7 +234,7 @@ class ELMoTransformer(BaseEstimator, TransformerMixin):
         elmo_embeddings = self._elmo(character_ids)['elmo_representations'][1]
         elmo_embeddings = elmo_embeddings.detach().numpy()
         features = [word_ids, char_ids, elmo_embeddings]
-        if y_ner is None or y_term is None: return features
+        if not y_ner or not y_term or not y_rel: return features
         # NER
         y_ner = [self._label_vocab_ner.doc2id(doc) for doc in y_ner]
         y_ner = pad_sequences(y_ner, padding='post')
@@ -243,7 +245,10 @@ class ELMoTransformer(BaseEstimator, TransformerMixin):
         y_term = pad_sequences(y_term, padding='post')
         y_term = to_categorical(y_term, self.label_size_term).astype(int)
         y_term = y_term if len(y_term.shape) == 3 else np.expand_dims(y_term, axis=0)
-        return features, [y_ner, y_term]
+        # REL
+        y_rel = pad_sequences(y_rel, padding='post')
+        y_rel = np.expand_dims(y_rel, axis=2)
+        return features, [y_ner, y_term, y_rel]
 
     # def transform(self, x, y=None):
     #     word_ids = [self._word_vocab.doc2id(doc) for doc in x]
@@ -268,16 +273,17 @@ class ELMoTransformer(BaseEstimator, TransformerMixin):
     def fit_transform(self, x, y_ner=None, y_term=None, **params):
         return self.fit(x, y_ner, y_term).transform(x, y_ner, y_term)
 
-    def inverse_transform(self, y_ner, y_term, lengths=None):
+    def inverse_transform(self, y_ner, y_term, y_rel, lengths=None):
         y_ner = np.argmax(y_ner, -1)
         y_term = np.argmax(y_term, -1)
         inverse_y_ner = [self._label_vocab_ner.id2doc(ids) for ids in y_ner]
         inverse_y_term = [self._label_vocab_term.id2doc(ids) for ids in y_term]
-        if lengths is not None:
+        inverse_y_rel = y_rel[:, :, 0].tolist()
+        if lengths:
             inverse_y_ner = [iy[:l] for iy, l in zip(inverse_y_ner, lengths)]
             inverse_y_term = [iy[:l] for iy, l in zip(inverse_y_term, lengths)]
-
-        return inverse_y_ner, inverse_y_term
+            inverse_y_rel = [iy[:l] for iy, l in zip(inverse_y_rel, lengths)]
+        return inverse_y_ner, inverse_y_term, inverse_y_rel
 
     @property
     def word_vocab_size(self):

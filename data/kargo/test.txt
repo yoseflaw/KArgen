@@ -45,7 +45,7 @@
 6	receive	O	O	0	0
 7	19	S-CARDINAL	O	1	9
 8	Airbus	S-ORG	B-TERM	0	0
-9	A350	S-PRODUCT	E-TERM	0	18
+9	A350	S-MISC	E-TERM	0	18
 10	over	O	O	0	0
 11	the	B-DATE	O	0	0
 12	next	I-DATE	O	0	0
@@ -57,9 +57,9 @@
 18	bellyhold	O	B-TERM	1	23
 19	capacity	O	E-TERM	0	0
 20	by	O	O	0	0
-21	50	B-PERCENT	O	0	0
-22	per	I-PERCENT	O	0	0
-23	cent	E-PERCENT	O	0	0
+21	50	B-MISC	O	0	0
+22	per	I-MISC	O	0	0
+23	cent	E-MISC	O	0	0
 24	.	O	O	0	0
 
 1	In	O	O	0	0
@@ -68,8 +68,8 @@
 4	the	O	O	0	0
 5	airline	O	O	0	0
 6	handled	O	O	0	0
-7	149,000	B-QUANTITY	O	0	0
-8	tonnes	E-QUANTITY	O	0	17
+7	149,000	B-MISC	O	0	0
+8	tonnes	E-MISC	O	0	17
 9	of	O	O	0	0
 10	cargo	O	O	0	0
 11	and	O	O	0	0
@@ -77,8 +77,8 @@
 13	aiming	O	O	0	0
 14	to	O	O	0	0
 15	process	O	O	0	0
-16	300,000	B-QUANTITY	O	0	0
-17	tonnes	E-QUANTITY	O	0	0
+16	300,000	B-MISC	O	0	0
+17	tonnes	E-MISC	O	0	0
 18	by	O	O	0	0
 19	2020	S-DATE	O	0	0
 20	.	O	O	0	0
@@ -86,9 +86,9 @@
 1	Cargo	S-ORG	O	0	6
 2	made	O	O	0	0
 3	up	O	O	0	0
-4	17	B-PERCENT	O	0	0
-5	per	I-PERCENT	O	0	0
-6	cent	E-PERCENT	O	1	8
+4	17	B-MISC	O	0	0
+5	per	I-MISC	O	0	0
+6	cent	E-MISC	O	1	8
 7	of	O	O	0	0
 8	Finnair	S-ORG	S-TERM	0	0
 9	's	O	O	0	0
@@ -152,9 +152,9 @@
 53	Finnair	S-ORG	O	0	0
 54	,	O	O	0	0
 55	totalling	O	O	0	0
-56	three	B-MONEY	O	0	0
-57	billion	I-MONEY	O	0	0
-58	euros	E-MONEY	O	0	0
+56	three	B-MISC	O	0	0
+57	billion	I-MISC	O	0	0
+58	euros	E-MISC	O	0	0
 59	.	O	O	0	0
 
 1	Kuusenmaki	S-PERSON	O	0	0
@@ -247,9 +247,9 @@
 6	Finnair	S-GPE	S-TERM	1	9
 7	are	O	O	0	0
 8	central	O	O	0	0
-9	Europe	S-LOC	O	0	11
+9	Europe	S-MISC	O	0	11
 10	and	O	O	0	0
-11	Asia	S-LOC	O	0	15
+11	Asia	S-MISC	O	0	15
 12	,	O	O	0	0
 13	according	O	O	0	0
 14	to	O	O	0	0
@@ -291,9 +291,9 @@
 3	are	O	O	0	0
 4	strong	O	O	0	0
 5	into	O	O	0	0
-6	North	B-LOC	O	0	0
-7	East	I-LOC	O	0	0
-8	Asia	E-LOC	O	1	10
+6	North	B-MISC	O	0	0
+7	East	I-MISC	O	0	0
+8	Asia	E-MISC	O	1	10
 9	,	O	O	0	0
 10	China	S-GPE	O	1	12
 11	and	O	O	0	0
@@ -307,10 +307,10 @@
 19	flying	O	O	0	0
 20	time	O	O	0	0
 21	from	O	O	0	0
-22	Europe	S-LOC	O	1	25
+22	Europe	S-MISC	O	1	25
 23	of	O	O	0	0
-24	nine	B-TIME	O	0	0
-25	hours	E-TIME	O	0	0
+24	nine	B-MISC	O	0	0
+25	hours	E-MISC	O	0	0
 26	,	O	O	0	0
 27	so	O	O	0	0
 28	we	O	O	0	0
@@ -338,7 +338,7 @@
 7	is	O	O	0	0
 8	salmon	O	O	0	0
 9	to	O	O	0	0
-10	Asia	S-LOC	O	0	18
+10	Asia	S-MISC	O	0	18
 11	,	O	O	0	0
 12	and	O	O	0	0
 13	the	O	O	0	0
@@ -355,8 +355,8 @@
 24	to	O	O	0	0
 25	Japan	S-GPE	O	0	28
 26	within	O	O	0	0
-27	36	B-TIME	O	0	0
-28	hours	E-TIME	O	0	0
+27	36	B-MISC	O	0	0
+28	hours	E-MISC	O	0	0
 29	.	O	O	0	0
 
 1	Finnair	S-ORG	S-TERM	0	8
@@ -372,7 +372,7 @@
 11	.	O	O	0	0
 
 1	The	O	O	0	0
-2	Scandinavian	S-NORP	O	0	0
+2	Scandinavian	S-MISC	O	0	0
 3	market	O	O	0	0
 4	has	O	O	0	0
 5	not	O	O	0	0
@@ -411,7 +411,7 @@
 7	situations	O	O	0	0
 8	in	O	O	0	0
 9	the	O	O	0	0
-10	Eurozone	S-LOC	O	0	12
+10	Eurozone	S-MISC	O	0	12
 11	and	O	O	0	0
 12	Russia	S-GPE	O	0	0
 13	have	O	O	0	0
@@ -428,7 +428,7 @@
 24	strengthening	O	O	0	0
 25	currencies	O	O	0	0
 26	in	O	O	0	0
-27	Asia	S-LOC	O	0	0
+27	Asia	S-MISC	O	0	0
 28	have	O	O	0	0
 29	helped	O	O	0	0
 30	balance	O	O	0	0
@@ -478,7 +478,7 @@
 13	's	O	O	0	0
 14	network	O	O	0	0
 15	in	O	O	0	0
-16	Europe	S-LOC	O	0	0
+16	Europe	S-MISC	O	0	0
 17	.	O	O	0	0
 
 1	China	B-ORG	B-TERM	0	0
@@ -497,7 +497,7 @@
 3	Solutions	E-ORG	E-TERM	1	6
 4	,	O	O	0	0
 5	the	O	O	0	0
-6	German	S-NORP	O	1	10
+6	German	S-MISC	O	1	10
 7	provider	O	O	0	0
 8	of	O	O	0	0
 9	climate-controlled	O	B-TERM	0	0
@@ -525,7 +525,7 @@
 4	to	O	O	0	0
 5	lease	O	O	0	0
 6	the	O	O	0	0
-7	Opticooler	S-PRODUCT	S-TERM	1	14
+7	Opticooler	S-MISC	S-TERM	1	14
 8	,	O	O	0	0
 9	the	O	O	0	0
 10	newest	O	O	0	0
@@ -655,7 +655,7 @@
 13	temperature	O	O	0	0
 14	inside	O	O	0	0
 15	the	O	O	0	0
-16	Opticooler	S-PRODUCT	S-TERM	1	22
+16	Opticooler	S-MISC	S-TERM	1	22
 17	in	O	O	0	0
 18	the	O	O	0	0
 19	once	O	O	0	0
@@ -679,7 +679,7 @@
 13	"	O	O	0	0
 14	Especially	O	O	0	0
 15	as	O	O	0	0
-16	Asia	S-LOC	O	1	21
+16	Asia	S-MISC	O	1	21
 17	,	O	O	0	0
 18	and	O	O	0	0
 19	in	O	O	0	0
@@ -721,7 +721,7 @@
 16	Airlines	E-ORG	E-TERM	1	19
 17	makes	O	O	0	0
 18	the	O	O	0	0
-19	Opticooler	S-PRODUCT	S-TERM	1	24
+19	Opticooler	S-MISC	S-TERM	1	24
 20	being	O	O	0	0
 21	deployable	O	O	0	0
 22	at	O	O	0	0
@@ -746,7 +746,7 @@
 7	va-Q-tec	O	S-TERM	0	0
 8	containers	O	S-TERM	0	0
 
-1	Portuguese	S-NORP	O	1	4
+1	Portuguese	S-MISC	O	1	4
 2	airline	O	O	0	0
 3	TAP	B-ORG	B-TERM	0	0
 4	Cargo	E-ORG	E-TERM	1	10
@@ -773,7 +773,7 @@
 8	important	O	O	0	0
 9	on	O	O	0	0
 10	its	O	O	0	0
-11	Europe	S-LOC	O	1	13
+11	Europe	S-MISC	O	1	13
 12	to	O	O	0	0
 13	Brazil	S-GPE	O	0	0
 14	trade	O	O	0	0
@@ -808,7 +808,7 @@
 26	value	O	I-TERM	0	0
 27	pharmaceuticals	O	E-TERM	1	29
 28	from	O	O	0	0
-29	Europe	S-LOC	O	1	39
+29	Europe	S-MISC	O	1	39
 30	and	O	O	0	0
 31	other	O	O	0	0
 32	markets	O	O	0	0
@@ -922,9 +922,9 @@
 7	unique	O	O	0	0
 8	gateway	O	O	0	0
 9	from	O	O	0	0
-10	Europe	S-LOC	O	1	12
+10	Europe	S-MISC	O	1	12
 11	to	O	O	0	0
-12	Brazilian	S-NORP	O	1	17
+12	Brazilian	S-MISC	O	1	17
 13	pharma	O	O	0	0
 14	hubs	O	O	0	0
 15	,	O	O	0	0
@@ -954,9 +954,9 @@
 5	construction	O	O	0	0
 6	on	O	O	0	0
 7	a	O	O	0	0
-8	15,663	B-QUANTITY	B-TERM	0	0
-9	sq	I-QUANTITY	I-TERM	0	0
-10	ft	E-QUANTITY	E-TERM	1	12
+8	15,663	B-MISC	B-TERM	0	0
+9	sq	I-MISC	I-TERM	0	0
+10	ft	E-MISC	E-TERM	1	12
 11	perishable	O	B-TERM	0	0
 12	centre	O	E-TERM	1	16
 13	at	O	O	0	0
@@ -1004,8 +1004,8 @@
 28	to	O	O	0	0
 29	28	S-CARDINAL	B-TERM	0	0
 30	to	O	I-TERM	0	0
-31	40	B-QUANTITY	I-TERM	0	0
-32	degrees	E-QUANTITY	E-TERM	0	39
+31	40	B-MISC	I-TERM	0	0
+32	degrees	E-MISC	E-TERM	0	39
 33	;	O	O	0	0
 34	and	O	O	0	0
 35	13	S-CARDINAL	B-TERM	0	0
@@ -1099,15 +1099,15 @@
 1	The	O	O	0	0
 2	pilot	O	O	0	0
 3	on	O	O	0	0
-4	Latin	B-LOC	O	0	0
-5	America	E-LOC	O	1	7
+4	Latin	B-MISC	O	0	0
+5	America	E-MISC	O	1	7
 6	–	O	O	0	0
-7	Europe	S-LOC	O	0	9
+7	Europe	S-MISC	O	0	9
 8	and	O	O	0	0
 9	USA	S-GPE	O	1	12
 10	–	O	O	0	0
-11	Middle	B-LOC	O	0	0
-12	East	E-LOC	O	1	17
+11	Middle	B-MISC	O	0	0
+12	East	E-MISC	O	1	17
 13	trade	O	O	0	0
 14	lanes	O	O	0	0
 15	will	O	O	0	0
@@ -1195,9 +1195,9 @@
 7	the	O	O	0	0
 8	CCA	S-ORG	S-TERM	1	11
 9	's	O	O	0	0
-10	Global	B-EVENT	O	0	0
-11	Perishables	I-EVENT	O	0	16
-12	Event	E-EVENT	O	0	0
+10	Global	B-MISC	O	0	0
+11	Perishables	I-MISC	O	0	16
+12	Event	E-MISC	O	0	0
 13	at	O	O	0	0
 14	Fresh	B-FAC	O	0	0
 15	Park	I-FAC	O	0	0
@@ -1412,10 +1412,10 @@
 25	,	O	O	0	0
 26	marking	O	O	0	0
 27	the	O	O	0	0
-28	first	S-ORDINAL	O	1	31
+28	first	S-MISC	O	1	31
 29	of	O	O	0	0
 30	its	O	O	0	0
-31	European	S-NORP	O	0	0
+31	European	S-MISC	O	0	0
 32	cargo	O	O	0	0
 33	stations	O	O	0	0
 34	to	O	O	0	0
@@ -1434,8 +1434,8 @@
 8	Brussels	S-GPE	O	1	12
 9	increased	O	O	0	0
 10	by	O	O	0	0
-11	170	B-PERCENT	O	0	0
-12	percent	E-PERCENT	O	0	0
+11	170	B-MISC	O	0	0
+12	percent	E-MISC	O	0	0
 13	during	O	O	0	0
 14	2016	S-DATE	O	0	0
 15	,	O	O	0	0
@@ -1455,8 +1455,8 @@
 29	through	O	O	0	0
 30	October	S-DATE	O	0	0
 31	surpassing	O	O	0	0
-32	3,000	B-QUANTITY	O	0	0
-33	tonnes	E-QUANTITY	O	0	0
+32	3,000	B-MISC	O	0	0
+33	tonnes	E-MISC	O	0	0
 34	.	O	O	0	0
 
 1	To	O	O	0	0
@@ -1553,14 +1553,14 @@
 7	of	O	O	0	0
 8	cargo	O	O	0	0
 9	for	O	O	0	0
-10	Europe	S-LOC	O	0	13
+10	Europe	S-MISC	O	0	13
 11	,	O	O	0	0
-12	Middle	B-LOC	O	0	0
-13	East	E-LOC	O	0	15
+12	Middle	B-MISC	O	0	0
+13	East	E-MISC	O	0	15
 14	,	O	O	0	0
-15	Africa	S-LOC	O	0	17
+15	Africa	S-MISC	O	0	17
 16	and	O	O	0	0
-17	Asia	S-LOC	O	0	28
+17	Asia	S-MISC	O	0	28
 18	,	O	O	0	0
 19	added	O	O	0	0
 20	,	O	O	0	0
@@ -1632,8 +1632,8 @@
 12	the	O	O	0	0
 13	leasing	O	O	0	0
 14	of	O	O	0	0
-15	PharmaPort	B-PRODUCT	B-TERM	0	0
-16	360	E-PRODUCT	I-TERM	0	0
+15	PharmaPort	B-MISC	B-TERM	0	0
+16	360	E-MISC	I-TERM	0	0
 17	temperature	O	I-TERM	0	0
 18	controlled	O	I-TERM	0	0
 19	bulk	O	I-TERM	0	0
@@ -1648,8 +1648,8 @@
 5	shippers	O	E-TERM	1	10
 6	to	O	O	0	0
 7	lease	O	O	0	0
-8	PharmaPort	B-PRODUCT	B-TERM	0	0
-9	360	E-PRODUCT	I-TERM	0	0
+8	PharmaPort	B-MISC	B-TERM	0	0
+9	360	E-MISC	I-TERM	0	0
 10	containers	O	E-TERM	0	18
 11	directly	O	O	0	0
 12	from	O	O	0	0
@@ -1737,9 +1737,9 @@
 53	.	O	O	0	0
 54	"	O	O	0	0
 
-1	The	B-PRODUCT	O	0	0
-2	PharmaPort	I-PRODUCT	B-TERM	0	0
-3	360	E-PRODUCT	E-TERM	1	7
+1	The	B-MISC	O	0	0
+2	PharmaPort	I-MISC	B-TERM	0	0
+3	360	E-MISC	E-TERM	1	7
 4	utilises	O	O	0	0
 5	proprietary	O	B-TERM	0	0
 6	hybrid	O	I-TERM	0	0
@@ -1807,7 +1807,7 @@
 28	.	O	O	0	0
 
 1	The	O	O	0	0
-2	PharmaPort	S-PRODUCT	S-TERM	0	10
+2	PharmaPort	S-MISC	S-TERM	0	10
 3	contains	O	O	0	0
 4	a	O	O	0	0
 5	fully	O	O	0	0
@@ -1950,7 +1950,7 @@
 18	,	O	O	0	0
 19	with	O	O	0	0
 20	its	O	O	0	0
-21	first	S-ORDINAL	O	1	23
+21	first	S-MISC	O	1	23
 22	drop	O	B-TERM	0	0
 23	point	O	E-TERM	0	0
 24	in	O	O	0	0
@@ -2025,7 +2025,7 @@
 13	:	O	O	0	0
 14	"	O	O	0	0
 15	The	O	O	0	0
-16	Canadian	S-NORP	O	0	0
+16	Canadian	S-MISC	O	0	0
 17	pharmaceutical	O	O	0	0
 18	market	O	O	0	0
 19	is	O	O	0	0
@@ -2041,9 +2041,9 @@
 29	to	O	O	0	0
 30	grow	O	O	0	0
 31	into	O	O	0	0
-32	a	B-MONEY	O	0	0
-33	$25	I-MONEY	O	0	0
-34	billion	E-MONEY	O	0	0
+32	a	B-MISC	O	0	0
+33	$25	I-MISC	O	0	0
+34	billion	E-MISC	O	0	0
 35	industry	O	O	0	0
 36	by	O	O	0	0
 37	2021	S-DATE	O	0	0
@@ -2145,8 +2145,8 @@
 47	pallet	O	I-TERM	0	0
 48	shippers	O	E-TERM	0	51
 49	and	O	O	0	0
-50	Credo	B-PRODUCT	B-TERM	0	0
-51	Cargo	E-PRODUCT	E-TERM	0	0
+50	Credo	B-MISC	B-TERM	0	0
+51	Cargo	E-MISC	E-TERM	0	0
 52	bulk	O	O	0	0
 53	shippers	O	O	0	0
 54	.	O	O	0	0
@@ -2295,7 +2295,7 @@
 23	and	O	O	0	0
 24	13	S-CARDINAL	O	1	26
 25	across	O	O	0	0
-26	Europe	S-LOC	O	0	0
+26	Europe	S-MISC	O	0	0
 27	already	O	O	0	0
 28	announced	O	O	0	0
 29	.	O	O	0	0
@@ -2408,7 +2408,7 @@
 6	of	O	O	0	0
 7	business	O	O	0	0
 8	development	O	O	0	0
-9	Asia	S-LOC	O	0	11
+9	Asia	S-MISC	O	0	11
 10	at	O	O	0	0
 11	va-Q-tec	S-ORG	S-TERM	0	0
 12	,	O	O	0	0
@@ -2440,9 +2440,9 @@
 14	containers	O	O	0	0
 15	directly	O	O	0	0
 16	from	O	O	0	0
-17	Cathay	B-PRODUCT	B-TERM	0	0
-18	Pacific	I-PRODUCT	I-TERM	0	0
-19	Cargo	E-PRODUCT	E-TERM	0	0
+17	Cathay	B-MISC	B-TERM	0	0
+18	Pacific	I-MISC	I-TERM	0	0
+19	Cargo	E-MISC	E-TERM	0	0
 20	.	O	O	0	0
 21	"	O	O	0	0
 
@@ -2519,8 +2519,8 @@
 25	its	O	O	0	0
 26	presence	O	O	0	0
 27	in	O	O	0	0
-28	Asia	B-LOC	O	0	0
-29	Pacific	E-LOC	O	0	0
+28	Asia	B-MISC	O	0	0
+29	Pacific	E-MISC	O	0	0
 30	,	O	O	0	0
 31	"	O	O	0	0
 32	he	O	O	0	0
@@ -2610,8 +2610,8 @@
 5	storage	O	B-TERM	0	0
 6	area	O	E-TERM	1	9
 7	totalling	O	O	0	0
-8	3,000sq	B-QUANTITY	B-TERM	0	0
-9	m	E-QUANTITY	E-TERM	1	12
+8	3,000sq	B-MISC	B-TERM	0	0
+9	m	E-MISC	E-TERM	1	12
 10	and	O	O	0	0
 11	covering	O	O	0	0
 12	four	S-CARDINAL	O	1	15
@@ -2620,21 +2620,21 @@
 15	ranges	O	E-TERM	1	19
 16	(	O	O	0	0
 17	from	O	O	0	0
-18	-20	B-QUANTITY	B-TERM	0	0
-19	°C	E-QUANTITY	I-TERM	1	24
+18	-20	B-MISC	B-TERM	0	0
+19	°C	E-MISC	I-TERM	1	24
 20	to	O	I-TERM	0	0
 21	+	O	I-TERM	0	0
-22	25	B-QUANTITY	I-TERM	0	0
-23	°C	I-QUANTITY	E-TERM	0	0
-24	)	E-QUANTITY	O	1	29
+22	25	B-MISC	I-TERM	0	0
+23	°C	I-MISC	E-TERM	0	0
+24	)	E-MISC	O	1	29
 25	in	O	O	0	0
 26	a	O	O	0	0
 27	total	O	O	0	0
 28	indoor	O	B-TERM	0	0
 29	area	O	E-TERM	1	32
 30	of	O	O	0	0
-31	43,000sq	B-QUANTITY	B-TERM	0	0
-32	m	E-QUANTITY	E-TERM	0	37
+31	43,000sq	B-MISC	B-TERM	0	0
+32	m	E-MISC	E-TERM	0	37
 33	.	O	O	0	0
 34	"	O	O	0	0
 35	The	O	O	0	0
@@ -2647,8 +2647,8 @@
 42	dedicated	O	B-TERM	0	0
 43	area	O	E-TERM	1	46
 44	of	O	O	0	0
-45	1,030sq	B-QUANTITY	B-TERM	0	0
-46	m	E-QUANTITY	E-TERM	0	0
+45	1,030sq	B-MISC	B-TERM	0	0
+46	m	E-MISC	E-TERM	0	0
 47	,	O	O	0	0
 48	"	O	O	0	0
 49	the	O	O	0	0
@@ -2890,21 +2890,21 @@
 21	of	O	O	0	0
 22	the	O	O	0	0
 23	international	O	O	0	0
-24	Good	B-LAW	B-TERM	0	0
-25	Distribution	I-LAW	I-TERM	0	0
-26	Practice	E-LAW	I-TERM	0	0
+24	Good	B-MISC	B-TERM	0	0
+25	Distribution	I-MISC	I-TERM	0	0
+26	Practice	E-MISC	I-TERM	0	0
 27	guides	O	E-TERM	0	34
 28	,	O	O	0	0
-29	IATA	B-LAW	B-TERM	0	0
-30	Perishable	I-LAW	I-TERM	0	0
-31	Cargo	I-LAW	I-TERM	0	0
-32	Regulations	E-LAW	I-TERM	0	0
-33	Section	B-LAW	I-TERM	0	0
-34	17	I-LAW	E-TERM	1	38
-35	and	I-LAW	O	0	0
-36	Temperature	I-LAW	B-TERM	0	0
-37	Control	I-LAW	I-TERM	0	0
-38	Regulations	E-LAW	E-TERM	0	0
+29	IATA	B-MISC	B-TERM	0	0
+30	Perishable	I-MISC	I-TERM	0	0
+31	Cargo	I-MISC	I-TERM	0	0
+32	Regulations	E-MISC	I-TERM	0	0
+33	Section	B-MISC	I-TERM	0	0
+34	17	I-MISC	E-TERM	1	38
+35	and	I-MISC	O	0	0
+36	Temperature	I-MISC	B-TERM	0	0
+37	Control	I-MISC	I-TERM	0	0
+38	Regulations	E-MISC	E-TERM	0	0
 39	.	O	O	0	0
 
 1	FedEx	S-ORG	S-TERM	1	3
@@ -2923,8 +2923,8 @@
 5	have	O	O	0	0
 6	rolled	O	O	0	0
 7	out	O	O	0	0
-8	Medpak	B-PRODUCT	B-TERM	0	0
-9	VI°C	E-PRODUCT	E-TERM	1	20
+8	Medpak	B-MISC	B-TERM	0	0
+9	VI°C	E-MISC	E-TERM	1	20
 10	globally	O	O	0	0
 11	,	O	O	0	0
 12	having	O	O	0	0
@@ -2937,7 +2937,7 @@
 19	healthcare	O	I-TERM	0	0
 20	products	O	E-TERM	1	22
 21	in	O	O	0	0
-22	Europe	S-LOC	S-TERM	0	0
+22	Europe	S-MISC	S-TERM	0	0
 23	three	B-DATE	O	0	0
 24	years	I-DATE	O	0	0
 25	ago	E-DATE	O	0	0
@@ -2975,10 +2975,10 @@
 11	,	O	O	0	0
 12	starting	O	O	0	0
 13	with	O	O	0	0
-14	Asia-Pacific	S-LOC	B-TERM	0	0
+14	Asia-Pacific	S-MISC	B-TERM	0	0
 15	and	O	I-TERM	0	0
-16	North	B-LOC	I-TERM	0	0
-17	America	E-LOC	E-TERM	0	0
+16	North	B-MISC	I-TERM	0	0
+17	America	E-MISC	E-TERM	0	0
 18	.	O	O	0	0
 
 1	Marking	O	O	0	0
@@ -3091,7 +3091,7 @@
 1	UPS	S-ORG	S-TERM	1	4
 2	to	O	O	0	0
 3	add	O	O	0	0
-4	Dutch	S-NORP	B-TERM	0	0
+4	Dutch	S-MISC	B-TERM	0	0
 5	pharma	O	I-TERM	0	0
 6	hub	O	E-TERM	0	0
 
@@ -3141,9 +3141,9 @@
 22	.	O	O	0	0
 
 1	The	O	O	0	0
-2	28,000	B-QUANTITY	B-TERM	0	0
-3	sq	I-QUANTITY	I-TERM	0	0
-4	m	E-QUANTITY	E-TERM	1	7
+2	28,000	B-MISC	B-TERM	0	0
+3	sq	I-MISC	I-TERM	0	0
+4	m	E-MISC	E-TERM	1	7
 5	facility	O	O	0	0
 6	at	O	O	0	0
 7	Roermond	S-GPE	O	0	12
@@ -3153,7 +3153,7 @@
 11	to	O	O	0	0
 12	UPS	S-ORG	S-TERM	1	16
 13	's	O	O	0	0
-14	European	S-NORP	B-TERM	0	0
+14	European	S-MISC	B-TERM	0	0
 15	air	O	I-TERM	0	0
 16	hub	O	E-TERM	1	19
 17	at	O	O	0	0
@@ -3190,7 +3190,7 @@
 10	:	O	O	0	0
 11	"	O	O	0	0
 12	This	O	O	0	0
-13	third	S-ORDINAL	O	1	16
+13	third	S-MISC	O	1	16
 14	dedicated	O	B-TERM	0	0
 15	healthcare	O	I-TERM	0	0
 16	facility	O	E-TERM	1	21
@@ -3208,7 +3208,7 @@
 28	of	O	O	0	0
 29	UPS	S-ORG	S-TERM	0	0
 30	's	O	O	0	0
-31	European	S-NORP	O	0	0
+31	European	S-MISC	O	0	0
 32	distribution	O	O	0	0
 33	campus	O	O	0	0
 34	.	O	O	0	0
@@ -3248,7 +3248,7 @@
 33	facilities	O	O	0	0
 34	in	O	O	0	0
 35	other	O	O	0	0
-36	European	S-NORP	O	1	41
+36	European	S-MISC	O	1	41
 37	countries	O	O	0	0
 38	,	O	O	0	0
 39	such	O	O	0	0
@@ -3329,14 +3329,14 @@
 16	50	E-CARDINAL	O	1	19
 17	locations	O	O	0	0
 18	throughout	O	O	0	0
-19	Europe	S-LOC	O	0	21
+19	Europe	S-MISC	O	0	21
 20	,	O	O	0	0
-21	Asia-Pacific	S-LOC	O	0	26
+21	Asia-Pacific	S-MISC	O	0	26
 22	,	O	O	0	0
-23	North	B-LOC	O	0	0
-24	and	I-LOC	O	0	0
-25	South	I-LOC	O	0	0
-26	America	E-LOC	O	0	0
+23	North	B-MISC	O	0	0
+24	and	I-MISC	O	0	0
+25	South	I-MISC	O	0	0
+26	America	E-MISC	O	0	0
 27	.	O	O	0	0
 
 1	Air	B-ORG	O	0	0
@@ -3345,12 +3345,12 @@
 4	is	O	O	0	0
 5	hosting	O	O	0	0
 6	its	O	O	0	0
-7	second	S-ORDINAL	O	0	12
-8	Life	B-EVENT	O	0	0
-9	Sciences	I-EVENT	O	0	0
-10	and	I-EVENT	O	0	0
-11	Pharmaceuticals	I-EVENT	O	0	0
-12	Conference	E-EVENT	O	0	0
+7	second	S-MISC	O	0	12
+8	Life	B-MISC	O	0	0
+9	Sciences	I-MISC	O	0	0
+10	and	I-MISC	O	0	0
+11	Pharmaceuticals	I-MISC	O	0	0
+12	Conference	E-MISC	O	0	0
 13	in	O	O	0	0
 14	December	B-DATE	O	0	0
 15	2015	E-DATE	O	0	0
@@ -3426,8 +3426,8 @@
 24	Airways	E-ORG	E-TERM	1	29
 25	commences	O	O	0	0
 26	its	O	O	0	0
-27	B787	B-PRODUCT	B-TERM	0	0
-28	Dreamliner	E-PRODUCT	I-TERM	0	0
+27	B787	B-MISC	B-TERM	0	0
+28	Dreamliner	E-MISC	I-TERM	0	0
 29	flights	O	E-TERM	0	0
 30	to	O	O	0	0
 31	the	O	O	0	0
@@ -3739,7 +3739,7 @@
 23	.	O	O	0	0
 
 1	The	O	O	0	0
-2	MS2400-Certification	S-PRODUCT	S-TERM	1	7
+2	MS2400-Certification	S-MISC	S-TERM	1	7
 3	is	O	O	0	0
 4	applicable	O	O	0	0
 5	to	O	O	0	0
@@ -3838,7 +3838,7 @@
 9	agreement	O	O	0	0
 10	with	O	O	0	0
 11	its	O	O	0	0
-12	first	S-ORDINAL	O	0	18
+12	first	S-MISC	O	0	18
 13	customers	O	O	0	0
 14	,	O	O	0	0
 15	Sejung	B-ORG	O	0	0
@@ -3947,7 +3947,7 @@
 24	to	O	O	0	0
 25	reach	O	O	0	0
 26	$	O	O	0	0
-27	2.6trn	S-MONEY	O	0	0
+27	2.6trn	S-MISC	O	0	0
 28	by	O	O	0	0
 29	2023	S-DATE	O	0	0
 30	.	O	O	0	0
@@ -3987,9 +3987,9 @@
 6	listed	O	O	0	0
 7	on	O	O	0	0
 8	the	O	O	0	0
-9	Verify	B-PRODUCT	O	0	0
-10	Halal	I-PRODUCT	E-TERM	0	0
-11	app	E-PRODUCT	O	0	0
+9	Verify	B-MISC	O	0	0
+10	Halal	I-MISC	E-TERM	0	0
+11	app	E-MISC	O	0	0
 12	,	O	O	0	0
 13	which	O	O	0	0
 14	was	O	O	0	0
@@ -4075,7 +4075,7 @@
 37	,	O	O	0	0
 38	marked	O	O	0	0
 39	the	O	O	0	0
-40	10th	S-ORDINAL	O	0	0
+40	10th	S-MISC	O	0	0
 41	anniversary	O	O	0	0
 42	of	O	O	0	0
 43	their	O	O	0	0
@@ -4172,21 +4172,21 @@
 12	when	O	O	0	0
 13	they	O	O	0	0
 14	released	O	O	0	0
-15	the	B-PRODUCT	O	0	0
-16	'	I-PRODUCT	O	0	0
-17	Emirates	I-PRODUCT	B-TERM	0	0
-18	SkyCargo	I-PRODUCT	I-TERM	0	0
-19	White	I-PRODUCT	I-TERM	0	0
-20	Cover	I-PRODUCT	E-TERM	1	24
-21	'	E-PRODUCT	O	0	0
+15	the	B-MISC	O	0	0
+16	'	I-MISC	O	0	0
+17	Emirates	I-MISC	B-TERM	0	0
+18	SkyCargo	I-MISC	I-TERM	0	0
+19	White	I-MISC	I-TERM	0	0
+20	Cover	I-MISC	E-TERM	1	24
+21	'	E-MISC	O	0	0
 22	-	O	O	0	0
 23	the	O	O	0	0
-24	first	S-ORDINAL	O	1	26
+24	first	S-MISC	O	1	26
 25	pallet	O	B-TERM	0	0
 26	cover	O	E-TERM	1	2
 27	made	O	O	0	0
 28	with	O	O	0	0
-29	Tyvek	S-PRODUCT	S-TERM	0	0
+29	Tyvek	S-MISC	S-TERM	0	0
 30	that	O	O	0	0
 31	revolutionized	O	O	0	0
 32	cold	O	B-TERM	0	0
@@ -4247,10 +4247,10 @@
 5	SkyCargo	E-ORG	O	1	10
 6	introduced	O	O	0	0
 7	'	O	O	0	0
-8	White	B-PRODUCT	B-TERM	0	0
-9	Cover	I-PRODUCT	I-TERM	0	0
-10	Advanced	I-PRODUCT	E-TERM	1	15
-11	'	E-PRODUCT	O	0	0
+8	White	B-MISC	B-TERM	0	0
+9	Cover	I-MISC	I-TERM	0	0
+10	Advanced	I-MISC	E-TERM	1	15
+11	'	E-MISC	O	0	0
 12	for	O	O	0	0
 13	protecting	O	B-TERM	0	0
 14	temperature-sensitive	O	I-TERM	0	0
@@ -4273,11 +4273,11 @@
 6	the	O	O	0	0
 7	launch	O	O	0	0
 8	of	O	O	0	0
-9	'	B-WORK_OF_ART	O	0	0
-10	White	I-WORK_OF_ART	B-TERM	0	0
-11	Cover	I-WORK_OF_ART	I-TERM	0	0
-12	Xtreme	I-WORK_OF_ART	E-TERM	0	0
-13	'	E-WORK_OF_ART	O	0	0
+9	'	B-MISC	O	0	0
+10	White	I-MISC	B-TERM	0	0
+11	Cover	I-MISC	I-TERM	0	0
+12	Xtreme	I-MISC	E-TERM	0	0
+13	'	E-MISC	O	0	0
 14	in	O	O	0	0
 15	August	B-DATE	O	0	0
 16	2017	E-DATE	O	0	0
@@ -4380,10 +4380,10 @@
 3	cargo	O	O	0	0
 4	carrier	O	O	0	0
 5	has	O	O	0	0
-6	over	B-QUANTITY	O	0	0
-7	25,000	I-QUANTITY	B-TERM	0	0
-8	square	I-QUANTITY	I-TERM	0	0
-9	meters	E-QUANTITY	E-TERM	1	14
+6	over	B-MISC	O	0	0
+7	25,000	I-MISC	B-TERM	0	0
+8	square	I-MISC	I-TERM	0	0
+9	meters	E-MISC	E-TERM	1	14
 10	of	O	O	0	0
 11	dedicated	O	B-TERM	0	0
 12	temperature-controlled	O	I-TERM	0	0
@@ -4540,9 +4540,9 @@
 8	the	O	O	0	0
 9	functionality	O	O	0	0
 10	of	O	O	0	0
-11	the	B-LOC	O	0	0
-12	White	I-LOC	O	0	0
-13	Cover	E-LOC	O	0	25
+11	the	B-MISC	O	0	0
+12	White	I-MISC	O	0	0
+13	Cover	E-MISC	O	0	25
 14	and	O	O	0	0
 15	have	O	O	0	0
 16	released	O	O	0	0
@@ -4552,14 +4552,14 @@
 20	the	O	O	0	0
 21	most	O	O	0	0
 22	recent	O	O	0	0
-23	White	B-PRODUCT	B-TERM	0	0
-24	Cover	I-PRODUCT	I-TERM	0	0
-25	Xtreme	E-PRODUCT	E-TERM	0	30
+23	White	B-MISC	B-TERM	0	0
+24	Cover	I-MISC	I-TERM	0	0
+25	Xtreme	E-MISC	E-TERM	0	30
 26	,	O	O	0	0
 27	providing	O	O	0	0
 28	an	O	O	0	0
 29	excellent	O	O	0	0
-30	first	S-ORDINAL	O	0	0
+30	first	S-MISC	O	0	0
 31	level	O	O	0	0
 32	of	O	O	0	0
 33	protection	O	O	0	0
@@ -4613,7 +4613,7 @@
 12	's	E-ORG	O	0	0
 13	real-time	O	B-TERM	0	0
 14	Bluetooth-enabled	O	I-TERM	0	0
-15	ULD	S-PRODUCT	I-TERM	0	0
+15	ULD	S-MISC	I-TERM	0	0
 16	tracking	O	I-TERM	0	0
 17	technology	O	E-TERM	0	0
 18	is	O	O	0	0
@@ -4723,7 +4723,7 @@
 21	that	O	O	0	0
 22	the	O	O	0	0
 23	new	O	O	0	0
-24	Bluetooth	S-PRODUCT	O	0	0
+24	Bluetooth	S-MISC	O	0	0
 25	technology	O	O	0	0
 26	"	O	O	0	0
 27	will	O	O	0	0
@@ -4767,11 +4767,11 @@
 24	introduction	O	O	0	0
 25	of	O	O	0	0
 26	real-time	O	B-TERM	0	0
-27	Bluetooth	S-PRODUCT	I-TERM	0	0
+27	Bluetooth	S-MISC	I-TERM	0	0
 28	tracking	O	I-TERM	0	0
 29	on	O	I-TERM	0	0
 30	its	O	I-TERM	0	0
-31	ULDs	S-PRODUCT	E-TERM	0	0
+31	ULDs	S-MISC	E-TERM	0	0
 32	.	O	O	0	0
 
 1	ACL	B-ORG	B-TERM	1	6
@@ -4782,13 +4782,13 @@
 6	CORES	S-ORG	S-TERM	1	10
 7	's	O	O	0	0
 8	low-energy	O	B-TERM	0	0
-9	Bluetooth	S-PRODUCT	I-TERM	0	0
+9	Bluetooth	S-MISC	I-TERM	0	0
 10	devices	O	E-TERM	1	15
 11	into	O	O	0	0
 12	the	O	O	0	0
 13	company	O	O	0	0
 14	's	O	O	0	0
-15	ULDs	S-PRODUCT	S-TERM	0	20
+15	ULDs	S-MISC	S-TERM	0	20
 16	,	O	O	0	0
 17	which	O	O	0	0
 18	report	O	B-TERM	0	0
@@ -4889,7 +4889,7 @@
 1	Lufthansa	B-ORG	B-TERM	0	0
 2	Cargo	E-ORG	E-TERM	0	4
 3	becomes	O	O	0	0
-4	sixth	S-ORDINAL	O	0	0
+4	sixth	S-MISC	O	0	0
 5	airline	O	O	0	0
 6	to	O	O	0	0
 7	achieve	O	O	0	0
@@ -4900,7 +4900,7 @@
 3	has	O	O	0	0
 4	become	O	O	0	0
 5	the	O	O	0	0
-6	sixth	S-ORDINAL	O	1	11
+6	sixth	S-MISC	O	1	11
 7	airline	O	O	0	0
 8	to	O	O	0	0
 9	be	O	O	0	0
@@ -4920,7 +4920,7 @@
 23	.	O	O	0	0
 
 1	The	O	O	0	0
-2	German	S-NORP	O	0	0
+2	German	S-MISC	O	0	0
 3	airline	O	O	0	0
 4	said	O	O	0	0
 5	that	O	O	0	0
@@ -5007,7 +5007,7 @@
 3	one	S-CARDINAL	O	0	6
 4	of	O	O	0	0
 5	the	O	O	0	0
-6	first	S-ORDINAL	O	0	11
+6	first	S-MISC	O	0	11
 7	airlines	O	O	0	0
 8	worldwide	O	O	0	0
 9	to	O	O	0	0
@@ -5028,7 +5028,7 @@
 24	done	O	O	0	0
 25	on	O	O	0	0
 26	our	O	O	0	0
-27	Cool/td	S-PRODUCT	S-TERM	0	0
+27	Cool/td	S-MISC	S-TERM	0	0
 28	product	O	O	0	0
 29	over	O	O	0	0
 30	the	B-DATE	O	0	0
@@ -5203,8 +5203,8 @@
 11	introducing	O	O	0	0
 12	the	O	O	0	0
 13	new	O	O	0	0
-14	CSafe	S-PRODUCT	B-TERM	1	15
-15	RAP	S-PRODUCT	I-TERM	1	20
+14	CSafe	S-MISC	B-TERM	1	15
+15	RAP	S-MISC	I-TERM	1	20
 16	container	O	E-TERM	0	0
 17	to	O	O	0	0
 18	its	O	O	0	0
@@ -5283,9 +5283,9 @@
 26	run	O	I-TERM	0	0
 27	time	O	I-TERM	0	0
 28	of	O	I-TERM	0	0
-29	over	B-QUANTITY	I-TERM	0	0
-30	120	I-QUANTITY	I-TERM	0	0
-31	hours	E-QUANTITY	E-TERM	0	0
+29	over	B-MISC	I-TERM	0	0
+30	120	I-MISC	I-TERM	0	0
+31	hours	E-MISC	E-TERM	0	0
 32	with	O	O	0	0
 33	efficiencies	O	O	0	0
 34	found	O	O	0	0
@@ -5307,9 +5307,9 @@
 9	France-KLM	I-ORG	I-TERM	0	0
 10	Cargo	E-ORG	E-TERM	0	14
 11	and	O	O	0	0
-12	Virgin	B-PRODUCT	B-TERM	0	0
-13	Atlantic	I-PRODUCT	I-TERM	0	0
-14	Cargo	E-PRODUCT	E-TERM	1	24
+12	Virgin	B-MISC	B-TERM	0	0
+13	Atlantic	I-MISC	I-TERM	0	0
+14	Cargo	E-MISC	E-TERM	1	24
 15	,	O	O	0	0
 16	we	O	O	0	0
 17	can	O	O	0	0
@@ -5428,11 +5428,11 @@
 16	approved	O	I-TERM	0	0
 17	facilities	O	E-TERM	1	19
 18	in	O	O	0	0
-19	Europe	S-LOC	O	0	23
+19	Europe	S-MISC	O	0	23
 20	and	O	O	0	0
 21	one	O	O	0	0
 22	in	O	O	0	0
-23	Asia	S-LOC	O	0	0
+23	Asia	S-MISC	O	0	0
 24	,	O	O	0	0
 25	through	O	O	0	0
 26	partners	O	O	0	0
@@ -5457,8 +5457,8 @@
 3	pharma	O	O	0	0
 4	volumes	O	O	0	0
 5	grow	O	O	0	0
-6	60	B-PERCENT	O	0	0
-7	percent	E-PERCENT	O	0	0
+6	60	B-MISC	O	0	0
+7	percent	E-MISC	O	0	0
 8	in	O	O	0	0
 9	2018	S-DATE	O	0	0
 
@@ -5481,8 +5481,8 @@
 17	pharma	O	E-TERM	1	21
 18	'	O	O	0	0
 19	rise	O	O	0	0
-20	60	B-PERCENT	O	0	0
-21	percent	E-PERCENT	O	0	0
+20	60	B-MISC	O	0	0
+21	percent	E-MISC	O	0	0
 22	year-on-year	O	O	0	0
 23	in	O	O	0	0
 24	2018	S-DATE	O	0	0
@@ -5499,12 +5499,12 @@
 35	last	B-DATE	O	0	0
 36	year	E-DATE	O	0	0
 37	of	O	O	0	0
-38	10	B-PERCENT	O	0	0
-39	percent	E-PERCENT	O	0	0
+38	10	B-MISC	O	0	0
+39	percent	E-MISC	O	0	0
 40	.	O	O	0	0
 
 1	The	O	O	0	0
-2	Russian	S-NORP	O	1	10
+2	Russian	S-MISC	O	1	10
 3	all	O	O	0	0
 4	cargo	O	O	0	0
 5	carrier	O	O	0	0
@@ -5719,7 +5719,7 @@
 2	Global	I-ORG	E-TERM	1	7
 3	's	E-ORG	O	0	0
 4	new	O	O	0	0
-5	RAP	S-PRODUCT	B-TERM	0	0
+5	RAP	S-MISC	B-TERM	0	0
 6	temperature-controlled	O	I-TERM	0	0
 7	container	O	E-TERM	1	13
 8	has	O	O	0	0
@@ -5817,23 +5817,23 @@
 35	.	O	E-TERM	0	0
 
 1	Like	O	O	0	0
-2	the	B-PRODUCT	O	0	0
-3	CSafe	I-PRODUCT	S-TERM	1	4
-4	RKN	E-PRODUCT	S-TERM	1	8
+2	the	B-MISC	O	0	0
+3	CSafe	I-MISC	S-TERM	1	4
+4	RKN	E-MISC	S-TERM	1	8
 5	,	O	O	0	0
-6	the	B-PRODUCT	O	0	0
-7	CSafe	I-PRODUCT	S-TERM	0	0
-8	RAP	E-PRODUCT	S-TERM	1	18
+6	the	B-MISC	O	0	0
+7	CSafe	I-MISC	S-TERM	0	0
+8	RAP	E-MISC	S-TERM	1	18
 9	also	O	O	0	0
 10	has	O	O	0	0
 11	a	O	O	0	0
 12	battery	O	B-TERM	0	0
 13	life	O	I-TERM	0	0
 14	of	O	I-TERM	0	0
-15	well	B-TIME	I-TERM	0	0
-16	over	I-TIME	I-TERM	0	0
-17	100	I-TIME	I-TERM	0	0
-18	hours	E-TIME	E-TERM	0	0
+15	well	B-MISC	I-TERM	0	0
+16	over	I-MISC	I-TERM	0	0
+17	100	I-MISC	I-TERM	0	0
+18	hours	E-MISC	E-TERM	0	0
 19	.	O	O	0	0
 
 1	CSafe	B-ORG	B-TERM	1	29
@@ -5863,8 +5863,8 @@
 25	launch	O	O	0	0
 26	of	O	O	0	0
 27	the	O	O	0	0
-28	CSafe	S-PRODUCT	S-TERM	0	0
-29	RAP	S-PRODUCT	S-TERM	1	33
+28	CSafe	S-MISC	S-TERM	0	0
+29	RAP	S-MISC	S-TERM	1	33
 30	,	O	O	0	0
 31	providing	O	O	0	0
 32	life-science	O	B-TERM	0	0
@@ -5901,7 +5901,7 @@
 63	with	O	O	0	0
 64	the	O	O	0	0
 65	CSafe	S-ORG	S-TERM	0	0
-66	RKN	S-PRODUCT	B-TERM	0	0
+66	RKN	S-MISC	B-TERM	0	0
 67	active	O	I-TERM	0	0
 68	container	O	E-TERM	0	0
 69	over	O	O	0	0
@@ -5946,10 +5946,10 @@
 22	which	O	O	0	0
 23	will	O	O	0	0
 24	handle	O	O	0	0
-25	up	B-QUANTITY	O	0	0
-26	to	I-QUANTITY	O	0	0
-27	250,000	I-QUANTITY	O	0	0
-28	tons	E-QUANTITY	O	0	0
+25	up	B-MISC	O	0	0
+26	to	I-MISC	O	0	0
+27	250,000	I-MISC	O	0	0
+28	tons	E-MISC	O	0	0
 29	a	O	O	0	0
 30	year	O	O	0	0
 31	.	O	O	0	0
@@ -5965,7 +5965,7 @@
 9	generated	O	O	0	0
 10	in	O	O	0	0
 11	the	O	O	0	0
-12	Nordic	S-NORP	O	1	16
+12	Nordic	S-MISC	O	1	16
 13	region	O	O	0	0
 14	,	O	O	0	0
 15	and	O	O	0	0
@@ -5977,17 +5977,17 @@
 21	cargo	O	O	0	0
 22	airport	O	O	0	0
 23	in	O	O	0	0
-24	Europe	S-LOC	O	0	28
+24	Europe	S-MISC	O	0	28
 25	with	O	O	0	0
-26	36	B-PERCENT	O	0	0
-27	per	I-PERCENT	O	0	0
-28	cent	E-PERCENT	O	0	0
+26	36	B-MISC	O	0	0
+27	per	I-MISC	O	0	0
+28	cent	E-MISC	O	0	0
 29	.	O	O	0	0
 
 1	Of	O	O	0	0
 2	the	O	O	0	0
-3	185,000	B-QUANTITY	O	0	0
-4	tons	E-QUANTITY	O	0	14
+3	185,000	B-MISC	O	0	0
+4	tons	E-MISC	O	0	14
 5	flown	O	O	0	0
 6	in	O	O	0	0
 7	and	O	O	0	0
@@ -5996,13 +5996,13 @@
 10	the	O	O	0	0
 11	airport	O	O	0	0
 12	,	O	O	0	0
-13	90,000	B-QUANTITY	O	0	0
-14	tons	E-QUANTITY	O	0	19
+13	90,000	B-MISC	O	0	0
+14	tons	E-MISC	O	0	19
 15	was	O	O	0	0
 16	seafood	O	O	0	0
 17	,	O	O	0	0
 18	and	O	O	0	0
-19	Norwegian	S-NORP	O	0	29
+19	Norwegian	S-MISC	O	0	29
 20	seafood	O	O	0	0
 21	as	O	O	0	0
 22	air	O	O	0	0
@@ -6011,8 +6011,8 @@
 25	expected	O	O	0	0
 26	to	O	O	0	0
 27	reach	O	O	0	0
-28	230,000	B-QUANTITY	O	0	0
-29	tons	E-QUANTITY	O	0	0
+28	230,000	B-MISC	O	0	0
+29	tons	E-MISC	O	0	0
 30	in	O	O	0	0
 31	2018	S-DATE	O	0	0
 32	.	O	O	0	0
@@ -6113,8 +6113,8 @@
 22	cargo	O	B-TERM	0	0
 23	hub	O	E-TERM	1	26
 24	in	O	O	0	0
-25	Northern	B-LOC	O	0	0
-26	Europe	E-LOC	O	0	0
+25	Northern	B-MISC	O	0	0
+26	Europe	E-MISC	O	0	0
 27	.	O	O	0	0
 28	"	O	O	0	0
 
@@ -6284,7 +6284,7 @@
 35	.	O	O	0	0
 36	"	O	O	0	0
 
-1	African	S-NORP	O	1	4
+1	African	S-MISC	O	1	4
 2	handler	O	O	0	0
 3	Siginon	B-ORG	B-TERM	0	0
 4	Aviation	E-ORG	E-TERM	1	7
@@ -6293,7 +6293,7 @@
 7	Cargo	E-ORG	E-TERM	0	0
 8	agreement	O	O	0	0
 
-1	Kenyan	S-NORP	O	1	5
+1	Kenyan	S-MISC	O	1	5
 2	cargo	O	O	0	0
 3	handler	O	O	0	0
 4	Siginon	B-ORG	B-TERM	0	0
@@ -6522,7 +6522,7 @@
 
 1	Swissport	S-PERSON	S-TERM	1	3
 2	opens	O	O	0	0
-3	second	S-ORDINAL	O	1	4
+3	second	S-MISC	O	1	4
 4	Vienna	S-GPE	O	0	0
 5	airport	O	B-TERM	0	0
 6	warehouse	O	E-TERM	0	0
@@ -6532,7 +6532,7 @@
 3	has	O	O	0	0
 4	opened	O	O	0	0
 5	its	O	O	0	0
-6	second	S-ORDINAL	O	1	9
+6	second	S-MISC	O	1	9
 7	air	O	B-TERM	0	0
 8	cargo	O	I-TERM	0	0
 9	warehouse	O	E-TERM	1	13
@@ -6546,9 +6546,9 @@
 17	total	O	O	0	0
 18	space	O	O	0	0
 19	to	O	O	0	0
-20	7,000	B-QUANTITY	B-TERM	0	0
-21	square	I-QUANTITY	I-TERM	0	0
-22	metres	E-QUANTITY	E-TERM	0	0
+20	7,000	B-MISC	B-TERM	0	0
+21	square	I-MISC	I-TERM	0	0
+22	metres	E-MISC	E-TERM	0	0
 23	.	O	O	0	0
 
 1	The	O	O	0	0
@@ -6562,9 +6562,9 @@
 9	surface	O	O	0	0
 10	area	O	O	0	0
 11	of	O	O	0	0
-12	2,100	B-QUANTITY	B-TERM	0	0
-13	square	I-QUANTITY	I-TERM	0	0
-14	metres	E-QUANTITY	E-TERM	0	19
+12	2,100	B-MISC	B-TERM	0	0
+13	square	I-MISC	I-TERM	0	0
+14	metres	E-MISC	E-TERM	0	19
 15	,	O	O	0	0
 16	has	O	O	0	0
 17	direct	O	B-TERM	0	0
@@ -6759,7 +6759,7 @@
 13	has	O	O	0	0
 14	become	O	O	0	0
 15	the	O	O	0	0
-16	first	S-ORDINAL	O	1	20
+16	first	S-MISC	O	1	20
 17	air	O	O	0	0
 18	gateway	O	O	0	0
 19	in	O	O	0	0
@@ -6832,9 +6832,9 @@
 8	IATA	S-ORG	S-TERM	0	13
 9	stand	O	O	0	0
 10	at	O	O	0	0
-11	Air	B-PRODUCT	O	0	0
-12	Cargo	I-PRODUCT	O	0	0
-13	Europe	E-PRODUCT	O	0	15
+11	Air	B-MISC	O	0	0
+12	Cargo	I-MISC	O	0	0
+13	Europe	E-MISC	O	0	15
 14	(	O	O	0	0
 15	ACE	S-ORG	O	0	24
 16	)	O	O	0	0
@@ -6977,16 +6977,16 @@
 11	are	O	O	0	0
 12	destined	O	O	0	0
 13	for	O	O	0	0
-14	North	B-LOC	O	0	0
-15	America	E-LOC	O	0	20
+14	North	B-MISC	O	0	0
+15	America	E-MISC	O	0	20
 16	,	O	O	0	0
 17	although	O	O	0	0
-18	the	B-LOC	O	0	0
-19	Far	I-LOC	O	0	0
-20	East	E-LOC	O	0	23
+18	the	B-MISC	O	0	0
+19	Far	I-MISC	O	0	0
+20	East	E-MISC	O	0	23
 21	and	O	O	0	0
-22	South	B-LOC	O	0	0
-23	America	E-LOC	O	0	0
+22	South	B-MISC	O	0	0
+23	America	E-MISC	O	0	0
 24	also	O	O	0	0
 25	represent	O	O	0	0
 26	important	O	O	0	0
@@ -7000,7 +7000,7 @@
 5	district	O	O	0	0
 6	,	O	O	0	0
 7	the	O	O	0	0
-8	second	S-ORDINAL	O	1	11
+8	second	S-MISC	O	1	11
 9	largest	O	O	0	0
 10	in	O	O	0	0
 11	Italy	S-GPE	O	0	13
@@ -7009,7 +7009,7 @@
 14	of	O	O	0	0
 15	the	O	O	0	0
 16	major	O	O	0	0
-17	European	S-NORP	O	0	0
+17	European	S-MISC	O	0	0
 18	production	O	O	0	0
 19	hubs	O	O	0	0
 20	,	O	O	0	0
@@ -7094,7 +7094,7 @@
 3	,	O	O	0	0
 4	regional	O	O	0	0
 5	director	O	O	0	0
-6	Europe	S-LOC	O	0	0
+6	Europe	S-MISC	O	0	0
 7	,	O	O	0	0
 8	airport	O	O	0	0
 9	,	O	O	0	0
@@ -7111,7 +7111,7 @@
 20	:	O	O	0	0
 21	"	O	O	0	0
 22	The	O	O	0	0
-23	European	S-NORP	O	0	0
+23	European	S-MISC	O	0	0
 24	freight	O	O	0	0
 25	market	O	O	0	0
 26	is	O	O	0	0
@@ -7182,9 +7182,9 @@
 1	Fiumicino	B-FAC	O	1	6
 2	airport	E-FAC	O	0	0
 3	handled	O	O	0	0
-4	approximately	B-QUANTITY	O	0	0
-5	200,000	I-QUANTITY	O	0	0
-6	tonnes	E-QUANTITY	O	0	17
+4	approximately	B-MISC	O	0	0
+5	200,000	I-MISC	O	0	0
+6	tonnes	E-MISC	O	0	17
 7	of	O	O	0	0
 8	cargo	O	O	0	0
 9	last	B-DATE	O	0	0
@@ -7194,8 +7194,8 @@
 13	a	O	O	0	0
 14	growth	O	O	0	0
 15	of	O	O	0	0
-16	11	B-PERCENT	O	0	0
-17	%	E-PERCENT	O	0	0
+16	11	B-MISC	O	0	0
+17	%	E-MISC	O	0	0
 18	compared	O	O	0	0
 19	to	O	O	0	0
 20	2017	S-DATE	O	0	0
@@ -7231,14 +7231,14 @@
 16	.	O	O	0	0
 
 1	The	O	O	0	0
-2	Texan	S-NORP	O	1	9
+2	Texan	S-MISC	O	1	9
 3	hub	O	O	0	0
 4	,	O	O	0	0
 5	which	O	O	0	0
 6	handled	O	O	0	0
-7	around	B-QUANTITY	O	0	0
-8	911,000	I-QUANTITY	O	0	0
-9	tons	E-QUANTITY	O	0	16
+7	around	B-MISC	O	0	0
+8	911,000	I-MISC	O	0	0
+9	tons	E-MISC	O	0	16
 10	of	O	O	0	0
 11	airfreight	O	O	0	0
 12	in	O	O	0	0
@@ -7251,8 +7251,8 @@
 19	two	E-CARDINAL	O	1	23
 20	airports	O	O	0	0
 21	in	O	O	0	0
-22	North	B-LOC	O	0	0
-23	America	E-LOC	O	1	29
+22	North	B-MISC	O	0	0
+23	America	E-MISC	O	1	29
 24	to	O	O	0	0
 25	have	O	O	0	0
 26	gained	O	O	0	0
@@ -7521,9 +7521,9 @@
 9	,	O	O	0	0
 10	having	O	O	0	0
 11	past	O	O	0	0
-12	five	B-QUANTITY	O	0	0
-13	million	I-QUANTITY	O	0	0
-14	tonnes	E-QUANTITY	O	0	0
+12	five	B-MISC	O	0	0
+13	million	I-MISC	O	0	0
+14	tonnes	E-MISC	O	0	0
 15	per	O	O	0	0
 16	annum	O	O	0	0
 17	in	O	O	0	0
@@ -7561,7 +7561,7 @@
 16	making	O	O	0	0
 17	it	O	O	0	0
 18	the	O	O	0	0
-19	first	S-ORDINAL	O	1	22
+19	first	S-MISC	O	1	22
 20	airline	O	O	0	0
 21	in	O	O	0	0
 22	Russia	S-GPE	O	0	0
@@ -7907,7 +7907,7 @@
 48	involve	O	O	0	0
 49	audits	O	O	0	0
 50	by	O	O	0	0
-51	third	S-ORDINAL	O	0	0
+51	third	S-MISC	O	0	0
 52	parties	O	O	0	0
 53	and	O	O	0	0
 54	training	O	O	0	0
@@ -7949,7 +7949,7 @@
 29	the	O	O	0	0
 30	highest	O	O	0	0
 31	global	O	O	0	0
-32	third	S-ORDINAL	O	0	0
+32	third	S-MISC	O	0	0
 33	party	O	O	0	0
 34	air	O	O	0	0
 35	freight	O	O	0	0
@@ -8076,7 +8076,7 @@
 2	aiming	O	O	0	0
 3	to	O	O	0	0
 4	be	O	O	0	0
-5	Europe	S-LOC	O	1	8
+5	Europe	S-MISC	O	1	8
 6	's	O	O	0	0
 7	largest	O	O	0	0
 8	IATA	S-ORG	S-TERM	1	9
@@ -8116,7 +8116,7 @@
 30	certified	O	I-TERM	0	0
 31	hub	O	E-TERM	1	33
 32	in	O	O	0	0
-33	Europe	S-LOC	O	0	0
+33	Europe	S-MISC	O	0	0
 34	.	O	O	0	0
 
 1	The	O	O	0	0
@@ -8132,7 +8132,7 @@
 11	pharmaceutical	O	I-TERM	0	0
 12	gateway	O	E-TERM	1	14
 13	in	O	O	0	0
-14	Europe	S-LOC	O	0	0
+14	Europe	S-MISC	O	0	0
 15	by	O	O	0	0
 16	early	B-DATE	O	0	0
 17	2017	E-DATE	O	0	0
@@ -8241,7 +8241,7 @@
 32	the	O	O	0	0
 33	Pharma-Gateway	O	B-TERM	0	0
 34	for	O	I-TERM	0	0
-35	Europe	S-LOC	E-TERM	0	0
+35	Europe	S-MISC	E-TERM	0	0
 36	.	O	O	0	0
 37	"	O	O	0	0
 
@@ -8355,19 +8355,19 @@
 2	enhances	O	O	0	0
 3	United	B-ORG	B-TERM	0	0
 4	Cargo	E-ORG	E-TERM	0	0
-5	TempControl	E-PRODUCT	S-TERM	0	0
+5	TempControl	E-MISC	S-TERM	0	0
 
 1	United	B-ORG	B-TERM	0	0
 2	Cargo	E-ORG	E-TERM	1	6
 3	has	O	O	0	0
 4	enhanced	O	O	0	0
 5	its	O	O	0	0
-6	TempControl	S-PRODUCT	S-TERM	1	11
+6	TempControl	S-MISC	S-TERM	1	11
 7	service	O	O	0	0
 8	by	O	O	0	0
 9	becoming	O	O	0	0
 10	the	O	O	0	0
-11	first	S-ORDINAL	O	1	12
+11	first	S-MISC	O	1	12
 12	US	S-GPE	O	1	19
 13	carrier	O	O	0	0
 14	to	O	O	0	0
@@ -8378,11 +8378,11 @@
 19	containers	O	E-TERM	1	22
 20	manufactured	O	O	0	0
 21	by	O	O	0	0
-22	SkyCell	S-PRODUCT	S-TERM	0	0
+22	SkyCell	S-MISC	S-TERM	0	0
 23	.	O	O	0	0
 
 1	The	O	O	0	0
-2	SkyCell	S-PRODUCT	B-TERM	0	0
+2	SkyCell	S-MISC	B-TERM	0	0
 3	containers	O	E-TERM	1	6
 4	feature	O	O	0	0
 5	patented	O	B-TERM	0	0
@@ -8435,7 +8435,7 @@
 10	the	O	O	0	0
 11	airline	O	O	0	0
 12	's	O	O	0	0
-13	TempControl	S-PRODUCT	S-TERM	1	16
+13	TempControl	S-MISC	S-TERM	1	16
 14	service	O	O	0	0
 15	transports	O	O	0	0
 16	vaccines	O	S-TERM	1	22
@@ -8583,7 +8583,7 @@
 14	and	O	I-TERM	0	0
 15	vegetables	O	E-TERM	0	17
 16	by	O	O	0	0
-17	Certysis	S-PRODUCT	S-TERM	0	0
+17	Certysis	S-MISC	S-TERM	0	0
 18	,	O	O	0	0
 19	an	O	O	0	0
 20	inspection	O	O	0	0
@@ -8602,7 +8602,7 @@
 5	giant	O	O	0	0
 6	Panalpina	S-ORG	S-TERM	1	8
 7	the	O	O	0	0
-8	first	S-ORDINAL	O	1	12
+8	first	S-MISC	O	1	12
 9	and	O	O	0	0
 10	only	O	O	0	0
 11	licensed	O	B-TERM	0	0
@@ -8612,7 +8612,7 @@
 15	produce	O	E-TERM	1	19
 16	at	O	O	0	0
 17	the	O	O	0	0
-18	European	S-NORP	B-TERM	0	0
+18	European	S-MISC	B-TERM	0	0
 19	hub	O	E-TERM	0	0
 20	.	O	O	0	0
 
@@ -8693,15 +8693,15 @@
 4	as	O	O	0	0
 5	an	O	O	0	0
 6	important	O	O	0	0
-7	European	S-NORP	O	1	9
+7	European	S-MISC	O	1	9
 8	import	O	B-TERM	0	0
 9	hub	O	E-TERM	0	15
 10	for	O	O	0	0
 11	organic	O	O	0	0
 12	avocados	O	O	0	0
 13	from	O	O	0	0
-14	Latin	B-LOC	O	0	0
-15	America	E-LOC	O	0	0
+14	Latin	B-MISC	O	0	0
+15	America	E-MISC	O	0	0
 16	.	O	O	0	0
 
 1	These	O	O	0	0
@@ -8715,7 +8715,7 @@
 9	Panalpina	S-ORG	S-TERM	1	13
 10	's	O	O	0	0
 11	Boeing	S-ORG	B-TERM	0	0
-12	747-8	S-PRODUCT	I-TERM	0	0
+12	747-8	S-MISC	I-TERM	0	0
 13	freighter	O	E-TERM	0	0
 14	,	O	O	0	0
 15	cleared	O	O	0	0
@@ -8727,7 +8727,7 @@
 21	final	O	O	0	0
 22	destination	O	O	0	0
 23	in	O	O	0	0
-24	Europe	S-LOC	O	0	0
+24	Europe	S-MISC	O	0	0
 25	.	O	O	0	0
 
 1	Panalpina	S-ORG	S-TERM	1	4
@@ -8738,7 +8738,7 @@
 6	airport	O	I-TERM	0	0
 7	locations	O	E-TERM	1	9
 8	in	O	O	0	0
-9	Europe	S-LOC	O	1	12
+9	Europe	S-MISC	O	1	12
 10	:	O	O	0	0
 11	London	S-GPE	B-TERM	0	0
 12	Heathrow	S-FAC	E-TERM	0	16
@@ -8784,9 +8784,9 @@
 2	Airport	E-FAC	E-TERM	1	7
 3	has	O	O	0	0
 4	added	O	O	0	0
-5	13,000	B-QUANTITY	B-TERM	0	0
-6	square	I-QUANTITY	I-TERM	0	0
-7	metres	E-QUANTITY	E-TERM	1	10
+5	13,000	B-MISC	B-TERM	0	0
+6	square	I-MISC	I-TERM	0	0
+7	metres	E-MISC	E-TERM	1	10
 8	of	O	O	0	0
 9	cargo	O	B-TERM	0	0
 10	capacity	O	E-TERM	0	17
@@ -8813,9 +8813,9 @@
 4	part	O	O	0	0
 5	of	O	O	0	0
 6	a	O	O	0	0
-7	€	B-MONEY	O	0	0
-8	17.9	I-MONEY	O	0	0
-9	million	E-MONEY	O	0	14
+7	€	B-MISC	O	0	0
+8	17.9	I-MISC	O	0	0
+9	million	E-MISC	O	0	14
 10	investment	O	O	0	0
 11	by	O	O	0	0
 12	operator	O	O	0	0
@@ -8910,9 +8910,9 @@
 8	in	O	O	0	0
 9	October	S-DATE	O	0	0
 10	adding	O	O	0	0
-11	13,000	B-QUANTITY	O	0	0
-12	square	I-QUANTITY	O	0	0
-13	metres	E-QUANTITY	O	1	18
+11	13,000	B-MISC	O	0	0
+12	square	I-MISC	O	0	0
+13	metres	E-MISC	O	1	18
 14	to	O	O	0	0
 15	the	B-FAC	O	0	0
 16	Air	I-FAC	B-TERM	0	0
@@ -8951,10 +8951,10 @@
 19	,	O	O	0	0
 20	which	O	O	0	0
 21	covers	O	O	0	0
-22	about	B-QUANTITY	O	0	0
-23	1,600	I-QUANTITY	O	0	0
-24	square	I-QUANTITY	O	0	0
-25	meters	E-QUANTITY	O	1	34
+22	about	B-MISC	O	0	0
+23	1,600	I-MISC	O	0	0
+24	square	I-MISC	O	0	0
+25	meters	E-MISC	O	1	34
 26	and	O	O	0	0
 27	is	O	O	0	0
 28	located	O	O	0	0
@@ -8970,9 +8970,9 @@
 2	facility	O	O	0	0
 3	features	O	O	0	0
 4	a	O	O	0	0
-5	153	B-QUANTITY	B-TERM	0	0
-6	square	I-QUANTITY	I-TERM	0	0
-7	metre	E-QUANTITY	E-TERM	1	9
+5	153	B-MISC	B-TERM	0	0
+6	square	I-MISC	I-TERM	0	0
+7	metre	E-MISC	E-TERM	1	9
 8	cold	O	B-TERM	0	0
 9	store	O	E-TERM	1	13
 10	for	O	O	0	0
@@ -8982,9 +8982,9 @@
 14	,	O	E-TERM	0	0
 15	and	O	O	0	0
 16	another	O	O	0	0
-17	1,415	B-QUANTITY	B-TERM	0	0
-18	square	I-QUANTITY	I-TERM	0	0
-19	metre	E-QUANTITY	I-TERM	0	0
+17	1,415	B-MISC	B-TERM	0	0
+18	square	I-MISC	I-TERM	0	0
+19	metre	E-MISC	I-TERM	0	0
 20	area	O	I-TERM	0	0
 21	for	O	I-TERM	0	0
 22	15°-25°C.	O	E-TERM	0	0
@@ -8995,9 +8995,9 @@
 4	invest	O	O	0	0
 5	a	O	O	0	0
 6	further	O	O	0	0
-7	€	B-MONEY	O	0	0
-8	1.9	I-MONEY	O	0	0
-9	million	E-MONEY	O	0	15
+7	€	B-MISC	O	0	0
+8	1.9	I-MISC	O	0	0
+9	million	E-MISC	O	0	15
 10	in	O	O	0	0
 11	the	O	O	0	0
 12	new	O	O	0	0
@@ -9033,9 +9033,9 @@
 19	an	O	O	0	0
 20	area	O	O	0	0
 21	of	O	O	0	0
-22	8,000	B-QUANTITY	O	0	0
-23	square	I-QUANTITY	O	0	0
-24	metres	E-QUANTITY	O	1	35
+22	8,000	B-MISC	O	0	0
+23	square	I-MISC	O	0	0
+24	metres	E-MISC	O	1	35
 25	was	O	O	0	0
 26	installed	O	O	0	0
 27	on	O	O	0	0
@@ -9178,7 +9178,7 @@
 16	value	O	O	0	0
 17	of	O	O	0	0
 18	lower	O	O	0	0
-19	Austrian	S-NORP	O	0	29
+19	Austrian	S-MISC	O	0	29
 20	industry	O	O	0	0
 21	,	O	O	0	0
 22	products	O	O	0	0
@@ -9187,8 +9187,8 @@
 25	the	O	O	0	0
 26	amount	O	O	0	0
 27	of	O	O	0	0
-28	€8	B-MONEY	O	0	0
-29	billion	E-MONEY	O	0	39
+28	€8	B-MISC	O	0	0
+29	billion	E-MISC	O	0	39
 30	is	O	O	0	0
 31	transported	O	O	0	0
 32	as	O	O	0	0
@@ -9280,10 +9280,10 @@
 10	an	O	O	0	0
 11	area	O	O	0	0
 12	of	O	O	0	0
-13	over	B-QUANTITY	O	0	0
-14	60,000	I-QUANTITY	O	0	0
-15	square	I-QUANTITY	O	0	0
-16	metres	E-QUANTITY	O	0	19
+13	over	B-MISC	O	0	0
+14	60,000	I-MISC	O	0	0
+15	square	I-MISC	O	0	0
+16	metres	E-MISC	O	0	19
 17	and	O	O	0	0
 18	create	O	O	0	0
 19	500	S-CARDINAL	O	0	0
@@ -9309,13 +9309,13 @@
 8	Cargo	E-ORG	E-TERM	1	16
 9	has	O	O	0	0
 10	obtained	O	O	0	0
-11	the	B-LAW	O	0	0
-12	"	I-LAW	O	0	0
-13	Authorized	I-LAW	B-TERM	0	0
-14	Economic	I-LAW	I-TERM	0	0
-15	Operator	I-LAW	I-TERM	0	0
-16	Certificate	I-LAW	E-TERM	0	0
-17	'	E-LAW	O	0	0
+11	the	B-MISC	O	0	0
+12	"	I-MISC	O	0	0
+13	Authorized	I-MISC	B-TERM	0	0
+14	Economic	I-MISC	I-TERM	0	0
+15	Operator	I-MISC	I-TERM	0	0
+16	Certificate	I-MISC	E-TERM	0	0
+17	'	E-MISC	O	0	0
 18	'	O	O	0	0
 19	.	O	O	0	0
 
@@ -9347,7 +9347,7 @@
 4	proved	O	O	0	0
 5	became	O	O	0	0
 6	the	O	O	0	0
-7	first	S-ORDINAL	O	0	0
+7	first	S-MISC	O	0	0
 8	and	O	O	0	0
 9	only	O	O	0	0
 10	air	O	O	0	0
@@ -9525,7 +9525,7 @@
 
 1	World	S-ORG	O	1	3
 2	's	O	O	0	0
-3	first	S-ORDINAL	O	1	6
+3	first	S-MISC	O	1	6
 4	CEIV	O	B-TERM	0	0
 5	Fresh	O	I-TERM	0	0
 6	certificate	O	E-TERM	1	9
@@ -9538,7 +9538,7 @@
 3	has	O	O	0	0
 4	become	O	O	0	0
 5	the	O	O	0	0
-6	first	S-ORDINAL	O	1	15
+6	first	S-MISC	O	1	15
 7	airline	O	O	0	0
 8	in	O	O	0	0
 9	the	O	O	0	0
@@ -9605,7 +9605,7 @@
 20	on	O	O	0	0
 21	becoming	O	O	0	0
 22	the	O	O	0	0
-23	first	S-ORDINAL	O	1	28
+23	first	S-MISC	O	1	28
 24	airline	O	E-TERM	0	0
 25	to	O	O	0	0
 26	achieve	O	O	0	0
@@ -9753,9 +9753,9 @@
 6	have	O	O	0	0
 7	opened	O	O	0	0
 8	a	O	O	0	0
-9	7,600	B-QUANTITY	B-TERM	0	0
-10	sq	I-QUANTITY	I-TERM	0	0
-11	m	E-QUANTITY	E-TERM	1	14
+9	7,600	B-MISC	B-TERM	0	0
+10	sq	I-MISC	I-TERM	0	0
+11	m	E-MISC	E-TERM	1	14
 12	express	O	B-TERM	0	0
 13	freight	O	I-TERM	0	0
 14	warehouse	O	E-TERM	1	18
@@ -9774,7 +9774,7 @@
 3	,	O	O	0	0
 4	with	O	O	0	0
 5	a	O	O	0	0
-6	€22m	S-MONEY	O	0	0
+6	€22m	S-MISC	O	0	0
 7	investment	O	O	0	0
 8	,	O	O	0	0
 9	will	O	O	0	0
@@ -9797,17 +9797,17 @@
 26	,	O	O	0	0
 27	which	O	O	0	0
 28	is	O	O	0	0
-29	65	B-PERCENT	O	0	0
-30	per	I-PERCENT	O	0	0
-31	cent	E-PERCENT	O	0	35
+29	65	B-MISC	O	0	0
+30	per	I-MISC	O	0	0
+31	cent	E-MISC	O	0	35
 32	owned	O	O	0	0
 33	by	O	O	0	0
 34	Air	B-ORG	B-TERM	0	0
 35	France-KLM	E-ORG	E-TERM	0	39
 36	and	O	O	0	0
-37	35	B-PERCENT	O	0	0
-38	per	I-PERCENT	O	0	0
-39	cent	E-PERCENT	O	0	41
+37	35	B-MISC	O	0	0
+38	per	I-MISC	O	0	0
+39	cent	E-MISC	O	0	41
 40	by	O	O	0	0
 41	Geopost	S-ORG	S-TERM	0	0
 42	.	O	O	0	0
@@ -9843,8 +9843,8 @@
 5	process	O	O	0	0
 6	up	O	O	0	0
 7	to	O	O	0	0
-8	55,000	B-QUANTITY	O	0	0
-9	tonnes	E-QUANTITY	O	0	14
+8	55,000	B-MISC	O	0	0
+9	tonnes	E-MISC	O	0	14
 10	per	O	O	0	0
 11	year	O	O	0	0
 12	from	O	O	0	0
@@ -9906,10 +9906,10 @@
 
 1	"	O	O	0	0
 2	Located	O	O	0	0
-3	just	B-TIME	O	0	0
-4	a	I-TIME	O	0	0
-5	few	I-TIME	O	0	0
-6	minutes	E-TIME	O	1	11
+3	just	B-MISC	O	0	0
+4	a	I-MISC	O	0	0
+5	few	I-MISC	O	0	0
+6	minutes	E-MISC	O	1	11
 7	from	O	O	0	0
 8	the	O	O	0	0
 9	aircraft	O	B-TERM	0	0
@@ -9963,10 +9963,10 @@
 16	arrive	O	O	0	0
 17	in	O	O	0	0
 18	Paris	S-GPE	O	1	22
-19	early	B-TIME	O	0	0
-20	in	I-TIME	O	0	0
-21	the	I-TIME	O	0	0
-22	morning	E-TIME	O	0	0
+19	early	B-MISC	O	0	0
+20	in	I-MISC	O	0	0
+21	the	I-MISC	O	0	0
+22	morning	E-MISC	O	0	0
 23	,	O	O	0	0
 24	and	O	O	0	0
 25	can	O	O	0	0
@@ -9979,9 +9979,9 @@
 32	flight	O	O	0	0
 33	to	O	O	0	0
 34	southern	O	O	0	0
-35	Europe	S-LOC	O	0	37
+35	Europe	S-MISC	O	0	37
 36	or	O	O	0	0
-37	Scandinavia	S-LOC	O	0	47
+37	Scandinavia	S-MISC	O	0	47
 38	,	O	O	0	0
 39	for	O	O	0	0
 40	example	O	O	0	0
@@ -9989,9 +9989,9 @@
 42	with	O	O	0	0
 43	delivery	O	O	0	0
 44	in	O	O	0	0
-45	the	B-TIME	O	0	0
-46	early	I-TIME	O	0	0
-47	afternoon	E-TIME	O	0	0
+45	the	B-MISC	O	0	0
+46	early	I-MISC	O	0	0
+47	afternoon	E-MISC	O	0	0
 48	.	O	O	0	0
 49	"	O	O	0	0
 
@@ -10072,11 +10072,11 @@
 4	was	O	O	0	0
 5	made	O	O	0	0
 6	during	O	O	0	0
-7	the	B-EVENT	O	0	0
-8	IATA	I-EVENT	S-TERM	1	13
-9	World	I-EVENT	O	0	0
-10	Cargo	I-EVENT	O	0	0
-11	Symposium	E-EVENT	O	0	0
+7	the	B-MISC	O	0	0
+8	IATA	I-MISC	S-TERM	1	13
+9	World	I-MISC	O	0	0
+10	Cargo	I-MISC	O	0	0
+11	Symposium	E-MISC	O	0	0
 12	in	O	O	0	0
 13	Berlin	S-GPE	O	0	0
 14	.	O	O	0	0
@@ -10165,7 +10165,7 @@
 3	already	O	O	0	0
 4	one	O	O	0	0
 5	of	O	O	0	0
-6	Europe	S-LOC	O	0	12
+6	Europe	S-MISC	O	0	12
 7	's	O	O	0	0
 8	largest	O	O	0	0
 9	gateways	O	O	0	0
@@ -10251,7 +10251,7 @@
 24	transport	O	O	0	0
 25	to	O	O	0	0
 26	the	O	O	0	0
-27	second	S-ORDINAL	O	0	0
+27	second	S-MISC	O	0	0
 28	line	O	O	0	0
 29	(	O	O	0	0
 30	forwarder	O	O	0	0
@@ -10467,8 +10467,8 @@
 11	der	I-FAC	O	0	0
 12	Ent	E-FAC	O	0	15
 13	of	O	O	0	0
-14	Air	B-PRODUCT	O	0	0
-15	Cargo	E-PRODUCT	O	0	16
+14	Air	B-MISC	O	0	0
+15	Cargo	E-MISC	O	0	16
 16	Netherlands	S-GPE	O	0	0
 17	.	O	O	0	0
 
@@ -10662,10 +10662,10 @@
 3	and	O	O	0	0
 4	branding	O	O	0	0
 5	of	O	O	0	0
-6	the	B-PRODUCT	O	0	0
-7	Pharma	I-PRODUCT	I-TERM	0	0
-8	Gateway	I-PRODUCT	I-TERM	0	0
-9	Amsterdam	E-PRODUCT	E-TERM	1	19
+6	the	B-MISC	O	0	0
+7	Pharma	I-MISC	I-TERM	0	0
+8	Gateway	I-MISC	I-TERM	0	0
+9	Amsterdam	E-MISC	E-TERM	1	19
 10	(	O	O	0	0
 11	above	O	O	0	0
 12	)	O	O	0	0
@@ -10725,7 +10725,7 @@
 1	American	B-ORG	B-TERM	0	0
 2	Airlines	E-ORG	E-TERM	1	4
 3	approves	O	O	0	0
-4	CSafe	S-PRODUCT	S-TERM	1	5
+4	CSafe	S-MISC	S-TERM	1	5
 5	RAP	O	B-TERM	0	0
 6	containers	O	E-TERM	0	0
 
@@ -10737,8 +10737,8 @@
 6	the	O	O	0	0
 7	use	O	O	0	0
 8	of	O	O	0	0
-9	CSafe	B-PRODUCT	S-TERM	1	13
-10	RAP	E-PRODUCT	B-TERM	0	0
+9	CSafe	B-MISC	S-TERM	1	13
+10	RAP	E-MISC	B-TERM	0	0
 11	temperature-controlled	O	I-TERM	0	0
 12	active	O	I-TERM	0	0
 13	containers	O	E-TERM	0	0
@@ -10757,9 +10757,9 @@
 26	customers	O	O	0	0
 27	.	O	O	0	0
 
-1	The	B-PRODUCT	O	0	0
-2	CSafe	I-PRODUCT	S-TERM	1	3
-3	RAP	E-PRODUCT	S-TERM	0	0
+1	The	B-MISC	O	0	0
+2	CSafe	I-MISC	S-TERM	1	3
+3	RAP	E-MISC	S-TERM	0	0
 4	offers	O	O	0	0
 5	what	O	O	0	0
 6	the	O	O	0	0
@@ -10824,8 +10824,8 @@
 27	Airlines	E-ORG	E-TERM	1	31
 28	for	O	O	0	0
 29	our	O	O	0	0
-30	CSafe	B-PRODUCT	S-TERM	0	0
-31	RAP	E-PRODUCT	B-TERM	0	0
+30	CSafe	B-MISC	S-TERM	0	0
+31	RAP	E-MISC	B-TERM	0	0
 32	system	O	E-TERM	0	0
 33	.	O	O	0	0
 
@@ -10837,7 +10837,7 @@
 6	further	O	O	0	0
 7	partnering	O	O	0	0
 8	with	O	O	0	0
-9	American	S-NORP	S-TERM	0	0
+9	American	S-MISC	S-TERM	0	0
 10	to	O	O	0	0
 11	serve	O	O	0	0
 12	our	O	O	0	0
@@ -10900,7 +10900,7 @@
 2	says	O	O	0	0
 3	:	O	O	0	0
 4	"	O	O	0	0
-5	American	S-NORP	S-TERM	1	12
+5	American	S-MISC	S-TERM	1	12
 6	's	O	O	0	0
 7	goal	O	O	0	0
 8	is	O	O	0	0
@@ -11006,7 +11006,7 @@
 14	smartest	O	O	0	0
 15	airport	O	O	0	0
 16	in	O	O	0	0
-17	Europe	S-LOC	O	0	0
+17	Europe	S-MISC	O	0	0
 18	through	O	O	0	0
 19	increased	O	O	0	0
 20	use	O	O	0	0
@@ -11535,22 +11535,22 @@
 8	the	O	O	0	0
 9	requirements	O	O	0	0
 10	of	O	O	0	0
-11	the	B-LAW	O	0	0
-12	European	I-LAW	O	0	0
-13	Commission	I-LAW	O	0	0
-14	'	I-LAW	O	0	0
-15	Guidelines	I-LAW	B-TERM	0	0
-16	on	I-LAW	I-TERM	0	0
-17	Good	I-LAW	I-TERM	0	0
-18	Distribution	I-LAW	I-TERM	0	0
-19	Practice	I-LAW	I-TERM	1	25
-20	of	I-LAW	I-TERM	0	0
-21	Medicinal	I-LAW	I-TERM	0	0
-22	Products	I-LAW	I-TERM	0	0
-23	for	I-LAW	I-TERM	0	0
-24	Human	I-LAW	I-TERM	0	0
-25	Use	I-LAW	E-TERM	1	31
-26	'	E-LAW	O	0	0
+11	the	B-MISC	O	0	0
+12	European	I-MISC	O	0	0
+13	Commission	I-MISC	O	0	0
+14	'	I-MISC	O	0	0
+15	Guidelines	I-MISC	B-TERM	0	0
+16	on	I-MISC	I-TERM	0	0
+17	Good	I-MISC	I-TERM	0	0
+18	Distribution	I-MISC	I-TERM	0	0
+19	Practice	I-MISC	I-TERM	1	25
+20	of	I-MISC	I-TERM	0	0
+21	Medicinal	I-MISC	I-TERM	0	0
+22	Products	I-MISC	I-TERM	0	0
+23	for	I-MISC	I-TERM	0	0
+24	Human	I-MISC	I-TERM	0	0
+25	Use	I-MISC	E-TERM	1	31
+26	'	E-MISC	O	0	0
 27	and	O	O	0	0
 28	of	O	O	0	0
 29	World	B-ORG	O	0	0
@@ -11873,7 +11873,7 @@
 3	branch	O	O	0	0
 4	is	O	O	0	0
 5	the	O	O	0	0
-6	second	S-ORDINAL	O	1	18
+6	second	S-MISC	O	1	18
 7	logistics	O	O	0	0
 8	firm	O	O	0	0
 9	in	O	O	0	0
@@ -11981,8 +11981,8 @@
 9	external	O	O	0	0
 10	relations	O	O	0	0
 11	–	O	O	0	0
-12	Asia	B-LOC	O	0	0
-13	Pacific	E-LOC	O	0	15
+12	Asia	B-MISC	O	0	0
+13	Pacific	E-MISC	O	0	15
 14	for	O	O	0	0
 15	IATA	S-ORG	O	0	20
 16	says	O	O	0	0
@@ -12174,7 +12174,7 @@
 38	times	O	I-TERM	0	0
 39	weekly	O	E-TERM	1	41
 40	Boeing	S-ORG	B-TERM	0	0
-41	787	S-PRODUCT	E-TERM	1	47
+41	787	S-MISC	E-TERM	1	47
 42	passenger	O	O	0	0
 43	and	O	O	0	0
 44	cargo	O	O	0	0
@@ -12283,9 +12283,9 @@
 8	cargo	O	O	0	0
 9	carried	O	O	0	0
 10	onboard	O	O	0	0
-11	Air	B-PRODUCT	O	0	0
-12	India	I-PRODUCT	O	0	0
-13	's	E-PRODUCT	O	1	18
+11	Air	B-MISC	O	0	0
+12	India	I-MISC	O	0	0
+13	's	E-MISC	O	1	18
 14	new	O	O	0	0
 15	non-stop	O	O	0	0
 16	services	O	O	0	0
@@ -12362,12 +12362,12 @@
 5	Brussels	S-GPE	E-TERM	1	8
 6	became	O	O	0	0
 7	the	O	O	0	0
-8	first	S-ORDINAL	O	1	9
+8	first	S-MISC	O	1	9
 9	WFS	S-ORG	B-TERM	1	13
 10	cargo	O	I-TERM	0	0
 11	station	O	E-TERM	0	0
 12	in	O	O	0	0
-13	Europe	S-LOC	O	1	16
+13	Europe	S-MISC	O	1	16
 14	to	O	O	0	0
 15	achieve	O	O	0	0
 16	IATA	B-ORG	S-TERM	1	19
@@ -12503,7 +12503,7 @@
 11	,	O	O	0	0
 12	with	O	O	0	0
 13	the	O	O	0	0
-14	InsulCap	S-PRODUCT	B-TERM	0	0
+14	InsulCap	S-MISC	B-TERM	0	0
 15	thermal	O	I-TERM	0	0
 16	covers	O	E-TERM	1	19
 17	allowing	O	O	0	0
@@ -12637,7 +12637,7 @@
 4	has	O	O	0	0
 5	opened	O	O	0	0
 6	the	O	O	0	0
-7	first	S-ORDINAL	O	1	11
+7	first	S-MISC	O	1	11
 8	temperature-controlled	O	B-TERM	0	0
 9	life	O	I-TERM	0	0
 10	sciences	O	I-TERM	0	0
@@ -12653,9 +12653,9 @@
 20	.	O	O	0	0
 
 1	The	O	O	0	0
-2	6,000	B-QUANTITY	B-TERM	0	0
-3	sq	I-QUANTITY	I-TERM	0	0
-4	ft	E-QUANTITY	E-TERM	1	8
+2	6,000	B-MISC	B-TERM	0	0
+3	sq	I-MISC	I-TERM	0	0
+4	ft	E-MISC	E-TERM	1	8
 5	Life	I-FAC	B-TERM	0	0
 6	Sciences	I-FAC	I-TERM	0	0
 7	Excellence	I-FAC	I-TERM	0	0
@@ -12733,7 +12733,7 @@
 20	cornerstones	O	O	0	0
 21	of	O	O	0	0
 22	the	O	O	0	0
-23	Indian	S-NORP	O	0	33
+23	Indian	S-MISC	O	0	33
 24	economy	O	O	0	0
 25	with	O	O	0	0
 26	exports	O	O	0	0
@@ -12742,8 +12742,8 @@
 29	grow	O	O	0	0
 30	an	O	O	0	0
 31	astonishing	O	O	0	0
-32	60	B-PERCENT	O	0	0
-33	%	E-PERCENT	O	0	0
+32	60	B-MISC	O	0	0
+33	%	E-MISC	O	0	0
 34	in	O	O	0	0
 35	2017	S-DATE	O	0	0
 36	.	O	O	0	0
@@ -12755,7 +12755,7 @@
 5	will	O	O	0	0
 6	help	O	O	0	0
 7	fast-growing	O	O	0	0
-8	Indian	S-NORP	O	0	0
+8	Indian	S-MISC	O	0	0
 9	life	O	O	0	0
 10	sciences	O	O	0	0
 11	companies	O	O	0	0
@@ -12853,11 +12853,11 @@
 30	of	O	O	0	0
 31	the	O	O	0	0
 32	2017	S-DATE	O	0	0
-33	Agility	B-EVENT	O	0	0
-34	Emerging	I-EVENT	O	0	0
-35	Markets	I-EVENT	O	0	0
-36	Logistics	I-EVENT	O	0	0
-37	Index	E-EVENT	O	0	0
+33	Agility	B-MISC	O	0	0
+34	Emerging	I-MISC	O	0	0
+35	Markets	I-MISC	O	0	0
+36	Logistics	I-MISC	O	0	0
+37	Index	E-MISC	O	0	0
 38	.	O	O	0	0
 
 1	In	O	O	0	0
@@ -12870,9 +12870,9 @@
 8	locations	O	O	0	0
 9	and	O	O	0	0
 10	controls	O	O	0	0
-11	150,000	B-QUANTITY	O	0	0
-12	sq	I-QUANTITY	O	0	0
-13	m	E-QUANTITY	O	0	0
+11	150,000	B-MISC	O	0	0
+12	sq	I-MISC	O	0	0
+13	m	E-MISC	O	0	0
 14	of	O	O	0	0
 15	warehouse	O	O	0	0
 16	space	O	O	0	0
@@ -12922,16 +12922,16 @@
 1	Featuring	O	O	0	0
 2	DuPont	S-ORG	S-TERM	1	6
 3	's	O	O	0	0
-4	Tyvek	B-PRODUCT	B-TERM	1	47
-5	Xtreme	I-PRODUCT	I-TERM	0	0
-6	W50	E-PRODUCT	E-TERM	1	13
+4	Tyvek	B-MISC	B-TERM	1	47
+5	Xtreme	I-MISC	I-TERM	0	0
+6	W50	E-MISC	E-TERM	1	13
 7	material	O	O	0	0
 8	,	O	O	0	0
 9	the	O	O	0	0
 10	new	O	O	0	0
-11	White	B-PRODUCT	B-TERM	0	0
-12	Cover	I-PRODUCT	I-TERM	0	54
-13	Xtreme	E-PRODUCT	E-TERM	1	21
+11	White	B-MISC	B-TERM	0	0
+12	Cover	I-MISC	I-TERM	0	54
+13	Xtreme	E-MISC	E-TERM	1	21
 14	will	O	O	0	0
 15	offer	O	O	0	0
 16	enhanced	O	O	0	0
@@ -12949,30 +12949,30 @@
 28	weather	O	I-TERM	0	0
 29	conditions	O	E-TERM	0	0
 30	.	O	O	0	0
-31	Tyvek	B-PRODUCT	B-TERM	0	0
-32	Xtreme	I-PRODUCT	I-TERM	0	0
-33	W50	E-PRODUCT	E-TERM	0	0
+31	Tyvek	B-MISC	B-TERM	0	0
+32	Xtreme	I-MISC	I-TERM	0	0
+33	W50	E-MISC	E-TERM	0	0
 34	builds	O	O	0	0
 35	on	O	O	0	0
 36	DuPont	S-ORG	S-TERM	0	0
 37	's	O	O	0	0
 38	patented	O	O	0	0
-39	Tyvek	S-PRODUCT	O	0	0
+39	Tyvek	S-MISC	O	0	0
 40	high	O	O	0	0
 41	density	O	O	0	0
 42	polyethylene	O	O	0	0
 43	material	O	O	0	0
 44	used	O	O	0	0
 45	in	O	O	0	0
-46	Emirates	B-PRODUCT	B-TERM	1	117
-47	SkyCargo	I-PRODUCT	E-TERM	1	12
-48	's	E-PRODUCT	O	0	0
-49	White	B-PRODUCT	B-TERM	0	0
-50	Cover	E-PRODUCT	E-TERM	0	0
+46	Emirates	B-MISC	B-TERM	1	117
+47	SkyCargo	I-MISC	E-TERM	1	12
+48	's	E-MISC	O	0	0
+49	White	B-MISC	B-TERM	0	0
+50	Cover	E-MISC	E-TERM	0	0
 51	and	O	O	0	0
-52	White	B-PRODUCT	B-TERM	0	0
-53	Cover	I-PRODUCT	I-TERM	0	0
-54	Advanced	E-PRODUCT	E-TERM	1	66
+52	White	B-MISC	B-TERM	0	0
+53	Cover	I-MISC	I-TERM	0	0
+54	Advanced	E-MISC	E-TERM	1	66
 55	solutions	O	O	0	0
 56	to	O	O	0	0
 57	offer	O	O	0	0
@@ -13012,7 +13012,7 @@
 91	offer	O	O	0	0
 92	an	O	O	0	0
 93	effective	O	O	0	0
-94	first	S-ORDINAL	B-TERM	0	0
+94	first	S-MISC	B-TERM	0	0
 95	level	O	I-TERM	0	0
 96	of	O	I-TERM	0	0
 97	protection	O	E-TERM	1	105
@@ -13032,10 +13032,10 @@
 111	Emirates	S-ORG	O	0	0
 112	introduced	O	O	0	0
 113	'	O	O	0	0
-114	White	B-PRODUCT	B-TERM	0	0
-115	Cover	I-PRODUCT	I-TERM	0	0
-116	Advanced	I-PRODUCT	E-TERM	0	0
-117	'	E-PRODUCT	O	0	0
+114	White	B-MISC	B-TERM	0	0
+115	Cover	I-MISC	I-TERM	0	0
+116	Advanced	I-MISC	E-TERM	0	0
+117	'	E-MISC	O	0	0
 118	in	O	O	0	0
 119	April	B-DATE	O	0	0
 120	2016	E-DATE	O	0	0
@@ -13100,9 +13100,9 @@
 
 1	The	O	O	0	0
 2	new	O	O	0	0
-3	White	B-PRODUCT	B-TERM	0	0
-4	Cover	I-PRODUCT	I-TERM	0	0
-5	Xtreme	E-PRODUCT	E-TERM	1	11
+3	White	B-MISC	B-TERM	0	0
+4	Cover	I-MISC	I-TERM	0	0
+5	Xtreme	E-MISC	E-TERM	1	11
 6	will	O	O	0	0
 7	help	O	O	0	0
 8	shield	O	O	0	0
@@ -13130,7 +13130,7 @@
 30	SkyCargo	E-ORG	E-TERM	1	33
 31	is	O	O	0	0
 32	the	O	O	0	0
-33	first	S-ORDINAL	O	1	41
+33	first	S-MISC	O	1	41
 34	air	O	O	0	0
 35	cargo	O	O	0	0
 36	carrier	O	O	0	0
@@ -13140,14 +13140,14 @@
 40	introducing	O	O	0	0
 41	DuPont	S-ORG	S-TERM	1	45
 42	's	O	O	0	0
-43	Tyvek	B-PRODUCT	B-TERM	0	0
-44	Xtreme	I-PRODUCT	I-TERM	0	0
-45	W50	E-PRODUCT	E-TERM	1	4
+43	Tyvek	B-MISC	B-TERM	0	0
+44	Xtreme	I-MISC	I-TERM	0	0
+45	W50	E-MISC	E-TERM	1	4
 46	material	O	O	0	0
 47	in	O	O	0	0
 48	its	O	O	0	0
-49	White	B-PRODUCT	B-TERM	0	0
-50	Cover	E-PRODUCT	E-TERM	0	0
+49	White	B-MISC	B-TERM	0	0
+50	Cover	E-MISC	E-TERM	0	0
 51	protection	O	O	0	0
 52	solutions	O	O	0	0
 53	focused	O	O	0	0
@@ -13205,9 +13205,9 @@
 7	ground	O	O	0	0
 8	trials	O	O	0	0
 9	for	O	O	0	0
-10	White	B-PRODUCT	B-TERM	0	0
-11	Cover	I-PRODUCT	I-TERM	0	0
-12	Xtreme	E-PRODUCT	E-TERM	0	2
+10	White	B-MISC	B-TERM	0	0
+11	Cover	I-MISC	I-TERM	0	0
+12	Xtreme	E-MISC	E-TERM	0	2
 13	and	O	O	0	0
 14	roll	O	O	0	0
 15	out	O	O	0	0
@@ -13230,9 +13230,9 @@
 32	on	O	O	0	0
 33	the	O	O	0	0
 34	new	O	O	0	0
-35	White	B-PRODUCT	B-TERM	0	0
-36	Cover	I-PRODUCT	I-TERM	0	0
-37	Xtreme	E-PRODUCT	E-TERM	0	0
+35	White	B-MISC	B-TERM	0	0
+36	Cover	I-MISC	I-TERM	0	0
+37	Xtreme	E-MISC	E-TERM	0	0
 38	is	O	O	0	0
 39	part	O	O	0	0
 40	of	O	O	0	0
@@ -13277,9 +13277,9 @@
 13	2019	S-DATE	O	0	0
 14	during	O	O	0	0
 15	the	O	O	0	0
-16	Air	B-EVENT	O	0	0
-17	Cargo	I-EVENT	O	0	0
-18	Europe	E-EVENT	O	0	21
+16	Air	B-MISC	O	0	0
+17	Cargo	I-MISC	O	0	0
+18	Europe	E-MISC	O	0	21
 19	event	O	O	0	0
 20	in	O	O	0	0
 21	Munich	S-GPE	O	0	0
@@ -13359,8 +13359,8 @@
 2	an	O	O	0	0
 3	average	O	O	0	0
 4	over	O	O	0	0
-5	30,000	B-QUANTITY	O	0	0
-6	tonnes	E-QUANTITY	O	1	8
+5	30,000	B-MISC	O	0	0
+6	tonnes	E-MISC	O	1	8
 7	of	O	O	0	0
 8	perishables	O	S-TERM	1	17
 9	from	O	O	0	0
@@ -13393,10 +13393,10 @@
 36	freighters-	O	E-TERM	0	0
 37	13	S-CARDINAL	O	1	38
 38	Boeing	S-ORG	O	1	39
-39	777-Fs	S-PRODUCT	O	0	41
+39	777-Fs	S-MISC	O	0	41
 40	and	O	O	0	0
 41	one	S-CARDINAL	O	1	42
-42	B747-400ERF	S-PRODUCT	O	0	0
+42	B747-400ERF	S-MISC	O	0	0
 43	.	O	O	0	0
 
 1	The	O	O	0	0
@@ -13424,10 +13424,10 @@
 23	World	I-FAC	I-TERM	0	0
 24	Central	E-FAC	E-TERM	1	29
 25	including	O	O	0	0
-26	over	B-QUANTITY	O	0	0
-27	25,000	I-QUANTITY	B-TERM	0	0
-28	square	I-QUANTITY	I-TERM	0	0
-29	metres	E-QUANTITY	E-TERM	0	39
+26	over	B-MISC	O	0	0
+27	25,000	I-MISC	B-TERM	0	0
+28	square	I-MISC	I-TERM	0	0
+29	metres	E-MISC	E-TERM	0	39
 30	of	O	O	0	0
 31	dedicated	O	O	0	0
 32	temperature	O	I-TERM	0	0
@@ -13506,8 +13506,8 @@
 6	the	O	O	0	0
 7	company	O	O	0	0
 8	's	O	O	0	0
-9	sixth	S-ORDINAL	O	1	10
-10	CEIV	S-PRODUCT	S-TERM	1	13
+9	sixth	S-MISC	O	1	10
+10	CEIV	S-MISC	S-TERM	1	13
 11	certified	O	B-TERM	0	0
 12	cargo	O	I-TERM	0	0
 13	facility	O	E-TERM	0	0
@@ -13577,17 +13577,17 @@
 3	growth	O	O	0	0
 4	rates	O	O	0	0
 5	of	O	O	0	0
-6	nearly	B-PERCENT	O	0	0
-7	10	I-PERCENT	O	0	0
-8	%	E-PERCENT	O	0	16
+6	nearly	B-MISC	O	0	0
+7	10	I-MISC	O	0	0
+8	%	E-MISC	O	0	16
 9	and	O	O	0	0
 10	a	O	O	0	0
 11	total	O	O	0	0
 12	turnover	O	O	0	0
 13	of	O	O	0	0
-14	some	B-QUANTITY	O	0	0
-15	47,000	I-QUANTITY	O	0	0
-16	tonnes	E-QUANTITY	O	1	20
+14	some	B-MISC	O	0	0
+15	47,000	I-MISC	O	0	0
+16	tonnes	E-MISC	O	1	20
 17	in	O	O	0	0
 18	2017	S-DATE	O	0	0
 19	,	O	O	0	0
@@ -13635,9 +13635,9 @@
 1	The	O	O	0	0
 2	facility	O	O	0	0
 3	features	O	O	0	0
-4	7,500	B-QUANTITY	O	0	0
-5	square	I-QUANTITY	I-TERM	0	0
-6	metres	E-QUANTITY	I-TERM	1	9
+4	7,500	B-MISC	O	0	0
+5	square	I-MISC	I-TERM	0	0
+6	metres	E-MISC	I-TERM	1	9
 7	of	O	E-TERM	0	0
 8	temperature-controlled	O	O	0	0
 9	surface	O	I-TERM	1	20
@@ -13649,9 +13649,9 @@
 15	of	O	O	0	0
 16	+15	S-CARDINAL	O	0	0
 17	to	O	I-TERM	0	0
-18	+25	B-QUANTITY	I-TERM	0	0
-19	degrees	I-QUANTITY	I-TERM	0	0
-20	Celsius	E-QUANTITY	I-TERM	0	0
+18	+25	B-MISC	I-TERM	0	0
+19	degrees	I-MISC	I-TERM	0	0
+20	Celsius	E-MISC	I-TERM	0	0
 21	.	O	E-TERM	0	0
 
 1	"	O	O	0	0
@@ -13681,9 +13681,9 @@
 25	constant	O	O	0	0
 26	temperature	O	I-TERM	1	30
 27	of	O	E-TERM	0	0
-28	-20	B-QUANTITY	O	0	0
-29	degrees	I-QUANTITY	I-TERM	0	0
-30	Celcius	E-QUANTITY	I-TERM	0	0
+28	-20	B-MISC	O	0	0
+29	degrees	I-MISC	I-TERM	0	0
+30	Celcius	E-MISC	I-TERM	0	0
 31	.	O	E-TERM	0	0
 
 1	"	O	O	0	0
@@ -13705,8 +13705,8 @@
 17	an	O	O	0	0
 18	average	O	O	0	0
 19	of	O	I-TERM	0	0
-20	two	B-TIME	I-TERM	0	0
-21	minutes	E-TIME	I-TERM	1	25
+20	two	B-MISC	I-TERM	0	0
+21	minutes	E-MISC	I-TERM	1	25
 22	from	O	E-TERM	0	0
 23	its	O	O	0	0
 24	temperature-controlled	O	O	0	0
@@ -13722,7 +13722,7 @@
 3	investing	O	O	0	0
 4	at	O	O	0	0
 5	other	O	O	0	0
-6	European	S-NORP	O	1	8
+6	European	S-MISC	O	1	8
 7	logistics	O	O	0	0
 8	hubs	O	I-TERM	0	0
 9	.	O	E-TERM	0	0
@@ -13758,8 +13758,8 @@
 29	new	O	O	0	0
 30	facility	O	O	0	0
 31	at	O	O	0	0
-32	CargoCity	B-LOC	O	0	0
-33	South	E-LOC	I-TERM	0	0
+32	CargoCity	B-MISC	O	0	0
+33	South	E-MISC	I-TERM	0	0
 34	.	O	E-TERM	0	0
 
 1	The	O	E-TERM	0	0
@@ -13773,15 +13773,15 @@
 9	a	O	O	0	0
 10	surface	O	O	0	0
 11	of	O	O	0	0
-12	around	B-QUANTITY	O	0	0
-13	16,000	I-QUANTITY	O	0	0
-14	square	I-QUANTITY	I-TERM	0	0
-15	metres	E-QUANTITY	I-TERM	1	20
+12	around	B-MISC	O	0	0
+13	16,000	I-MISC	O	0	0
+14	square	I-MISC	I-TERM	0	0
+15	metres	E-MISC	I-TERM	1	20
 16	,	O	I-TERM	0	0
 17	making	O	E-TERM	0	0
 18	it	O	O	0	0
 19	the	O	O	0	0
-20	third	S-ORDINAL	O	1	23
+20	third	S-MISC	O	1	23
 21	largest	O	O	0	0
 22	in	O	O	0	0
 23	Swissport	S-GPE	O	1	28
@@ -13796,8 +13796,8 @@
 1	Swissport	B-ORG	O	0	0
 2	International	E-ORG	I-TERM	1	5
 3	handles	O	E-TERM	0	0
-4	4.7m	B-QUANTITY	O	0	0
-5	tonnes	E-QUANTITY	O	0	14
+4	4.7m	B-MISC	O	0	0
+5	tonnes	E-MISC	O	0	14
 6	of	O	O	0	0
 7	cargo	O	O	0	0
 8	a	B-DATE	O	0	0
@@ -13856,7 +13856,7 @@
 11	a	O	O	0	0
 12	subsidiary	O	O	0	0
 13	of	O	O	0	0
-14	Chinese	S-NORP	O	1	16
+14	Chinese	S-MISC	O	1	16
 15	conglomerate	O	O	0	0
 16	HNA	S-ORG	O	0	0
 17	,	O	O	0	0
@@ -13965,9 +13965,9 @@
 20	followed	O	O	0	0
 21	by	O	O	0	0
 22	its	O	O	0	0
-23	25,000	B-QUANTITY	B-TERM	0	0
-24	square	I-QUANTITY	I-TERM	0	0
-25	foot	E-QUANTITY	E-TERM	1	26
+23	25,000	B-MISC	B-TERM	0	0
+24	square	I-MISC	I-TERM	0	0
+25	foot	E-MISC	E-TERM	1	26
 26	pharmaceutical	O	B-TERM	1	33
 27	and	O	I-TERM	0	0
 28	healthcare	O	I-TERM	0	0
@@ -14025,7 +14025,7 @@
 15	and	O	O	0	0
 16	being	O	O	0	0
 17	the	O	O	0	0
-18	first	S-ORDINAL	O	1	19
+18	first	S-MISC	O	1	19
 19	U.S.	S-GPE	O	0	0
 20	carrier	O	O	0	0
 21	to	O	O	0	0
@@ -14087,7 +14087,7 @@
 1	American	S-ORG	S-TERM	1	4
 2	developed	O	O	0	0
 3	its	O	O	0	0
-4	ExpediteTC	S-PRODUCT	S-TERM	1	12
+4	ExpediteTC	S-MISC	S-TERM	1	12
 5	product	O	O	0	0
 6	to	O	O	0	0
 7	develop	O	O	0	0
@@ -14110,7 +14110,7 @@
 7	promote	O	O	0	0
 8	the	O	O	0	0
 9	investments	O	O	0	0
-10	American	S-NORP	O	0	0
+10	American	S-MISC	O	0	0
 11	made	O	O	0	0
 12	towards	O	O	0	0
 13	facility	O	O	0	0
@@ -14184,7 +14184,7 @@
 20	the	O	O	0	0
 21	company	O	O	0	0
 22	's	O	O	0	0
-23	Crēdo	S-PRODUCT	B-TERM	0	0
+23	Crēdo	S-MISC	B-TERM	0	0
 24	on	O	I-TERM	0	0
 25	Demand	O	E-TERM	1	27
 26	rental	O	B-TERM	0	0
@@ -14241,7 +14241,7 @@
 6	series	O	O	0	0
 7	of	O	O	0	0
 8	new	O	O	0	0
-9	European	S-NORP	O	1	11
+9	European	S-MISC	O	1	11
 10	drop	O	B-TERM	0	0
 11	points	O	E-TERM	0	0
 12	in	O	O	0	0
@@ -14297,7 +14297,7 @@
 3	has	O	O	0	0
 4	become	O	O	0	0
 5	the	O	O	0	0
-6	first	S-ORDINAL	O	1	12
+6	first	S-MISC	O	1	12
 7	global	O	O	0	0
 8	carrier	O	O	0	0
 9	based	O	O	0	0
@@ -14349,7 +14349,7 @@
 2	has	O	O	0	0
 3	created	O	O	0	0
 4	the	O	O	0	0
-5	first	S-ORDINAL	O	1	9
+5	first	S-MISC	O	1	9
 6	trans-Atlantic	O	O	0	0
 7	network	O	O	0	0
 8	connecting	O	O	0	0
@@ -14514,15 +14514,15 @@
 13	Careen	E-PERSON	O	0	0
 14	says	O	O	0	0
 15	the	O	O	0	0
-16	North	B-NORP	O	0	0
-17	American	E-NORP	O	0	24
+16	North	B-MISC	O	0	0
+17	American	E-MISC	O	0	24
 18	market	O	O	0	0
 19	accounts	O	O	0	0
 20	for	O	O	0	0
-21	over	B-PERCENT	O	0	0
-22	20	I-PERCENT	O	0	0
-23	per	I-PERCENT	O	0	0
-24	cent	E-PERCENT	O	0	31
+21	over	B-MISC	O	0	0
+22	20	I-MISC	O	0	0
+23	per	I-MISC	O	0	0
+24	cent	E-MISC	O	0	31
 25	of	O	O	0	0
 26	global	O	O	0	0
 27	trade	O	O	0	0
@@ -14655,10 +14655,10 @@
 18	Airport	E-FAC	E-TERM	1	23
 19	in	O	O	0	0
 20	a	O	O	0	0
-21	650	B-QUANTITY	B-TERM	0	0
-22	sq	I-QUANTITY	I-TERM	0	0
-23	m	E-QUANTITY	E-TERM	0	24
-24	first	S-ORDINAL	O	0	0
+21	650	B-MISC	B-TERM	0	0
+22	sq	I-MISC	I-TERM	0	0
+23	m	E-MISC	E-TERM	0	24
+24	first	S-MISC	O	0	0
 25	step	O	O	0	0
 26	programme	O	O	0	0
 27	that	O	O	0	0
@@ -14669,9 +14669,9 @@
 32	possible	O	O	0	0
 33	expansion	O	O	0	0
 34	to	O	O	0	0
-35	1,200	B-QUANTITY	B-TERM	0	0
-36	sq	I-QUANTITY	I-TERM	0	0
-37	m.	E-QUANTITY	E-TERM	0	0
+35	1,200	B-MISC	B-TERM	0	0
+36	sq	I-MISC	I-TERM	0	0
+37	m.	E-MISC	E-TERM	0	0
 38	The	O	O	0	0
 39	company	O	O	0	0
 40	has	O	O	0	0
@@ -15037,16 +15037,16 @@
 21	a	O	O	0	0
 22	digital	O	O	0	0
 23	"	O	O	0	0
-24	Perishable	B-PRODUCT	B-TERM	0	0
-25	Management	I-PRODUCT	I-TERM	0	0
-26	App	I-PRODUCT	E-TERM	1	33
-27	"	E-PRODUCT	O	0	0
+24	Perishable	B-MISC	B-TERM	0	0
+25	Management	I-MISC	I-TERM	0	0
+26	App	I-MISC	E-TERM	1	33
+27	"	E-MISC	O	0	0
 28	on	O	O	0	0
 29	its	O	O	0	0
 30	open	O	O	0	0
 31	data	O	O	0	0
 32	sharing	O	O	0	0
-33	BRUCloud	S-PRODUCT	S-TERM	0	0
+33	BRUCloud	S-MISC	S-TERM	0	0
 34	platform	O	O	0	0
 35	.	O	O	0	0
 
@@ -15147,7 +15147,7 @@
 4	Ethiopian	B-ORG	B-TERM	0	0
 5	Airlines	E-ORG	E-TERM	1	7
 6	with	O	O	0	0
-7	Opticooler	S-PRODUCT	I-TERM	0	0
+7	Opticooler	S-MISC	I-TERM	0	0
 8	containers	O	E-TERM	0	0
 
 1	Ethiopian	B-ORG	B-TERM	0	0
@@ -15168,12 +15168,12 @@
 16	Temperature	I-ORG	I-TERM	0	0
 17	Solutions	I-ORG	E-TERM	1	19
 18	'	E-ORG	O	0	0
-19	Opticooler	S-PRODUCT	B-TERM	0	0
+19	Opticooler	S-MISC	B-TERM	0	0
 20	container	O	E-TERM	0	0
 21	.	O	O	0	0
 
 1	The	O	O	0	0
-2	Opticooler	S-PRODUCT	S-TERM	1	11
+2	Opticooler	S-MISC	S-TERM	1	11
 3	is	O	O	0	0
 4	equipped	O	O	0	0
 5	with	O	O	0	0
@@ -15229,7 +15229,7 @@
 8	agreement	O	O	0	0
 9	with	O	O	0	0
 10	the	O	O	0	0
-11	German	S-NORP	O	1	13
+11	German	S-MISC	O	1	13
 12	ULD	S-ORG	B-TERM	0	0
 13	provider	O	E-TERM	0	23
 14	and	O	O	0	0
@@ -15241,7 +15241,7 @@
 20	cargo	O	O	0	0
 21	terminal	O	O	0	0
 22	in	O	O	0	0
-23	Africa	S-LOC	O	1	29
+23	Africa	S-MISC	O	1	29
 24	at	O	O	0	0
 25	its	O	O	0	0
 26	hub	O	O	0	0
@@ -15270,7 +15270,7 @@
 18	has	O	O	0	0
 19	offered	O	O	0	0
 20	the	O	O	0	0
-21	DoKaSch	S-PRODUCT	S-TERM	1	23
+21	DoKaSch	S-MISC	S-TERM	1	23
 22	active	O	B-TERM	0	0
 23	container	O	E-TERM	0	0
 24	to	O	O	0	0
@@ -15314,7 +15314,7 @@
 31	with	O	O	0	0
 32	DoKaSch	S-ORG	S-TERM	1	34
 33	's	O	O	0	0
-34	Opticooler	S-PRODUCT	S-TERM	0	0
+34	Opticooler	S-MISC	S-TERM	0	0
 35	.	O	O	0	0
 
 1	"	O	O	0	0
@@ -15363,7 +15363,7 @@
 15	the	O	O	0	0
 16	most	O	O	0	0
 17	successful	O	O	0	0
-18	African	S-NORP	O	1	25
+18	African	S-MISC	O	1	25
 19	carrier	O	O	0	0
 20	and	O	O	0	0
 21	their	O	O	0	0
@@ -15392,7 +15392,7 @@
 10	could	O	O	0	0
 11	expand	O	O	0	0
 12	our	O	O	0	0
-13	African	S-NORP	B-TERM	0	0
+13	African	S-MISC	B-TERM	0	0
 14	network	O	E-TERM	1	22
 15	by	O	O	0	0
 16	signing	O	O	0	0
@@ -15481,7 +15481,7 @@
 14	and	O	O	0	0
 15	is	O	O	0	0
 16	the	O	O	0	0
-17	first	S-ORDINAL	O	1	22
+17	first	S-MISC	O	1	22
 18	new	O	O	0	0
 19	external	O	B-TERM	0	0
 20	temporary	O	I-TERM	0	0
@@ -15726,7 +15726,7 @@
 5	to	O	O	0	0
 6	welcome	O	O	0	0
 7	the	O	O	0	0
-8	first	S-ORDINAL	O	0	17
+8	first	S-MISC	O	0	17
 9	customers	O	O	0	0
 10	who	O	O	0	0
 11	support	O	O	0	0
@@ -15737,7 +15737,7 @@
 16	Puerto	B-GPE	O	0	0
 17	Rico	E-GPE	O	1	19
 18	to	O	O	0	0
-19	Europe	S-LOC	O	0	29
+19	Europe	S-MISC	O	0	29
 20	and	O	O	0	0
 21	who	O	O	0	0
 22	will	O	O	0	0
@@ -15854,8 +15854,8 @@
 23	London	S-GPE	O	0	0
 24	.	O	O	0	0
 
-1	Earlier	B-TIME	O	0	0
-2	today	E-TIME	O	0	4
+1	Earlier	B-MISC	O	0	0
+2	today	E-MISC	O	0	4
 3	,	O	O	0	0
 4	IAG	S-ORG	S-TERM	0	10
 5	announced	O	O	0	0
@@ -15863,7 +15863,7 @@
 7	would	O	O	0	0
 8	launch	O	O	0	0
 9	the	O	O	0	0
-10	first	S-ORDINAL	O	0	15
+10	first	S-MISC	O	0	15
 11	ever	O	O	0	0
 12	direct	O	O	0	0
 13	service	O	O	0	0
@@ -15877,16 +15877,16 @@
 21	utilising	O	O	0	0
 22	a	O	O	0	0
 23	Boeing	S-ORG	B-TERM	0	0
-24	787-8	S-PRODUCT	I-TERM	0	0
+24	787-8	S-MISC	I-TERM	0	0
 25	aircraft	O	E-TERM	1	28
 26	with	O	O	0	0
 27	bellyhold	O	B-TERM	0	0
 28	capacity	O	E-TERM	1	33
 29	of	O	O	0	0
-30	up	B-QUANTITY	O	0	0
-31	to	I-QUANTITY	O	0	0
-32	15	I-QUANTITY	O	0	0
-33	tonnes	E-QUANTITY	O	0	0
+30	up	B-MISC	O	0	0
+31	to	I-MISC	O	0	0
+32	15	I-MISC	O	0	0
+33	tonnes	E-MISC	O	0	0
 34	.	O	O	0	0
 
 1	IAG	B-ORG	I-TERM	0	0
@@ -15924,7 +15924,7 @@
 6	's	E-ORG	O	0	0
 7	recently	O	O	0	0
 8	launched	O	O	0	0
-9	Critical	S-PRODUCT	B-TERM	0	0
+9	Critical	S-MISC	B-TERM	0	0
 10	product	O	E-TERM	1	13
 11	for	O	O	0	0
 12	emergency	O	B-TERM	0	0

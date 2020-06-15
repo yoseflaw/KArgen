@@ -2,7 +2,9 @@ import json
 
 import numpy as np
 from keras import Input, Model
+from keras import backend as K
 from keras.models import load_model
+from keras.losses import binary_crossentropy
 from keras.optimizers import Adam
 from keras.layers import Embedding, TimeDistributed, Bidirectional, LSTM, Concatenate, Dropout, Dense, Conv1D, \
     GlobalMaxPooling1D
@@ -12,6 +14,17 @@ from kargen.crf import CRF, crf_loss
 from kargen.preprocessing import ELMoTransformer
 from kargen.trainer import Trainer
 from kargen.utils import load_glove, filter_embeddings
+
+
+def weighted_binary_crossentropy(weight=1.):
+
+    def _custom_loss(y_true, y_pred):
+        y_true = K.clip(y_true, K.epsilon(), 1 - K.epsilon())
+        y_pred = K.clip(y_pred, K.epsilon(), 1 - K.epsilon())
+        logloss = -(y_true * K.log(y_pred) * weight + (1 - y_true) * K.log(1 - y_pred))
+        return K.mean(logloss, axis=-1)
+
+    return _custom_loss
 
 
 class SequenceModel(object):
@@ -42,8 +55,8 @@ class SequenceModel(object):
         self.initial_vocab = initial_vocab
         self.optimizer = optimizer
 
-    def fit(self, x_train, y_ner_train, y_term_train,
-            x_valid, y_ner_valid, y_term_valid,
+    def fit(self, x_train, y_ner_train, y_term_train, y_rel_train,
+            x_valid, y_ner_valid, y_term_valid, y_rel_valid,
             embeddings_file, elmo_options_file, elmo_weights_file,
             epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
         print("elmo")
@@ -73,8 +86,8 @@ class SequenceModel(object):
         print("training")
         trainer = Trainer(model, preprocessor=p)
         trainer.train(
-            x_train, y_ner_train, y_term_train,
-            x_valid, y_ner_valid, y_term_valid,
+            x_train, y_ner_train, y_term_train, y_rel_train,
+            x_valid, y_ner_valid, y_term_valid, y_rel_valid,
             epochs=epochs, batch_size=batch_size,
             verbose=verbose, callbacks=callbacks,
             shuffle=shuffle
@@ -154,7 +167,7 @@ class SequenceModel(object):
         self = cls()
         self.p = ELMoTransformer.load(preprocessor_file)
         self.model = load_model(weights_file, custom_objects={'CRF': CRF}, compile=False)
-        self.model.compile(loss=crf_loss, optimizer="adam")
+        self.model.compile(loss=[crf_loss, crf_loss, weighted_binary_crossentropy(9.)], optimizer="adam")
         return self
 
 
@@ -227,12 +240,12 @@ class MultiLayerLSTM(object):
 
         word_embeddings = Dropout(self._dropout)(word_embeddings)
         z = Bidirectional(LSTM(units=self._word_lstm_size, return_sequences=True))(word_embeddings)
-        z = Dense(self._fc_dim, activation='relu')(z)
+        z = Dense(self._fc_dim, activation="relu")(z)
         crf_ner = CRF(self._num_labels_ner, sparse_target=False, name="crf_ner")
         crf_term = CRF(self._num_labels_term, sparse_target=False, name="crf_term")
-        loss = [crf_ner.loss_function, crf_term.loss_function]
-        preds = [crf_ner(z), crf_term(z)]
-
+        cls_rel = TimeDistributed(Dense(1, activation="sigmoid"), name="cls_rel")
+        loss = [crf_ner.loss_function, crf_term.loss_function, weighted_binary_crossentropy(9.)]
+        preds = [crf_ner(z), crf_term(z), cls_rel(z)]
         model = Model(inputs=[word_ids, char_ids, elmo_embeddings], outputs=preds)
         print(model.summary())
 
@@ -270,52 +283,77 @@ class Tagger(object):
 
         words = self.tokenizer(text)
         X = self.preprocessor.transform([words])
-        y = self.model.predict(X)
-        y = y[0]  # reduce batch dimension.
+        y_ner, y_term, y_rel = self.model.predict(X)
+        y_ner, y_term, y_rel = y_ner[0], y_term[0], y_rel[0]  # reduce batch dimension.
+        return y_ner, y_term, y_rel
 
-        return y
+    def _get_prob(self, pred_ner, pred_term, pred_rel):
+        prob_ner = np.max(pred_ner, -1)
+        prob_term = np.max(pred_term, -1)
+        prob_rel = np.max(pred_rel, -1)
+        return prob_ner, prob_term, prob_rel
 
-    def _get_prob(self, pred):
-        prob = np.max(pred, -1)
+    def _get_tags(self, pred_ner, pred_term, pred_rel):
+        tags_ner, tags_term, tags_rel = self.preprocessor.inverse_transform(
+            np.expand_dims(pred_ner, axis=0),
+            np.expand_dims(pred_term, axis=0),
+            np.expand_dims(pred_rel, axis=0)
+        )
+        tags_ner, tags_term, tags_rel = tags_ner[0], tags_term[0], tags_rel[0]  # reduce batch dimension
+        tags_rel = [int(tag > 0.5) for tag in tags_rel]
+        return tags_ner, tags_term, tags_rel
 
-        return prob
-
-    def _get_tags(self, pred):
-        tags = self.preprocessor.inverse_transform([pred])
-        tags = tags[0]  # reduce batch dimension
-
-        return tags
-
-    def _build_response(self, sent, tags, prob):
+    def _build_response(self, sent, tags, probs):
         words = self.tokenizer(sent)
         res = {
             'words': words,
-            'entities': [
-
-            ]
+            'entities': [],
+            'terms': [],
+            'head_rels': []
         }
-        chunks = sequence_labeling.get_entities(tags)
+        tag_ner, tag_term, tag_rel = tags
+        prob_ner, prob_term, prob_rel = probs
+        chunks_ner = sequence_labeling.get_entities(tag_ner)
+        chunks_term = sequence_labeling.get_entities(tag_term)
 
-        for chunk_type, chunk_start, chunk_end in chunks:
+        for chunk_type, chunk_start, chunk_end in chunks_ner:
             chunk_end += 1
             entity = {
                 'text': ' '.join(words[chunk_start: chunk_end]),
                 'type': chunk_type,
-                'score': float(np.average(prob[chunk_start: chunk_end])),
+                'score': float(np.average(prob_ner[chunk_start: chunk_end])),
                 'beginOffset': chunk_start,
                 'endOffset': chunk_end
             }
             res['entities'].append(entity)
+        for chunk_type, chunk_start, chunk_end in chunks_term:
+            chunk_end += 1
+            term = {
+                'text': ' '.join(words[chunk_start: chunk_end]),
+                'type': chunk_type,
+                'score': float(np.average(prob_ner[chunk_start: chunk_end])),
+                'beginOffset': chunk_start,
+                'endOffset': chunk_end
+            }
+            res['terms'].append(term)
+        for i, tag in enumerate(tag_rel):
+            if tag:
+                rel = {
+                    'text': words[i],
+                    'score': f"{round(prob_rel[i], 4)}",
+                    'offset': i
+                }
+                res['head_rels'].append(rel)
         return res
 
     def analyze(self, text):
-        pred = self.predict_proba(text)
-        tags = self._get_tags(pred)
-        prob = self._get_prob(pred)
-        res = self._build_response(text, tags, prob)
+        preds = self.predict_proba(text)
+        tags = self._get_tags(*preds)
+        probs = self._get_prob(*preds)
+        res = self._build_response(text, tags, probs)
         return res
 
     def predict(self, text):
-        pred = self.predict_proba(text)
-        tags = self._get_tags(pred)
+        preds = self.predict_proba(text)
+        tags = self._get_tags(*preds)
         return tags
