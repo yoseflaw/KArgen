@@ -59,42 +59,40 @@ Epoch 1/15
 
 if __name__ == "__main__":
     print("load data")
-    # x_train, y_train = load_data_and_labels("data/conll2003/ner/train.txt")
-    # x_valid, y_valid = load_data_and_labels("data/conll2003/ner/valid.txt")
-    # x_test, y_test = load_data_and_labels("data/conll2003/ner/test.txt")
-    # x_dev, y_ner_dev, y_term_dev, y_rel_dev = load_data_and_labels("data/kargo/dev.txt")
-    # x_test, y_ner_test, y_term_test, y_rel_test = load_data_and_labels("data/kargo/test.txt")
-    # print(x_dev[0])
-    # print(y_ner_dev[0])
-    # print(y_term_dev[0])
-    # print(y_rel_dev[0])
-    # model = SequenceModel()
-    # model.fit(x_dev, y_ner_dev, y_term_dev, y_rel_dev,
-    #           x_test, y_ner_test, y_term_test, y_rel_test,
-    #           embeddings_file="pretrain_models/glove/glove.6B.100d.txt.gz",
-    #           elmo_options_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_options.json",
-    #           elmo_weights_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_weights.hdf5",
-    #           epochs=20,
-    #           batch_size=32)
-    # print("try saving model")
-    # model.save(
-    #     weights_file="pretrain_models/lstm/mtl2/weights.h5",
-    #     preprocessor_file="pretrain_models/lstm/mtl2/preprocessors.json",
-    #     params_file="pretrain_models/lstm/mtl2/params.json",
-    # )
-    # print("try loading model")
-    model = SequenceModel.load(
-        weights_file="pretrain_models/lstm/mtl2/weights.h5",
-        preprocessor_file="pretrain_models/lstm/mtl2/preprocessors.json"
+    x_train, y_ner_train, y_term_train, y_rel_train = load_data_and_labels("data/kargo/train.txt")
+    x_dev, y_ner_dev, y_term_dev, y_rel_dev = load_data_and_labels("data/kargo/dev.txt")
+    x_test, y_ner_test, y_term_test, y_rel_test = load_data_and_labels("data/kargo/test.txt")
+    print(x_train[0])
+    print(y_ner_train[0])
+    print(y_term_train[0])
+    print(y_rel_train[0])
+    model = SequenceModel()
+    model.fit(x_train, y_ner_train, y_term_train, y_rel_train,
+              x_test, y_ner_test, y_term_test, y_rel_test,
+              embeddings_file="pretrain_models/glove/glove.6B.100d.txt.gz",
+              elmo_options_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_options.json",
+              elmo_weights_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_weights.hdf5",
+              epochs=20,
+              batch_size=32)
+    print("try saving model")
+    model.save(
+        weights_file="pretrain_models/lstm/mtl3/weights.h5",
+        preprocessor_file="pretrain_models/lstm/mtl3/preprocessors.json",
+        params_file="pretrain_models/lstm/mtl3/params.json",
     )
-    print("try analyzing a sample sentence")
-    # test_score = model.score(x_test, y_test)
-    news1 = "Emirates approved CSafe RAP active temperature-controlled packaging for pharmaceuticals and life-science cargo."
-    news2 = "The new facility, opened today (October 23), has 3,620 sq m of temperature-controlled warehouse space."
-    news3 = "The KT400D-60 container is capable of maintaining temperatures between -60 -80 degrees Celsius for 120 hours, " \
-            "with an ambient temperature of 30 degrees Celsius."
-    online1 = "Temperature controlled dolly, protecting shipment from extreme heat on tarmac at Hong Kong International Airport"
-    online2 = "Active container – supported by Envirotainer and CSafe"
-    analysis = model.analyze(online2)
-    from pprint import pprint
-    pprint(analysis)
+    # print("try loading model")
+    # model = SequenceModel.load(
+    #     weights_file="pretrain_models/lstm/mtl2/weights.h5",
+    #     preprocessor_file="pretrain_models/lstm/mtl2/preprocessors.json"
+    # )
+    # print("try analyzing a sample sentence")
+    # # test_score = model.score(x_test, y_test)
+    # news1 = "Emirates approved CSafe RAP active temperature-controlled packaging for pharmaceuticals and life-science cargo."
+    # news2 = "The new facility, opened today (October 23), has 3,620 sq m of temperature-controlled warehouse space."
+    # news3 = "The KT400D-60 container is capable of maintaining temperatures between -60 -80 degrees Celsius for 120 hours, " \
+    #         "with an ambient temperature of 30 degrees Celsius."
+    # online1 = "Temperature controlled dolly, protecting shipment from extreme heat on tarmac at Hong Kong International Airport"
+    # online2 = "Active container – supported by Envirotainer and CSafe"
+    # analysis = model.analyze(news3)
+    # from pprint import pprint
+    # pprint(analysis)

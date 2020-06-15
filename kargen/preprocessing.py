@@ -276,13 +276,17 @@ class ELMoTransformer(BaseEstimator, TransformerMixin):
     def inverse_transform(self, y_ner, y_term, y_rel, lengths=None):
         y_ner = np.argmax(y_ner, -1)
         y_term = np.argmax(y_term, -1)
+        y_rel = y_rel[:, :, 0].tolist()
         inverse_y_ner = [self._label_vocab_ner.id2doc(ids) for ids in y_ner]
         inverse_y_term = [self._label_vocab_term.id2doc(ids) for ids in y_term]
-        inverse_y_rel = y_rel[:, :, 0].tolist()
         if lengths:
             inverse_y_ner = [iy[:l] for iy, l in zip(inverse_y_ner, lengths)]
             inverse_y_term = [iy[:l] for iy, l in zip(inverse_y_term, lengths)]
-            inverse_y_rel = [iy[:l] for iy, l in zip(inverse_y_rel, lengths)]
+            inverse_y_rel = []
+            for iy, l in zip(y_rel, lengths):
+                inverse_y_rel += iy[:l]
+        else:
+            inverse_y_rel = [y for y in y_rel]
         return inverse_y_ner, inverse_y_term, inverse_y_rel
 
     @property
