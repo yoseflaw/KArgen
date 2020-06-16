@@ -36,10 +36,12 @@ class SequenceModel(object):
                  char_lstm_size=None,
                  char_cnn_num_filters=64,
                  char_cnn_filters_size=3,
-                 fc_dim=100,
-                 dropout=0.5,
+                 fc_rel_dim=64,
+                 emb_dropout=0.5,
+                 lstm_dropout=0.2,
                  initial_vocab=None,
-                 optimizer="adam"):
+                 lr=0.001,
+                 rel_pos_bal=9.):
         self.model = None
         self.p = None
         self.tagger = None
@@ -50,10 +52,12 @@ class SequenceModel(object):
         self.char_lstm_size = char_lstm_size
         self.char_cnn_num_filters = char_cnn_num_filters
         self.char_cnn_filters_size = char_cnn_filters_size
-        self.fc_dim = fc_dim
-        self.dropout = dropout
+        self.fc_rel_dim = fc_rel_dim
+        self.emb_dropout = emb_dropout
+        self.lstm_dropout = lstm_dropout
         self.initial_vocab = initial_vocab
-        self.optimizer = optimizer
+        self.lr = lr
+        self.rel_pos_bal = rel_pos_bal
 
     def fit(self, x_train, y_ner_train, y_term_train, y_rel_train,
             x_valid, y_ner_valid, y_term_valid, y_rel_valid,
@@ -77,12 +81,14 @@ class SequenceModel(object):
             char_lstm_size=self.char_lstm_size,
             char_cnn_num_filters=self.char_cnn_num_filters,
             char_cnn_filters_size=self.char_cnn_filters_size,
-            fc_dim=self.fc_dim,
-            dropout=self.dropout,
+            fc_rel_dim=self.fc_rel_dim,
+            emb_dropout=self.emb_dropout,
+            lstm_dropout=self.lstm_dropout,
+            rel_pos_bal=self.rel_pos_bal,
             embeddings=embeddings
         )
         model, loss = model.build()
-        model.compile(loss=loss, optimizer=self.optimizer)
+        model.compile(loss=loss, optimizer=Adam(lr=self.lr))
         print("training")
         trainer = Trainer(model, preprocessor=p)
         trainer.train(
@@ -187,8 +193,10 @@ class MultiLayerLSTM(object):
                  char_lstm_size,
                  char_cnn_num_filters,
                  char_cnn_filters_size,
-                 fc_dim,
-                 dropout,
+                 fc_rel_dim,
+                 emb_dropout,
+                 lstm_dropout,
+                 rel_pos_bal,
                  embeddings):
         self._char_embedding_dim = char_embedding_dim
         self._word_embedding_dim = word_embedding_dim
@@ -198,8 +206,10 @@ class MultiLayerLSTM(object):
         self._word_lstm_size = word_lstm_size
         self._char_vocab_size = char_vocab_size
         self._word_vocab_size = word_vocab_size
-        self._fc_dim = fc_dim
-        self._dropout = dropout
+        self._fc_rel_dim = fc_rel_dim
+        self._emb_dropout = emb_dropout
+        self._lstm_dropout = lstm_dropout
+        self._rel_pos_bal = rel_pos_bal
         self._embeddings = embeddings
         self._num_labels_ner = num_labels_ner
         self._num_labels_term = num_labels_term
@@ -229,27 +239,44 @@ class MultiLayerLSTM(object):
             char_embeddings = TimeDistributed(Bidirectional(LSTM(self._char_lstm_size)))(char_embeddings)
         else:
             char_embeddings = TimeDistributed(
-                Conv1D(64, 3, padding="same", activation="relu"),
+                Conv1D(self._char_cnn_num_filters, self._char_cnn_filters_size, padding="same", activation="relu"),
                 name="char_cnn"
             )(char_embeddings)
             char_embeddings = TimeDistributed(GlobalMaxPooling1D(), name="char_pooling")(char_embeddings)
 
         elmo_embeddings = Input(shape=(None, 1024), dtype='float32')
 
-        word_embeddings = Concatenate()([word_embeddings, char_embeddings, elmo_embeddings])
+        g_ner = Concatenate()([word_embeddings, char_embeddings, elmo_embeddings])
 
-        word_embeddings = Dropout(self._dropout)(word_embeddings)
-        z = Bidirectional(LSTM(units=self._word_lstm_size, return_sequences=True))(word_embeddings)
-        z = Dense(self._fc_dim, activation="relu")(z)
+        g_ner = Dropout(self._emb_dropout)(g_ner)
+        lstm_ner1 = Bidirectional(
+            LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_ner1"
+        )(g_ner)
         crf_ner = CRF(self._num_labels_ner, sparse_target=False, name="crf_ner")
+        pred_ner = crf_ner(lstm_ner1)
+
+        g_term = Concatenate()([g_ner, lstm_ner1])
+        lstm_term1 = Bidirectional(
+            LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_term1"
+        )(g_term)
         crf_term = CRF(self._num_labels_term, sparse_target=False, name="crf_term")
+        pred_term = crf_term(lstm_term1)
+
+        g_rel = Concatenate()([g_term, lstm_term1])
+        lstm_rel1 = Bidirectional(
+            LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_rel1"
+        )(g_rel)
+        fc_rel = Dense(self._fc_rel_dim, activation="relu")(lstm_rel1)
         cls_rel = TimeDistributed(Dense(1, activation="sigmoid"), name="cls_rel")
-        loss = [crf_ner.loss_function, crf_term.loss_function, weighted_binary_crossentropy(9.)]
-        preds = [crf_ner(z), crf_term(z), cls_rel(z)]
+        pred_rel = cls_rel(fc_rel)
+
+        preds = [pred_ner, pred_term, pred_rel]
+        losses = [crf_ner.loss_function, crf_term.loss_function, weighted_binary_crossentropy(self._rel_pos_bal)]
         model = Model(inputs=[word_ids, char_ids, elmo_embeddings], outputs=preds)
+
         print(model.summary())
 
-        return model, loss
+        return model, losses
 
 
 class Tagger(object):
