@@ -72,7 +72,7 @@ if __name__ == "__main__":
               embeddings_file="pretrain_models/glove/glove.6B.100d.txt.gz",
               elmo_options_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_options.json",
               elmo_weights_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_weights.hdf5",
-              epochs=10,
+              epochs=1,
               batch_size=32)
     print("try saving model")
     model.save(

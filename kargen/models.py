@@ -252,21 +252,33 @@ class MultiLayerLSTM(object):
         lstm_ner1 = Bidirectional(
             LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_ner1"
         )(g_ner)
+        lstm_ner2 = Bidirectional(
+            LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_ner2"
+        )(lstm_ner1)
         crf_ner = CRF(self._num_labels_ner, sparse_target=False, name="crf_ner")
-        pred_ner = crf_ner(lstm_ner1)
+        pred_ner = crf_ner(lstm_ner2)
 
-        g_term = Concatenate()([g_ner, lstm_ner1])
+        g_term = Concatenate()([g_ner, lstm_ner2])
         lstm_term1 = Bidirectional(
             LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_term1"
         )(g_term)
+        lstm_term2 = Bidirectional(
+            LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_term2"
+        )(lstm_term1)
         crf_term = CRF(self._num_labels_term, sparse_target=False, name="crf_term")
-        pred_term = crf_term(lstm_term1)
+        pred_term = crf_term(lstm_term2)
 
-        g_rel = Concatenate()([g_term, lstm_term1])
+        g_rel = Concatenate()([g_term, lstm_term2])
         lstm_rel1 = Bidirectional(
             LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_rel1"
         )(g_rel)
-        fc_rel = Dense(self._fc_rel_dim, activation="relu")(lstm_rel1)
+        lstm_rel2 = Bidirectional(
+            LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_rel2"
+        )(lstm_rel1)
+        lstm_rel3 = Bidirectional(
+            LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_rel3"
+        )(lstm_rel2)
+        fc_rel = TimeDistributed(Dense(self._fc_rel_dim, activation="relu"), name="fc_rel")(lstm_rel3)
         cls_rel = TimeDistributed(Dense(1, activation="sigmoid"), name="cls_rel")
         pred_rel = cls_rel(fc_rel)
 
