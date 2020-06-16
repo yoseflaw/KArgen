@@ -275,10 +275,10 @@ class MultiLayerLSTM(object):
         lstm_rel2 = Bidirectional(
             LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_rel2"
         )(lstm_rel1)
-        lstm_rel3 = Bidirectional(
-            LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_rel3"
-        )(lstm_rel2)
-        fc_rel = TimeDistributed(Dense(self._fc_rel_dim, activation="relu"), name="fc_rel")(lstm_rel3)
+        # lstm_rel3 = Bidirectional(
+        #     LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_rel3"
+        # )(lstm_rel2)
+        fc_rel = TimeDistributed(Dense(self._fc_rel_dim, activation="relu"), name="fc_rel")(lstm_rel2)
         cls_rel = TimeDistributed(Dense(1, activation="sigmoid"), name="cls_rel")
         pred_rel = cls_rel(fc_rel)
 
