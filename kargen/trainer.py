@@ -1,7 +1,7 @@
 import math
 import numpy as np
 from seqeval.metrics import f1_score as seqeval_f1, classification_report as seqeval_cr
-from sklearn.metrics import roc_auc_score, classification_report as sklearn_cr
+from sklearn.metrics import f1_score as sklearn_f1, classification_report as sklearn_cr
 from keras.utils import Sequence
 from keras.callbacks import Callback
 from pprint import pprint
@@ -71,11 +71,11 @@ class CallbackScore(Callback):
         print(' - TERM f1: {:04.2f}'.format(term_score * 100))
         print(seqeval_cr(label_true_term, label_pred_term))
         logs['f1_term'] = term_score
-        rel_score = roc_auc_score(label_true_rel, label_pred_rel)
-        print(' - REL AUC: {:04.2f}'.format(rel_score * 100))
         label_pred_class = [pred > 0.5 for pred in label_pred_rel]
+        rel_score = sklearn_f1(label_true_rel, label_pred_class)
+        print(' - REL F1: {:04.2f}'.format(rel_score * 100))
         print(sklearn_cr(label_true_rel, label_pred_class))
-        logs['auc_rel'] = rel_score
+        logs['f1_rel'] = rel_score
 
 
 class Trainer(object):
@@ -98,16 +98,17 @@ class Trainer(object):
             batch_size, self._preprocessor.transform
         )
 
-        if x_valid and y_term_valid:
-            valid_seq = NERSequence(
-                x_valid, y_ner_valid, y_term_valid, y_rel_valid,
-                batch_size, self._preprocessor.transform
-            )
-            callback_score = CallbackScore(valid_seq, preprocessor=self._preprocessor)
-            callbacks = [callback_score] + callbacks if callbacks else [callback_score]
+        # if x_valid and y_term_valid:
+        valid_seq = NERSequence(
+            x_valid, y_ner_valid, y_term_valid, y_rel_valid,
+            batch_size, self._preprocessor.transform
+        )
+        callback_score = CallbackScore(valid_seq, preprocessor=self._preprocessor)
+        callbacks = [callback_score] + callbacks if callbacks else [callback_score]
 
-        self._model.fit_generator(generator=train_seq,
-                                  epochs=epochs,
-                                  callbacks=callbacks,
-                                  verbose=verbose,
-                                  shuffle=shuffle)
+        return self._model.fit_generator(generator=train_seq,
+                                         validation_data=valid_seq,
+                                         epochs=epochs,
+                                         callbacks=callbacks,
+                                         verbose=verbose,
+                                         shuffle=shuffle)

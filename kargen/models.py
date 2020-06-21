@@ -41,7 +41,7 @@ class SequenceModel(object):
                  lstm_dropout=0.2,
                  initial_vocab=None,
                  lr=0.001,
-                 rel_pos_bal=9.):
+                 rel_pos_bal=3.):
         self.model = None
         self.p = None
         self.tagger = None
@@ -91,7 +91,7 @@ class SequenceModel(object):
         model.compile(loss=loss, optimizer=Adam(lr=self.lr))
         print("training")
         trainer = Trainer(model, preprocessor=p)
-        trainer.train(
+        history = trainer.train(
             x_train, y_ner_train, y_term_train, y_rel_train,
             x_valid, y_ner_valid, y_term_valid, y_rel_valid,
             epochs=epochs, batch_size=batch_size,
@@ -100,6 +100,22 @@ class SequenceModel(object):
         )
         self.p = p
         self.model = model
+        return history
+
+    def resume(self, x_train, y_ner_train, y_term_train, y_rel_train,
+               x_valid, y_ner_valid, y_term_valid, y_rel_valid,
+               epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
+        print("training")
+        trainer = Trainer(self.model, preprocessor=self.p)
+        history = trainer.train(
+            x_train, y_ner_train, y_term_train, y_rel_train,
+            x_valid, y_ner_valid, y_term_valid, y_rel_valid,
+            epochs=epochs, batch_size=batch_size,
+            verbose=verbose, callbacks=callbacks,
+            shuffle=shuffle
+        )
+        return history
+
 
     def predict(self, x_test):
         """Returns the prediction of the model on the given test data.
@@ -275,9 +291,6 @@ class MultiLayerLSTM(object):
         lstm_rel2 = Bidirectional(
             LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_rel2"
         )(lstm_rel1)
-        # lstm_rel3 = Bidirectional(
-        #     LSTM(units=self._word_lstm_size, return_sequences=True, dropout=self._lstm_dropout), name="lstm_rel3"
-        # )(lstm_rel2)
         fc_rel = TimeDistributed(Dense(self._fc_rel_dim, activation="relu"), name="fc_rel")(lstm_rel2)
         cls_rel = TimeDistributed(Dense(1, activation="sigmoid"), name="cls_rel")
         pred_rel = cls_rel(fc_rel)

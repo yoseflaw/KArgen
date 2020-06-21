@@ -59,7 +59,7 @@ Epoch 1/15
 
 if __name__ == "__main__":
     print("load data")
-    x_train, y_ner_train, y_term_train, y_rel_train = load_data_and_labels("data/kargo/train_rel_terms_only.txt")
+    x_train, y_ner_train, y_term_train, y_rel_train = load_data_and_labels("data/kargo/train/kpm_terms_only.txt")
     x_dev, y_ner_dev, y_term_dev, y_rel_dev = load_data_and_labels("data/kargo/dev_rel.txt")
     x_test, y_ner_test, y_term_test, y_rel_test = load_data_and_labels("data/kargo/test_rel.txt")
     print(x_train[0])
@@ -67,23 +67,35 @@ if __name__ == "__main__":
     print(y_term_train[0])
     print(y_rel_train[0])
     model = SequenceModel()
-    model.fit(x_train, y_ner_train, y_term_train, y_rel_train,
-              x_test, y_ner_test, y_term_test, y_rel_test,
-              embeddings_file="pretrain_models/glove/glove.6B.100d.txt.gz",
-              elmo_options_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_options.json",
-              elmo_weights_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_weights.hdf5",
-              epochs=1,
-              batch_size=32)
+    history = model.fit(x_dev, y_ner_dev, y_term_dev, y_rel_dev,
+                        x_test, y_ner_test, y_term_test, y_rel_test,
+                        embeddings_file="pretrain_models/glove/glove.6B.100d.txt.gz",
+                        elmo_options_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_options.json",
+                        elmo_weights_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_weights.hdf5",
+                        epochs=1,
+                        batch_size=32,
+                        verbose=1)
+    from pprint import pprint
+    pprint(history.history)
     print("try saving model")
     model.save(
-        weights_file="pretrain_models/lstm/mtl5/weights.h5",
-        preprocessor_file="pretrain_models/lstm/mtl5/preprocessors.json",
-        params_file="pretrain_models/lstm/mtl5/params.json",
+        weights_file="pretrain_models/lstm/trial/weights.h5",
+        preprocessor_file="pretrain_models/lstm/trial/preprocessors.json",
+        params_file="pretrain_models/lstm/trial/params.json",
     )
     # print("try loading model")
     # model = SequenceModel.load(
-    #     weights_file="pretrain_models/lstm/mtl2/weights.h5",
-    #     preprocessor_file="pretrain_models/lstm/mtl2/preprocessors.json"
+    #     weights_file="pretrain_models/lstm/kpm-to-5e-bs32/weights.h5",
+    #     preprocessor_file="pretrain_models/lstm/kpm-to-5e-bs32/preprocessors.json"
+    # )
+    # print("try resuming")
+    # model.resume(x_train, y_ner_train, y_term_train, y_rel_train,
+    #              x_test, y_ner_test, y_term_test, y_rel_test,
+    #              epochs=5, batch_size=32)
+    # model.save(
+    #     weights_file="pretrain_models/lstm/kpm-to-5e-bs32/weights.h5",
+    #     preprocessor_file="pretrain_models/lstm/kpm-to-5e-bs32/preprocessors.json",
+    #     params_file="pretrain_models/lstm/kpm-to-5e-bs32/params.json",
     # )
     # print("try analyzing a sample sentence")
     # # test_score = model.score(x_test, y_test)
