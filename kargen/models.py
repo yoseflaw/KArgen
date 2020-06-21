@@ -62,7 +62,7 @@ class SequenceModel(object):
     def fit(self, x_train, y_ner_train, y_term_train, y_rel_train,
             x_valid, y_ner_valid, y_term_valid, y_rel_valid,
             embeddings_file, elmo_options_file, elmo_weights_file,
-            epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
+            steps_per_epoch=None, epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
         print("elmo")
         p = ELMoTransformer(elmo_options_file, elmo_weights_file)
         p.fit(x_train, y_ner_train, y_term_train)
@@ -94,6 +94,7 @@ class SequenceModel(object):
         history = trainer.train(
             x_train, y_ner_train, y_term_train, y_rel_train,
             x_valid, y_ner_valid, y_term_valid, y_rel_valid,
+            steps_per_epoch=steps_per_epoch,
             epochs=epochs, batch_size=batch_size,
             verbose=verbose, callbacks=callbacks,
             shuffle=shuffle
@@ -104,12 +105,14 @@ class SequenceModel(object):
 
     def resume(self, x_train, y_ner_train, y_term_train, y_rel_train,
                x_valid, y_ner_valid, y_term_valid, y_rel_valid,
-               epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
+               steps_per_epoch=None, epochs=1, batch_size=32,
+               verbose=1, callbacks=None, shuffle=True):
         print("training")
         trainer = Trainer(self.model, preprocessor=self.p)
         history = trainer.train(
             x_train, y_ner_train, y_term_train, y_rel_train,
             x_valid, y_ner_valid, y_term_valid, y_rel_valid,
+            steps_per_epoch=steps_per_epoch,
             epochs=epochs, batch_size=batch_size,
             verbose=verbose, callbacks=callbacks,
             shuffle=shuffle
@@ -299,7 +302,7 @@ class MultiLayerLSTM(object):
         losses = [crf_ner.loss_function, crf_term.loss_function, weighted_binary_crossentropy(self._rel_pos_bal)]
         model = Model(inputs=[word_ids, char_ids, elmo_embeddings], outputs=preds)
 
-        print(model.summary())
+        # print(model.summary())
 
         return model, losses
 

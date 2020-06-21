@@ -92,7 +92,7 @@ class Trainer(object):
 
     def train(self, x_train, y_ner_train, y_term_train, y_rel_train,
               x_valid=None, y_ner_valid=None, y_term_valid=None, y_rel_valid=None,
-              epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
+              steps_per_epoch=None, epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
         train_seq = NERSequence(
             x_train, y_ner_train, y_term_train, y_rel_train,
             batch_size, self._preprocessor.transform
@@ -108,6 +108,7 @@ class Trainer(object):
 
         return self._model.fit_generator(generator=train_seq,
                                          validation_data=valid_seq,
+                                         steps_per_epoch=steps_per_epoch,
                                          epochs=epochs,
                                          callbacks=callbacks,
                                          verbose=verbose,
