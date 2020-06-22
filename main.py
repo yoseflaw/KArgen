@@ -1,4 +1,4 @@
-import csv
+import json
 import warnings; warnings.filterwarnings(action='ignore', category=Warning)
 from kargen.models import MultiLayerLSTM, SequenceModel
 from kargen.preprocessing import load_data_and_labels, ELMoTransformer
@@ -59,7 +59,7 @@ Epoch 1/15
 """
 
 if __name__ == "__main__":
-    methods = ["kpm", "positionrank", "yake"]
+    methods = ["kpm"]
     for method in methods:
         print(method)
         print("load data")
@@ -76,21 +76,20 @@ if __name__ == "__main__":
                             embeddings_file="pretrain_models/glove/glove.6B.100d.txt.gz",
                             elmo_options_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_options.json",
                             elmo_weights_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_weights.hdf5",
-                            steps_per_epoch=50,
-                            epochs=10,
+                            steps_per_epoch=18,
+                            epochs=20,
                             batch_size=32,
                             verbose=1)
         from pprint import pprint
-        with open(f"logs/results/{method}.csv", "w") as f:
+        pprint(history.history)
+        with open(f"logs/results/{method}.json", "w") as f:
             hist = history.history
-            w = csv.DictWriter(f, hist.keys())
-            w.writeheader()
-            w.writerow(hist)
+            json.dump(hist, f, indent=2)
         print("try saving model")
         model.save(
-            weights_file="pretrain_models/lstm/trial/weights.h5",
-            preprocessor_file="pretrain_models/lstm/trial/preprocessors.json",
-            params_file="pretrain_models/lstm/trial/params.json",
+            weights_file=f"pretrain_models/lstm/spe18_20e/{method}/weights.h5",
+            preprocessor_file=f"pretrain_models/lstm/spe18_20e/{method}/preprocessors.json",
+            params_file=f"pretrain_models/lstm/spe18_20e/{method}/params.json",
         )
     # print("try loading model")
     # model = SequenceModel.load(
