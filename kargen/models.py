@@ -9,6 +9,8 @@ from keras.optimizers import Adam
 from keras.layers import Embedding, TimeDistributed, Bidirectional, LSTM, Concatenate, Dropout, Dense, Conv1D, \
     GlobalMaxPooling1D
 from seqeval.metrics import sequence_labeling, f1_score
+from nltk import sent_tokenize
+import stanza
 
 from kargen.crf import CRF, crf_loss
 from kargen.preprocessing import ELMoTransformer
@@ -89,7 +91,7 @@ class SequenceModel(object):
         )
         model, loss = model.build()
         model.compile(loss=loss, optimizer=Adam(lr=self.lr))
-        print("training")
+        print(f"training lr={self.lr}")
         trainer = Trainer(model, preprocessor=p)
         history = trainer.train(
             x_train, y_ner_train, y_term_train, y_rel_train,
@@ -119,7 +121,6 @@ class SequenceModel(object):
         )
         return history
 
-
     def predict(self, x_test):
         """Returns the prediction of the model on the given test data.
 
@@ -140,43 +141,17 @@ class SequenceModel(object):
         else:
             raise OSError('Could not find a model. Call load(dir_path).')
 
-    def score(self, x_test, y_test):
-        """Returns the f1-micro score on the given test data and labels.
-
-        Args:
-            x_test : array-like, shape = (n_samples, sent_length)
-            Test samples.
-
-            y_test : array-like, shape = (n_samples, sent_length)
-            True labels for x.
-
-        Returns:
-            score : float, f1-micro score.
-        """
-        if self.model:
-            x_test = self.p.transform(x_test)
-            lengths = map(len, y_test)
-            y_pred = self.model.predict(x_test)
-            y_pred = self.p.inverse_transform(y_pred, lengths)
-            score = f1_score(y_test, y_pred)
-            return score
-        else:
-            raise OSError('Could not find a model. Call load(dir_path).')
-
-    def analyze(self, text, tokenizer=str.split):
+    def analyze(self, text):
         """Analyze text and return pretty format.
 
         Args:
             text: string, the input text.
-            tokenizer: Tokenize input sentence. Default tokenizer is `str.split`.
 
         Returns:
             res: dict.
         """
         if not self.tagger:
-            self.tagger = Tagger(self.model,
-                                 preprocessor=self.p,
-                                 tokenizer=tokenizer)
+            self.tagger = Tagger(self.model, preprocessor=self.p)
         return self.tagger.analyze(text)
 
     def save(self, weights_file, preprocessor_file, params_file=None):
@@ -188,11 +163,11 @@ class SequenceModel(object):
                 json.dump(json.loads(params), f, sort_keys=True, indent=4)
 
     @classmethod
-    def load(cls, weights_file, preprocessor_file):
+    def load(cls, weights_file, preprocessor_file, rel_pos_bal=3., lr=5e-4):
         self = cls()
         self.p = ELMoTransformer.load(preprocessor_file)
         self.model = load_model(weights_file, custom_objects={'CRF': CRF}, compile=False)
-        self.model.compile(loss=[crf_loss, crf_loss, weighted_binary_crossentropy(9.)], optimizer="adam")
+        self.model.compile(loss=[crf_loss, crf_loss, weighted_binary_crossentropy(rel_pos_bal)], optimizer=Adam(lr=lr))
         return self
 
 
@@ -301,9 +276,6 @@ class MultiLayerLSTM(object):
         preds = [pred_ner, pred_term, pred_rel]
         losses = [crf_ner.loss_function, crf_term.loss_function, weighted_binary_crossentropy(self._rel_pos_bal)]
         model = Model(inputs=[word_ids, char_ids, elmo_embeddings], outputs=preds)
-
-        # print(model.summary())
-
         return model, losses
 
 
@@ -313,13 +285,22 @@ class Tagger(object):
     Attributes:
         model: Model.
         preprocessor: Transformer. Preprocessing data for feature extraction.
-        tokenizer: Tokenize input sentence. Default tokenizer is `str.split`.
     """
 
-    def __init__(self, model, preprocessor, tokenizer=str.split):
+    def __init__(self, model, preprocessor):
         self.model = model
         self.preprocessor = preprocessor
-        self.tokenizer = tokenizer
+        self.nlp = stanza.Pipeline(
+            "en",
+            processors="tokenize",
+            package="gum",
+            verbose=False,
+            tokenize_no_ssplit=True
+        )
+
+    def tokenize(self, text):
+        tokenized_text = self.nlp(text)
+        return [token.text for token in tokenized_text.sentences[0].tokens]
 
     def predict_proba(self, text):
         """Probability estimates.
@@ -336,7 +317,7 @@ class Tagger(object):
         """
         assert isinstance(text, str)
 
-        words = self.tokenizer(text)
+        words = self.tokenize(text)
         X = self.preprocessor.transform([words])
         y_ner, y_term, y_rel = self.model.predict(X)
         y_ner, y_term, y_rel = y_ner[0], y_term[0], y_rel[0]  # reduce batch dimension.
@@ -359,7 +340,7 @@ class Tagger(object):
         return tags_ner, tags_term, tags_rel
 
     def _build_response(self, sent, tags, probs):
-        words = self.tokenizer(sent)
+        words = self.tokenize(sent)
         res = {
             'words': words,
             'entities': [],
