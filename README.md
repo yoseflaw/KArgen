@@ -9,7 +9,7 @@ Code structure adopted from: [anago](https://github.com/Hironsan/anago)
 The generalization part provides a model that can be used for entity/relation extraction from special cargo text.
 The training set was created automatically via [KArgo](https://github.com/yoseflaw/KArgo). The model architecture can be seen here: 
 
-<img src="https://github.com/yoseflaw/KArgo/blob/master/images/simplified_hmtl.png" alt="Simplified HMTL Architecture" />
+<img src="https://github.com/yoseflaw/KArgen/blob/master/images/simplified_hmtl.png" alt="Simplified HMTL Architecture" />
 
 This repository contains the following folders:
 
@@ -28,12 +28,12 @@ This repository contains the following folders:
 * infer.ipynb: example of extraction with the trained models, visualization with [displaCy](https://explosion.ai/demos/displacy)
 * results.ipynb: notebook for visualizing model training/evaluation results, can be seen here
 
-<img src="https://github.com/yoseflaw/KArgo/blob/master/images/result_viz.png" alt="Result Training Visualization" />
+<img src="https://github.com/yoseflaw/KArgen/blob/master/images/result_viz.png" alt="Result Training Visualization" />
     
 A comparison of **P**recision/**R**ecall/**F**-score for model trained with automatic training set (`Auto`) and development set (`Manual`), for test set 1 (holdout news articles):
 
-<img src="https://github.com/yoseflaw/KArgo/blob/master/images/result_ts1.png" alt="Result Test Set 1 News" />
+<img src="https://github.com/yoseflaw/KArgen/blob/master/images/result_ts1.png" alt="Result Test Set 1 News" />
 
 and for test set 2 (online documents):
 
-<img src="https://github.com/yoseflaw/KArgo/blob/master/images/result_ts2.png" alt="Result Test Set 1 News" />
+<img src="https://github.com/yoseflaw/KArgen/blob/master/images/result_ts2.png" alt="Result Test Set 1 News" />
