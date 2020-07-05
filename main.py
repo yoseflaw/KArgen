@@ -14,7 +14,7 @@ if __name__ == "__main__":
     print(y_term_train[0])
     print(y_rel_train[0])
     model = SequenceModel(lr=5e-4)
-    history = model.fit(x_dev, y_ner_dev, y_term_dev, y_rel_dev,
+    history = model.fit(x_train, y_ner_train, y_term_train, y_rel_train,
                         x_test, y_ner_test, y_term_test, y_rel_test,
                         embeddings_file="pretrain_models/glove/glove.6B.100d.txt.gz",
                         elmo_options_file="pretrain_models/elmo/2x4096_512_2048cnn_2xhighway_options.json",

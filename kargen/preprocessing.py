@@ -7,7 +7,33 @@ from keras.utils import to_categorical
 from keras_preprocessing.sequence import pad_sequences
 from sklearn.base import BaseEstimator, TransformerMixin
 
-from kargen.utils import pad_nested_sequences
+
+def pad_nested_sequences(sequences, dtype='int32'):
+    """Pads nested sequences to the same length.
+
+    This function transforms a list of list sequences
+    into a 3D Numpy array of shape `(num_samples, max_sent_len, max_word_len)`.
+
+    Args:
+        sequences: List of lists of lists.
+        dtype: Type of the output sequences.
+
+    # Returns
+        x: Numpy array.
+    """
+    max_sent_len = 0
+    max_word_len = 0
+    for sent in sequences:
+        max_sent_len = max(len(sent), max_sent_len)
+        for word in sent:
+            max_word_len = max(len(word), max_word_len)
+
+    x = np.zeros((len(sequences), max_sent_len, max_word_len)).astype(dtype)
+    for i, sent in enumerate(sequences):
+        for j, word in enumerate(sent):
+            x[i, j, :len(word)] = word
+
+    return x
 
 
 def load_data_and_labels(filename, encoding='utf-8'):
@@ -250,26 +276,6 @@ class ELMoTransformer(BaseEstimator, TransformerMixin):
         y_rel = np.expand_dims(y_rel, axis=2)
         return features, [y_ner, y_term, y_rel]
 
-    # def transform(self, x, y=None):
-    #     word_ids = [self._word_vocab.doc2id(doc) for doc in x]
-    #     word_ids = pad_sequences(word_ids, padding='post')
-    #
-    #     if self._use_char:
-    #         char_ids = [[self._char_vocab.doc2id(w) for w in doc] for doc in x]
-    #         char_ids = pad_nested_sequences(char_ids)
-    #         features = [word_ids, char_ids]
-    #     else:
-    #         features = word_ids
-    #
-    #     if y is not None:
-    #         y = [self._label_vocab.doc2id(doc) for doc in y]
-    #         y = pad_sequences(y, padding='post')
-    #         y = to_categorical(y, self.label_size).astype(int)
-    #         y = y if len(y.shape) == 3 else np.expand_dims(y, axis=0)
-    #         return features, y
-    #     else:
-    #         return features
-
     def fit_transform(self, x, y_ner=None, y_term=None, **params):
         return self.fit(x, y_ner, y_term).transform(x, y_ner, y_term)
 
@@ -314,45 +320,3 @@ class ELMoTransformer(BaseEstimator, TransformerMixin):
 
         return p
 
-
-# class ELMoTransformer(IndexTransformer):
-#
-#     def __init__(self, options_file, weight_file, lower=True, num_norm=True,
-#                  use_char=True, initial_vocab=None):
-#         super(ELMoTransformer, self).__init__(lower, num_norm, use_char, initial_vocab)
-#         self._elmo = Elmo(options_file, weight_file, 2, dropout=0)
-#
-#     def transform(self, X, y=None):
-#         """Transform documents to document ids.
-#
-#         Uses the vocabulary learned by fit.
-#
-#         Args:
-#             X : iterable
-#             an iterable which yields either str, unicode or file objects.
-#             y : iterable, label strings.
-#
-#         Returns:
-#             features: document id matrix.
-#             y: label id matrix.
-#         """
-#         word_ids = [self._word_vocab.doc2id(doc) for doc in X]
-#         word_ids = pad_sequences(word_ids, padding='post')
-#
-#         char_ids = [[self._char_vocab.doc2id(w) for w in doc] for doc in X]
-#         char_ids = pad_nested_sequences(char_ids)
-#
-#         character_ids = batch_to_ids(X)
-#         elmo_embeddings = self._elmo(character_ids)['elmo_representations'][1]
-#         elmo_embeddings = elmo_embeddings.detach().numpy()
-#
-#         features = [word_ids, char_ids, elmo_embeddings]
-#
-#         if y is not None:
-#             y = [self._label_vocab.doc2id(doc) for doc in y]
-#             y = pad_sequences(y, padding='post')
-#             y = to_categorical(y, self.label_size).astype(int)
-#             y = y if len(y.shape) == 3 else np.expand_dims(y, axis=0)
-#             return features, y
-#         else:
-#             return features

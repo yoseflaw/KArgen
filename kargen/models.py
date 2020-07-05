@@ -1,4 +1,5 @@
 import json
+import gzip
 
 import numpy as np
 from keras import Input, Model
@@ -15,7 +16,47 @@ import stanza
 from kargen.crf import CRF, crf_loss
 from kargen.preprocessing import ELMoTransformer
 from kargen.trainer import Trainer
-from kargen.utils import load_glove, filter_embeddings
+
+
+def filter_embeddings(embeddings, vocab, dim):
+    """Loads word vectors in numpy array.
+
+    Args:
+        embeddings (dict): a dictionary of numpy array.
+        vocab (dict): word_index lookup table.
+
+    Returns:
+        numpy array: an array of word embeddings.
+    """
+    if not isinstance(embeddings, dict):
+        return
+    _embeddings = np.zeros([len(vocab), dim])
+    for word in vocab:
+        if word in embeddings:
+            word_idx = vocab[word]
+            _embeddings[word_idx] = embeddings[word]
+
+    return _embeddings
+
+
+def load_glove(file):
+    """Loads GloVe vectors in numpy array.
+
+    Args:
+        file (str): a path to a glove file.
+
+    Return:
+        dict: a dict of numpy arrays.
+    """
+    model = {}
+    with gzip.open(file, "rt") as f:
+        for line in f:
+            line = line.split(' ')
+            word = line[0]
+            vector = np.array([float(val) for val in line[1:]])
+            model[word] = vector
+
+    return model
 
 
 def weighted_binary_crossentropy(weight=1.):
