@@ -13,7 +13,7 @@ The training set was created automatically via [KArgo](https://github.com/yosefl
 
 This repository contains the following folders:
 
-* data/kargo: all datasets for NER/EE/RE in CONLL format. Multi-task modeling as proposed by [Bekoulis et al. (2018)](https://arxiv.org/pdf/1804.07847.pdf).
+* data/kargo: all datasets for NER/EE/RE in CONLL format. Multi-task modeling as proposed by [Bekoulis et al. (2018)](https://github.com/bekou/multihead_joint_entity_relation_extraction).
     * train: training sets as produced by [KArgo](https://github.com/yoseflaw/KArgo)
         * `not_terms_only`: dataset contains all sentences, including sentences without entities (for EE)
         * `terms_only`: dataset contains only sentences with at least one entity (for EE)
