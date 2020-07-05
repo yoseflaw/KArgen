@@ -9,7 +9,7 @@ Code structure adopted from: [anago](https://github.com/Hironsan/anago)
 The generalization part provides a model that can be used for entity/relation extraction from special cargo text.
 The training set was created automatically via [KArgo](https://github.com/yoseflaw/KArgo). The model architecture can be seen here: 
 
-<img src="https://github.com/yoseflaw/KArgen/blob/master/images/simplified_hmtl.png" alt="Simplified HMTL Architecture" />
+<img src="https://github.com/yoseflaw/KArgen/blob/master/images/simplified_hmtl.png" alt="Simplified HMTL Architecture" width="400"/>
 
 This repository contains the following folders:
 
