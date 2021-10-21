@@ -3,7 +3,7 @@ alabaster==0.7.12
 allennlp==0.9.0
 astor==0.8.0
 attrs==19.3.0
-Babel==2.8.0
+Babel==2.9.1
 blis==0.2.4
 boto3==1.14.1
 botocore==1.17.1
