@@ -36,7 +36,7 @@ google-pasta==0.2.0
 greenlet==0.4.16
 grpcio==1.16.1
 h5py==2.10.0
-html5lib==0.9999999
+html5lib==0.99999999
 idna==2.9
 imagesize==1.2.0
 importlib-metadata==1.6.1
